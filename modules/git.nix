@@ -21,9 +21,11 @@
         hyperlinks = true;
       };
     
+      # Add user config 
       user.name = "Henrik Nepstad";
       user.email = "github@topheinz.com";
 
+      # Allow for SSH signing
       gpg.format = "ssh";
       user.signingkey = "~/.ssh/GitHub-SigningKey.pub";
       commit.gpgsign = true;
