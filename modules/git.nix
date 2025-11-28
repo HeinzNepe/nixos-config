@@ -26,10 +26,10 @@
       user.email = "github@topheinz.com";
 
       # Allow for SSH signing
-      gpg.format = "ssh";
-      user.signingkey = "~/.ssh/GitHub-SigningKey.pub";
-      commit.gpgsign = true;
-      tag.gpgsign = true;
+      #gpg.format = "ssh";
+      #user.signingkey = "~/.ssh/GitHub-SigningKey.pub";
+      #commit.gpgsign = true;
+      #tag.gpgsign = true;
     };
 
     

@@ -7,27 +7,26 @@
 {
   imports =
     [ 
+     # include NixOS-WSL modules
+     <nixos-wsl/modules>
+
      # Defaults
      ../../modules/desktop.nix
      ../../modules/nix-options.nix
      ../../modules/region.nix
-     ../../modules/cli-programs.nix
+      ../../modules/cli-programs.nix
      
      # Optional modules
-     ../../modules/optional/desktop-programs.nix
      ../../modules/git.nix
-     ../../modules/1password.nix
-     ../../homemanager.nix
+     
+     
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
-  networking.hostName = "lap-nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  wsl.enable = true;
+  wsl.defaultUser = "henrik";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.henrik = {
@@ -42,6 +41,21 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    vivaldi
+    tmux
+    git
+    lf
+    discord
+    spotify
+    vscode
+    wireguard-tools
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
