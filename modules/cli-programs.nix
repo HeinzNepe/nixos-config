@@ -11,8 +11,8 @@
 
 }
 
-vivaldi
-discord
-spotify
-vscode
+#vivaldi
+#discord
+#spotify
+#vscode
 
