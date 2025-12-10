@@ -6,6 +6,7 @@
     wget
     tmux
     git
+    lazygit
     lf
     fastfetch
   ];
