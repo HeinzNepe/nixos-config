@@ -26,3 +26,9 @@ Where \#device is any of the following devices:
 - laptop
 - desktop
 - wsl
+
+### Updating the flake
+Updating the flake is done with
+```
+sudo nix flake update
+```

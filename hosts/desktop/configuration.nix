@@ -15,12 +15,14 @@
      
      # Optional modules
      ../../modules/optional/desktop-programs.nix
+     ../../modules/optional/gaming.nix
      ../../modules/git.nix
      ../../modules/1password.nix
      ../../homemanager.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+ 
     ];
 
   networking.hostName = "eagle-nixos"; # Define your hostname.

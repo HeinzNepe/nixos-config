@@ -7,6 +7,7 @@
     tmux
     git
     lf
+    fastfetch
   ];
 
 }
