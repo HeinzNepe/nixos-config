@@ -3,12 +3,10 @@
 {
   environment.systemPackages = with pkgs; [
     vivaldi
-    discord
     spotify
-    vscode 
+    discord
+    vscode
   ];
 
 }
-
-
 

@@ -14,7 +14,7 @@
      ../../modules/cli-programs.nix
      
      # Optional modules
-     ../../modules/optional/desktop-programs.nix
+     ../../modules/gui-programs.nix
      ../../modules/optional/gaming.nix
      ../../modules/git.nix
      ../../modules/1password.nix
