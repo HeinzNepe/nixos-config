@@ -32,3 +32,19 @@ Updating the flake is done with
 ```
 sudo nix flake update
 ```
+
+## Userful setup steps
+
+### Enable nix experimental features
+To use nix flakes, you need to enable the experimental features in nix.
+Add the following lines to `/etc/nix/configuration.nix`:
+```
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+```
+
+### Start nix shell with git
+To start a nix shell with git installed, use the following command:
+```
+nix shell nixpkgs#git
+```
