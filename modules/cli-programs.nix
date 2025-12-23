@@ -13,8 +13,3 @@
 
 }
 
-#vivaldi
-#discord
-#spotify
-#vscode
-

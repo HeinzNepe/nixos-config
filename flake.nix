@@ -25,6 +25,11 @@
           specialArgs = { inherit system inputs; };
           modules = [ ./hosts/desktop/configuration.nix ];
         };
+        # Define the school laptop state
+        school-laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit system inputs; };
+          modules = [ ./hosts/school-laptop/configuration.nix ];
+        };
       };
     };
 }
