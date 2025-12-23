@@ -4,6 +4,7 @@
   imports = [
     # Import other config files
     ./1passwordcommitsigning.nix
+    ./plasma-dark-node.nix
 
   ];
 
