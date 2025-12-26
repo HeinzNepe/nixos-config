@@ -21,6 +21,9 @@
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # Secure Boot
+      #../../modules/secureboot.nix
     ];
 
   networking.hostName = "school-laptop"; # Define your hostname.

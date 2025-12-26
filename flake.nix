@@ -5,6 +5,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    lanzaboote.url = "github:nix-community/lanzaboote/v0.4.2";
+    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -14,9 +17,10 @@
 
 
   # Define the outputs
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, lanzaboote, ... }@inputs:
     let system = "x86_64-linux";
     in {
+      
       nixosConfigurations = {
         # Define the laptop state
         laptop = nixpkgs.lib.nixosSystem {
@@ -31,7 +35,10 @@
         # Define the school laptop state
         school-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs; };
-          modules = [ ./hosts/school-laptop/configuration.nix ];
+          modules = [
+            #lanzaboote.nixosModules.lanzaboote
+            ./hosts/school-laptop/configuration.nix
+          ];
         };
       };
     };

@@ -33,6 +33,12 @@ Updating the flake is done with
 sudo nix flake update
 ```
 
+### Garbage collection
+To remove un-needed packages from the local nix store, you can use
+```
+sudo nix-collect-garbage -d
+```
+
 ## Userful setup steps
 
 ### Enable nix experimental features
