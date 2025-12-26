@@ -18,6 +18,8 @@
      ../../modules/git.nix
      ../../modules/1password.nix
      ../../homemanager.nix
+     ../../modules/options/gaming.nix
+     ../../modules/options/fonts.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
