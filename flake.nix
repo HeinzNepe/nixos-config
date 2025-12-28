@@ -1,12 +1,20 @@
 {
+  # Flake for NixOS with importable Secure Boot module (lanzaboote + sbctl)
   description = "Henrik's flake";
 
   # Define the inputs used for the flake
   inputs = {
+    # Add nixpkgs input under the unstable channel
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    lanzaboote.url = "github:nix-community/lanzaboote/v0.4.2";
-    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+    # Add nixpkgs-stable input for stable packages
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+
+    # Lanzaboote for Secure Boot support
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,8 +44,9 @@
         school-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs; };
           modules = [
-            #lanzaboote.nixosModules.lanzaboote
             ./hosts/school-laptop/configuration.nix
+            # To enable Secure Boot for this host, add:
+            lanzaboote.nixosModules.lanzaboote
           ];
         };
       };

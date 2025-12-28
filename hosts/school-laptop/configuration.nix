@@ -25,7 +25,7 @@
       ./hardware-configuration.nix
 
       # Secure Boot
-      #../../modules/secureboot.nix
+      ../../modules/secureboot.nix
     ];
 
   networking.hostName = "school-laptop"; # Define your hostname.
@@ -33,6 +33,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # Enable secureboot
+  #custom.security.secureBoot.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.henrik = {
@@ -45,7 +48,7 @@
   };
 
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
+  #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Allow unfree packages

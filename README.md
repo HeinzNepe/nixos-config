@@ -54,3 +54,62 @@ To start a nix shell with git installed, use the following command:
 ```
 nix shell nixpkgs#git
 ```
+
+## Secure boot
+
+This system uses **Lanzaboote** to provide Secure Boot support on NixOS. Lanzaboote replaces systemd‑boot and handles signing the bootloader and kernel so the firmware can verify them at boot.
+
+### Generating Secure Boot keys
+
+Before enabling Secure Boot, generate a fresh key set:
+
+```bash
+nix-shell -p sbctl
+```
+
+Then run:
+
+```bash
+sudo sbctl create-keys --path /etc/secureboot
+```
+
+This creates the Platform Key (PK), Key Exchange Key (KEK), and signature database (db) used by your firmware.
+
+Move them to the /etc/secureboot directory so Lanzaboote can find them.
+```bash
+sudo mv /var/lib/sbctl/ /etc/secureboot/
+```
+
+### Enrolling Secure Boot keys in firmware
+Enroll the keys into your system firmware:
+
+```bash
+sudo sbctl enroll-keys --microsoft
+```
+This will guide you through enrolling the keys, including adding Microsoft's key for compatibility. Follow the prompts to complete the process.
+
+### Enabling Secure Boot in NixOS
+
+Secure Boot is configured through the `secureboot.nix` module. It enables Lanzaboote and points NixOS to the key directory:
+
+```nix
+boot.lanzaboote.enable = true;
+boot.lanzaboote.pkiBundle = "/etc/secureboot";
+boot.loader.efi.canTouchEfiVariables = true;
+boot.loader.systemd-boot.enable = false;
+```
+
+### Rebuild your system
+
+After generating keys and enabling the module:
+
+```bash
+sudo nixos-rebuild switch --flake .#your-hostname
+```
+
+### Verifying Secure Boot
+After rebuilding use sbctl to verify Secure Boot status:
+
+```bash
+sudo sbctl status
+```

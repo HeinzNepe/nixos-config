@@ -1,37 +1,27 @@
+{ config, pkgs, ... }:
+
 {
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: {
-  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+  # Disable systemd-boot (Lanzaboote replaces it)
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  #impermanence.directories = ["/etc/secureboot"];
-
-  environment.systemPackages = with pkgs; [
-    # For debugging and troubleshooting Secure Boot.
-    sbctl
-  ];
-
-  # Lanzaboote currently replaces the systemd-boot module.
-  # This setting is usually set to true in configuration.nix
-  # generated at installation time. So we force it to false
-  # for now.
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-
-  # Enables support for secureboot, see:
-  # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+  # Enable Lanzaboote
   boot.lanzaboote = {
     enable = true;
-    pkiBundle = "/etc/secureboot";
+    pkiBundle = "/etc/secureboot";  # Where keys will be stored
+    autoEnrollKeys = {
+      enable = true; # Enable automatic key enrollment
+      autoReboot = true;  # Reboot automatically after enrolling keys
+    };
   };
 
-  boot.initrd.systemd = {
-    enable = true;
-    # Required to support TPM-based unlocking of LUKS encrypted drives.
-    # > sudo systemd-cryptenroll /dev/nvme0n1p6 --tpm2-device=auto --tpm2-pcrs=0+2+7
-    # PCRs are important to guarantee tamper-proofing
-    # Refer also to ./enable-tpm.sh
-    tpm2.enable = true;
-  };
+
+  # Optional but recommended
+  boot.kernelParams = [
+    "lockdown=integrity"
+  ];
+
+  environment.systemPackages = with pkgs; [
+    sbctl  # Secure Boot control tool
+  ];
 }
