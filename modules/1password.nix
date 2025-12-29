@@ -13,7 +13,17 @@
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    #polkitPolicyOwners = [ "yourUsernameHere" ];
+    polkitPolicyOwners = [ "henrik" ];
   };
+  
+  # Add Vivaldi to the list of allowed browsers for 1Password
+  environment.etc = {
+      "1password/custom_allowed_browsers" = {
+        text = ''
+          vivaldi-bin
+        '';
+        mode = "0755";
+      };
+    };
 
 }
