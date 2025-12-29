@@ -20,6 +20,7 @@
      ../../homemanager.nix
      ../../modules/options/gaming.nix
      ../../modules/options/fonts.nix
+      ../../modules/options/shell.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
