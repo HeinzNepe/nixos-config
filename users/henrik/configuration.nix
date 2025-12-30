@@ -4,7 +4,7 @@
   imports = [
     inputs.plasma-manager.homeModules.plasma-manager
     ./1passwordcommitsigning.nix
-    ./plasma-dark-node.nix
+    ./plasma-config.nix
   ];
 
   # Home Manager needs a bit of information about you and the
