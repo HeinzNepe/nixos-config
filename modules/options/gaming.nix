@@ -1,10 +1,10 @@
 { inputs, pkgs, ... }:
 
 {
-
+  # Add gaming related packages to system environment
   environment.systemPackages = with pkgs; [
-    modrinth-app
-
+    # Tetris desktop game
+    tetio-desktop
   ];
 
   # Steam
