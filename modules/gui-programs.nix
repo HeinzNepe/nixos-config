@@ -6,7 +6,6 @@
     firefox
     spotify
     discord
-    vscode
   ];
 
 
