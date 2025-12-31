@@ -2,13 +2,14 @@
 
 {
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    tmux
-    git
-    lazygit
-    lf
-    fastfetch
+    # Basic CLI tools
+    vim       # Vim text editor
+    wget      # Network downloader
+    tmux      # Terminal multiplexer
+    git       # Version control system
+    lazygit   # Git UI
+    lf        # Terminal file manager
+    fastfetch # System information tool
   ];
 
 }

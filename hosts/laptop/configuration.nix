@@ -15,7 +15,7 @@
      
      # Optional modules
      ../../modules/gui-programs.nix
-     ../../modules/git.nix
+     ../../modules/options/git.nix
      ../../modules/1password.nix
      ../../homemanager.nix
 

@@ -16,8 +16,10 @@
      # Optional modules
      ../../modules/gui-programs.nix
      ../../modules/options/gaming.nix
-     ../../modules/git.nix
+     ../../modules/options/git.nix
      ../../modules/1password.nix
+
+     # Add homemanager config
      ../../homemanager.nix
 
       # Include the results of the hardware scan.

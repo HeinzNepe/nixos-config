@@ -1,10 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./options/productivity.nix
+    ./options/browsers.nix
+   ];
+
+
   environment.systemPackages = with pkgs; [
-    vivaldi
-    firefox
-    spotify
     discord
   ];
 
