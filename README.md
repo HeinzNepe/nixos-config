@@ -70,12 +70,12 @@ nix-shell -p sbctl
 Then run:
 
 ```bash
-sudo sbctl create-keys --path /etc/secureboot
+sudo sbctl create-keys
 ```
 
-This creates the Platform Key (PK), Key Exchange Key (KEK), and signature database (db) used by your firmware.
+This creates the Platform Key (PK), Key Exchange Key (KEK), and signature database (db) used by your firmware in the file path /var/lib/sbctl/
 
-Move them to the /etc/secureboot directory so Lanzaboote can find them.
+I then move them to the /etc/secureboot directory so Lanzaboote can find them. (because I've set /etc/secureboot as the key location)
 ```bash
 sudo mv /var/lib/sbctl/ /etc/secureboot/
 ```
@@ -86,7 +86,8 @@ Enroll the keys into your system firmware:
 ```bash
 sudo sbctl enroll-keys --microsoft
 ```
-This will guide you through enrolling the keys, including adding Microsoft's key for compatibility. Follow the prompts to complete the process.
+This will guide you through enrolling the keys. Follow the prompts to complete the process.
+Usually, it will tell you to put the secure boot in "Setup Mode" which is either set in the Bios, or achieved by deleting all Secure Boot keys
 
 ### Enabling Secure Boot in NixOS
 

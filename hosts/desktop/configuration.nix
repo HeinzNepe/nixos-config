@@ -7,23 +7,37 @@
 {
   imports =
     [ 
-     # Defaults
-     ../../modules/desktop.nix
-     ../../modules/nix-options.nix
-     ../../modules/region.nix
-     ../../modules/cli-programs.nix
-     
-     # Optional modules
-     ../../modules/gui-programs.nix
-     ../../modules/options/gaming.nix
-     ../../modules/options/git.nix
-     ../../modules/1password.nix
+      # Defaults
+      ../../modules/desktop.nix
+      ../../modules/nix-options.nix
+      ../../modules/region.nix
+      ../../modules/cli-programs.nix
 
-     # Add homemanager config
-     ../../homemanager.nix
+      # Optional modules
+      # Applications
+      ../../modules/gui-programs.nix
+
+      # Add dev modules
+      ../../modules/options/development.nix
+      ../../modules/options/git.nix
+      ../../modules/options/fonts.nix
+      ../../modules/options/shell.nix
+      ../../modules/options/vpn.nix
+
+      # Add password manager
+      ../../modules/1password.nix
+
+      # Add gaming module
+      ../../modules/options/gaming.nix
+
+      # Home-manager
+      ../../homemanager.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # Secure Boot
+      ../../modules/options/secureboot.nix      
  
     ];
 
@@ -44,8 +58,15 @@
   };
 
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
+  #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Enable hardware accelerated graphics (Do i need this?)
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

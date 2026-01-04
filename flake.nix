@@ -38,7 +38,12 @@
         # Define the desktop state
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs; };
-          modules = [ ./hosts/desktop/configuration.nix ];
+          modules = [ 
+            ./hosts/desktop/configuration.nix
+            # To enable Secure Boot for this host, add:
+            lanzaboote.nixosModules.lanzaboote 
+          ];
+          
         };
         # Define the school laptop state
         school-laptop = nixpkgs.lib.nixosSystem {

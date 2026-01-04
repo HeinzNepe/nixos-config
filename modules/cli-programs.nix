@@ -10,6 +10,8 @@
     lazygit   # Git UI
     lf        # Terminal file manager
     fastfetch # System information tool
+    sbctl     # Secure boot management program
+    htop      # Process management
   ];
 
 }
