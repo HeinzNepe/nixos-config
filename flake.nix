@@ -25,19 +25,20 @@
 
 
   # Define the outputs
-  outputs = { self, nixpkgs, home-manager, plasma-manager, lanzaboote, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, lanzaboote, ... }@inputs:
     let system = "x86_64-linux";
+        pkgs-stable = import nixpkgs-stable { inherit system; config = { allowUnfree = true; }; };
     in {
       
       nixosConfigurations = {
         # Define the laptop state
         laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs; };
+          specialArgs = { inherit system inputs pkgs-stable; };
           modules = [ ./hosts/laptop/configuration.nix ];
         };
         # Define the desktop state
         desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs; };
+          specialArgs = { inherit system inputs pkgs-stable; };
           modules = [ 
             ./hosts/desktop/configuration.nix
             # To enable Secure Boot for this host, add:
@@ -47,7 +48,7 @@
         };
         # Define the school laptop state
         school-laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs; };
+          specialArgs = { inherit system inputs pkgs-stable; };
           modules = [
             ./hosts/school-laptop/configuration.nix
             # To enable Secure Boot for this host, add:
