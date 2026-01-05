@@ -28,8 +28,8 @@
       # Cisco Packet Tracer (remember to add to nixcache)
       #../../modules/options/packet-tracer.nix
 
-      # Java JDK 25
-      ../../modules/options/java-jdk-25.nix
+      # Java JDK 25 ++
+      #../../modules/options/tdt4100.nix
 
       # Add password manager
       ../../modules/1password.nix

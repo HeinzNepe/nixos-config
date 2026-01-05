@@ -24,6 +24,9 @@
       ../../modules/options/shell.nix
       ../../modules/options/vpn.nix
 
+      # Java JDK 25 ++
+      #../../modules/options/tdt4100.nix
+
       # Add password manager
       ../../modules/1password.nix
 

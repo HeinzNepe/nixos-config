@@ -7,6 +7,7 @@
     gh
 
     # JetBrains apps
+    jetbrains.idea
     jetbrains.datagrip
     jetbrains.gateway
     jetbrains.rider
