@@ -25,7 +25,7 @@
       ../../modules/options/vpn.nix
 
       # Cisco Packet Tracer (remember to add to nixcache)
-      ../../modules/options/packet-tracer.nix
+      #../../modules/options/packet-tracer.nix
 
       # Add password manager
       ../../modules/1password.nix
