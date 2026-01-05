@@ -23,6 +23,7 @@
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
       ../../modules/options/vpn.nix
+      ../../modules/options/docker.nix
 
       # Java JDK 25 ++
       #../../modules/options/tdt4100.nix
@@ -54,7 +55,7 @@
   users.users.henrik = {
     isNormalUser = true;
     description = "Henrik Nepstad";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       #package
     ];
