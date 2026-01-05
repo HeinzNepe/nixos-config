@@ -23,9 +23,13 @@
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
       ../../modules/options/vpn.nix
+      ../../modules/options/docker.nix
 
       # Cisco Packet Tracer (remember to add to nixcache)
       #../../modules/options/packet-tracer.nix
+
+      # Java JDK 25
+      ../../modules/options/java-jdk-25.nix
 
       # Add password manager
       ../../modules/1password.nix
@@ -57,7 +61,7 @@
   users.users.henrik = {
     isNormalUser = true;
     description = "Henrik Nepstad";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       #package
     ];
