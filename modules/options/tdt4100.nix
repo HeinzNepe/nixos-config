@@ -7,6 +7,10 @@
     environment.systemPackages = with pkgs; [
         # Eclipse Temurin, prebuilt OpenJDK binarys
         #javaPackages.compiler.temurin-bin.jdk-25
+        
+        # https://www.reddit.com/r/NixOS/comments/192n7yc/java_on_vscode_nixos/
+        # vscode-fhs
+
 
         # X11 libraries required for Java GUI applications
         #xorg.libX11

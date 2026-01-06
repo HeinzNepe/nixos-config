@@ -25,7 +25,7 @@ sudo nixos-rebuild switch --flake .#device
 Where \#device is any of the following devices: 
 - laptop
 - desktop
-- wsl
+- school-laptop
 
 ### Updating the flake
 Updating the flake is done with
