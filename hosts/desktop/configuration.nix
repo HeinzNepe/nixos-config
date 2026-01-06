@@ -24,6 +24,7 @@
       ../../modules/options/shell.nix
       ../../modules/options/vpn.nix
       ../../modules/options/docker.nix
+      ../../modules/options/networking-tools.nix
 
       # Java JDK 25 ++
       #../../modules/options/tdt4100.nix

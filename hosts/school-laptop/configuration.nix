@@ -24,6 +24,7 @@
       ../../modules/options/shell.nix
       ../../modules/options/vpn.nix
       ../../modules/options/docker.nix
+      ../../modules/options/networking-tools.nix
 
       # Cisco Packet Tracer (remember to add to nixcache)
       #../../modules/options/packet-tracer.nix
