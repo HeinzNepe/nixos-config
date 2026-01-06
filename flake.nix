@@ -55,6 +55,16 @@
             lanzaboote.nixosModules.lanzaboote
           ];
         };
+	# Define the devbox state
+        nixos-devbox = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit system inputs pkgs-stable; };
+          modules = [ 
+            ./hosts/nixos-devbox/configuration.nix
+            # To enable Secure Boot for this host, add:
+            #lanzaboote.nixosModules.lanzaboote
+          ];
+        };
+
       };
     };
 }
