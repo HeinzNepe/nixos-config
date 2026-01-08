@@ -31,11 +31,13 @@
     in {
       
       nixosConfigurations = {
+
         # Define the laptop state
         laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs pkgs-stable; };
           modules = [ ./hosts/laptop/configuration.nix ];
         };
+
         # Define the desktop state
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs pkgs-stable; };
@@ -46,6 +48,7 @@
           ];
           
         };
+
         # Define the school laptop state
         school-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs pkgs-stable; };
@@ -55,7 +58,8 @@
             lanzaboote.nixosModules.lanzaboote
           ];
         };
-	# Define the devbox state
+
+	      # Define the devbox state
         nixos-devbox = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs pkgs-stable; };
           modules = [ 
@@ -63,6 +67,12 @@
             # To enable Secure Boot for this host, add:
             #lanzaboote.nixosModules.lanzaboote
           ];
+        };
+
+        # Define the autoinstall state
+        autoinstall = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit system inputs pkgs-stable; };
+          modules = [ ./hosts/autoinstall/configuration.nix ];
         };
 
       };
