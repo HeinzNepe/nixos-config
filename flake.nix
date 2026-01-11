@@ -21,11 +21,16 @@
 
     plasma-manager.url = "github:pjones/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 
   # Define the outputs
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, lanzaboote, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, lanzaboote, disko, ... }@inputs:
     let system = "x86_64-linux";
         pkgs-stable = import nixpkgs-stable { inherit system; config = { allowUnfree = true; }; };
     in {
@@ -72,7 +77,20 @@
         # Define the autoinstall state
         autoinstall = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit system inputs pkgs-stable; };
-          modules = [ ./hosts/autoinstall/configuration.nix ];
+          modules = [ 
+            ./hosts/autoinstall/configuration.nix
+            disko.nixosModules.disko
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            ({ pkgs, ... }: {
+              image = {
+                fileName = "nix-autoinstall.iso";
+              };
+              isoImage = {
+                makeEfiBootable = true;
+                makeUsbBootable = true;
+              };
+            })
+          ];
         };
 
       };

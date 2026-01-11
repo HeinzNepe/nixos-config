@@ -114,3 +114,20 @@ After rebuilding use sbctl to verify Secure Boot status:
 ```bash
 sudo sbctl status
 ```
+
+## Custom ISO image
+This flake contains a custom ISO image, that is imagined primarily for setting up VMs on proxmox. The approximate task list of the ISO is the following:
+
+1. Format the disk (1 GB ESP partition, rest for NixOS)
+2. Install NixOS
+3. Reboot
+
+After these steps are done, it's possible to SSH in with the defined user (henrik) and SSH key (Homelab Key).
+
+### Building the ISO
+To build the ISO file, run the following command in the nixos-config directory:
+```
+nix build .#nixosConfigurations.autoinstall.config.system.build.isoImage
+```
+
+The resulting ISO will be located at `result/iso/nix-autoinstall.iso`
