@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, vars, ... }:
 
 {
   imports =
@@ -34,6 +34,10 @@
     isNormalUser = true;
     description = "Henrik Nepstad";
     extraGroups = [ "networkmanager" "wheel" ];
+    hashedPassword = vars.hashedPassword;
+    openssh.authorizedKeys.keys = [
+      vars.sshPublicKeyPersonal
+    ];
     packages = with pkgs; [
       #package
     ];
