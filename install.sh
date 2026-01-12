@@ -74,11 +74,12 @@ if [ "$SYSTYPE" == "vm" ]; then
 
   # Mounting filesystems
   echo -e "\n\033[1mMounting filesystems...\033[0m"
-  mount -t tmpfs none /mnt
+  mount -t tmpfs -o mode=0755 none /mnt
   mkdir -pv /mnt/{boot,nix,etc/ssh,var/{lib,log}}
   mount /dev/disk/by-label/boot /mnt/boot
   mount /dev/disk/by-label/nix /mnt/nix
   mkdir -pv /mnt/nix/{initrd/{etc/ssh,var/{lib,log}}}
+  chmod 0755 /mnt/nix
   echo -e "\033[32mFilesystems mounted successfully.\033[0m"
 
   # Completed
