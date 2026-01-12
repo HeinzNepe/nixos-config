@@ -58,29 +58,24 @@ if [ "$SYSTYPE" == "vm" ]; then
 
   # Partitioning disk
   echo -e "\n\033[1mPartitioning disk...\033[0m"
+
+  # Partitioning disk for legacy BIOS (msdos, no EFI)
   parted $DISK -- mklabel msdos
-  parted $DISK -- mkpart primary ext4 1MiB 1001MiB
+  parted $DISK -- mkpart primary ext4 1MiB 100%
   parted $DISK -- set 1 boot on
-  parted $DISK -- mkpart primary ext4 1001MiB 100%
   echo -e "\033[32mDisk partitioned successfully.\033[0m"
 
-  # Creating filesystems
-  echo -e "\n\033[1mCreating filesystems...\033[0m"
-  mkfs.ext4 -F -L boot $DISK_BOOT_PARTITION
-  mkfs.ext4 -F -L nix -m 0 $DISK_NIX_PARTITION
-  # Let mkfs catch its breath
+  # Creating filesystem
+  echo -e "\n\033[1mCreating filesystem...\033[0m"
+  mkfs.ext4 -F -L nixos $DISK_BOOT_PARTITION
   sleep 2
-  echo -e "\033[32mFilesystems created successfully.\033[0m"
+  echo -e "\033[32mFilesystem created successfully.\033[0m"
 
-  # Mounting filesystems
-  echo -e "\n\033[1mMounting filesystems...\033[0m"
-  mount -t tmpfs -o mode=0755 none /mnt
-  mkdir -pv /mnt/{boot,nix,etc/ssh,var/{lib,log}}
-  mount /dev/disk/by-label/boot /mnt/boot
-  mount /dev/disk/by-label/nix /mnt/nix
-  mkdir -pv /mnt/nix/{initrd/{etc/ssh,var/{lib,log}}}
-  chmod 0755 /mnt/nix
-  echo -e "\033[32mFilesystems mounted successfully.\033[0m"
+  # Mounting filesystem
+  echo -e "\n\033[1mMounting filesystem...\033[0m"
+  mount $DISK_BOOT_PARTITION /mnt
+  mkdir -pv /mnt/{etc/ssh,var/{lib,log}}
+  echo -e "\033[32mFilesystem mounted successfully.\033[0m"
 
   # Completed
   echo -e "\n\033[1;32mAll steps completed successfully. NixOS is now ready to be installed.\033[0m\n"
