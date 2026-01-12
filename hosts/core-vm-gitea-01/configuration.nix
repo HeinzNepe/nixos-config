@@ -11,7 +11,7 @@
       #../../modules/desktop.nix
       ../../modules/nix-options.nix
       ../../modules/region.nix
-      #../../modules/cli-programs.nix
+      ../../modules/cli-programs.nix
 
       # Optional modules
       # Applications
@@ -25,6 +25,7 @@
       #../../modules/options/vpn.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
+      ../../modules/options/ssh-server.nix
 
       # Cisco Packet Tracer (remember to add to nixcache)
       #../../modules/options/packet-tracer.nix
