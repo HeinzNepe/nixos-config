@@ -11,15 +11,10 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/sda2";
-      fsType = "ext4";
-    };
 
-  fileSystems."/boot" =
+  fileSystems."/" =
     { device = "/dev/sda1";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      fsType = "ext4";
     };
 
   swapDevices = [ ];
