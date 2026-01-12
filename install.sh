@@ -34,7 +34,11 @@ if [ "$SYSTYPE" == "vm" ]; then
   # Display warning and wait for confirmation to proceed
   echo "Linux selected"
   echo -e "\n\033[1;31m**Warning:** This script is irreversible and will prepare system for NixOS installation.\033[0m"
-  read -n 1 -s -r -p "Press any key to continue or Ctrl+C to abort..."
+  read -p "Type 'yes' to continue or Ctrl+C to abort: " confirm
+  if [ "$confirm" != "yes" ]; then
+    echo "Aborted."
+    exit 1
+  fi
 
   # Clear screen before showing disk layout
   clear
