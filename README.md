@@ -138,3 +138,10 @@ nix build .#nixosConfigurations.autoinstall.config.system.build.isoImage
 ```
 
 The resulting ISO will be located at `result/iso/nix-autoinstall.iso`
+
+### Retrieve hardware configuration
+Hardware generation is generated with the following command
+
+```
+nixos-generate-config --show-hardware-config
+```
