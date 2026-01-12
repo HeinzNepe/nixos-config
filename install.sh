@@ -2,14 +2,26 @@
 
 set -e -o pipefail
 
-# Take action based on inputted type
-SYSTYPE="${1:-}"
+# Define available system types
+SYSTEM_TYPES=("vm")
 
-# Dynamically ensure systype is in the list of approved types
-if [ -z "$SYSTYPE" ]; then
-  echo "Error: Please provide a system type (e.g., 'vm')"
+# Display menu and get user selection
+echo -e "\033[1mSelect system type:\033[0m"
+for i in "${!SYSTEM_TYPES[@]}"; do
+  echo "$((i + 1)). ${SYSTEM_TYPES[$i]}"
+done
+
+read -p "Enter your choice (1-${#SYSTEM_TYPES[@]}): " choice
+
+# Validate choice
+if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "${#SYSTEM_TYPES[@]}" ]; then
+  echo "Error: Invalid selection"
   exit 1
 fi
+
+# Get selected type
+SYSTYPE="${SYSTEM_TYPES[$((choice - 1))]}"
+echo -e "\n\033[32mSelected: $SYSTYPE\033[0m\n"
 
 
 
