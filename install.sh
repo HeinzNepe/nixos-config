@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
+set -e -o pipefail
 
 # Take action based on inputted type
-SYSTYPE="$1"
+SYSTYPE="${1:-}"
 
 # Dynamically ensure systype is in the list of approved types
+if [ -z "$SYSTYPE" ]; then
+  echo "Error: Please provide a system type (e.g., 'vm')"
+  exit 1
+fi
 
 
 
