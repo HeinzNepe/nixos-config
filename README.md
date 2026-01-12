@@ -26,6 +26,7 @@ Where \#device is any of the following devices:
 - laptop
 - desktop
 - school-laptop
+- nixos-devbox
 
 ### Updating the flake
 Updating the flake is done with
@@ -37,6 +38,12 @@ sudo nix flake update
 To remove un-needed packages from the local nix store, you can use
 ```
 sudo nix-collect-garbage -d
+```
+
+### Checking the flake for syntax errors
+To check the flake for syntax errors, you can use
+```
+nix flake check
 ```
 
 ## Userful setup steps

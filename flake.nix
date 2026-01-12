@@ -29,62 +29,38 @@
   };
 
 
-  # Define the outputs
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, plasma-manager, lanzaboote, disko, ... }@inputs:
-    let system = "x86_64-linux";
-        pkgs-stable = import nixpkgs-stable { inherit system; config = { allowUnfree = true; }; };
+  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, home-manager, plasma-manager, disko, ... }@inputs:
+    let
+      vars = import ./vars.nix;
+      mkNixOSConfig = path: extraModules: nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs vars; };
+        modules = [ path ] ++ extraModules;
+      };
     in {
-      
       nixosConfigurations = {
+        # Define NixOS configurations for different hosts
+        
+        # Laptop configuration
+        laptop = mkNixOSConfig ./hosts/laptop/configuration.nix [];
+        
+        # Desktop configuration
+        desktop = mkNixOSConfig ./hosts/desktop/configuration.nix [ lanzaboote.nixosModules.lanzaboote ];
+        
+        # School laptop configuration
+        school-laptop = mkNixOSConfig ./hosts/school-laptop/configuration.nix [ lanzaboote.nixosModules.lanzaboote ];
+        
+        # VM for development
+        nixos-devbox = mkNixOSConfig ./hosts/nixos-devbox/configuration.nix [];
 
-        # Define the laptop state
-        laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs pkgs-stable; };
-          modules = [ ./hosts/laptop/configuration.nix ];
-        };
-
-        # Define the desktop state
-        desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs pkgs-stable; };
-          modules = [ 
-            ./hosts/desktop/configuration.nix
-            # To enable Secure Boot for this host, add:
-            lanzaboote.nixosModules.lanzaboote 
-          ];
-          
-        };
-
-        # Define the school laptop state
-        school-laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs pkgs-stable; };
-          modules = [
-            ./hosts/school-laptop/configuration.nix
-            # To enable Secure Boot for this host, add:
-            lanzaboote.nixosModules.lanzaboote
-          ];
-        };
-
-	      # Define the devbox state
-        nixos-devbox = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs pkgs-stable; };
-          modules = [ 
-            ./hosts/nixos-devbox/configuration.nix
-            # To enable Secure Boot for this host, add:
-            #lanzaboote.nixosModules.lanzaboote
-          ];
-        };
-
-        # Define the autoinstall state
+        # Define the auto-installation ISO configuration
         autoinstall = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs pkgs-stable; };
-          modules = [ 
+          specialArgs = { inherit inputs vars; };
+          modules = [
             ./hosts/autoinstall/configuration.nix
             disko.nixosModules.disko
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
             ({ pkgs, ... }: {
-              image = {
-                fileName = "nix-autoinstall.iso";
-              };
+              image = { fileName = "nix-autoinstall.iso"; };
               isoImage = {
                 makeEfiBootable = true;
                 makeUsbBootable = true;
@@ -92,7 +68,6 @@
             })
           ];
         };
-
       };
     };
 }
