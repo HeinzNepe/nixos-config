@@ -40,6 +40,9 @@
       nixosConfigurations = {
         # Define NixOS configurations for different hosts
         
+        # Homelab configuration
+        core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
+
         # Laptop configuration
         laptop = mkNixOSConfig ./hosts/laptop/configuration.nix [];
         
