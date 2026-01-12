@@ -58,15 +58,15 @@ if [ "$SYSTYPE" == "vm" ]; then
 
   # Partitioning disk
   echo -e "\n\033[1mPartitioning disk...\033[0m"
-  parted $DISK -- mklabel gpt
-  parted $DISK -- mkpart ESP fat32 1MiB 1001MiB
+  parted $DISK -- mklabel msdos
+  parted $DISK -- mkpart primary ext4 1MiB 1001MiB
   parted $DISK -- set 1 boot on
-  parted $DISK -- mkpart Nix 1001MiB 100%
+  parted $DISK -- mkpart primary ext4 1001MiB 100%
   echo -e "\033[32mDisk partitioned successfully.\033[0m"
 
   # Creating filesystems
   echo -e "\n\033[1mCreating filesystems...\033[0m"
-  mkfs.fat -F32 -n boot $DISK_BOOT_PARTITION
+  mkfs.ext4 -F -L boot $DISK_BOOT_PARTITION
   mkfs.ext4 -F -L nix -m 0 $DISK_NIX_PARTITION
   # Let mkfs catch its breath
   sleep 2
