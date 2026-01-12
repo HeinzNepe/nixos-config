@@ -49,7 +49,7 @@
       #../../modules/options/secureboot.nix
     ];
 
-  networking.hostName = "NixOS-Devbox"; # Define your hostname.
+  networking.hostName = "core-vm-gitea-01"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -63,6 +63,10 @@
     isNormalUser = true;
     description = "Henrik Nepstad";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
+    hashedPassword = vars.hashedPassword;
+    openssh.authorizedKeys.keys = [
+      vars.sshPublicKeyPersonal
+    ];
     packages = with pkgs; [
       #package
     ];
