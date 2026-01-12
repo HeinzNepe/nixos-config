@@ -27,9 +27,9 @@ echo -e "\n\033[32mSelected: $SYSTYPE\033[0m\n"
 
 if [ "$SYSTYPE" == "vm" ]; then
   # Define disk
-  DISK="/dev/vda"
-  DISK_BOOT_PARTITION="/dev/vda1"
-  DISK_NIX_PARTITION="/dev/vda2"
+  DISK="/dev/sda"
+  DISK_BOOT_PARTITION="/dev/sda1"
+  DISK_NIX_PARTITION="/dev/sda2"
 
   # Display warning and wait for confirmation to proceed
   echo "Linux selected"
