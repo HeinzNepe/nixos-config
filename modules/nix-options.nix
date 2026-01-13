@@ -6,7 +6,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 7d --keep 8";
-    flake = "/home/henrik/GitHub/nixos-config"; # sets NH_OS_FLAKE variable for you
+    #flake = "/home/henrik/GitHub/nixos-config"; # sets NH_OS_FLAKE variable for you
   };
 
 
