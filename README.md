@@ -46,6 +46,28 @@ To check the flake for syntax errors, you can use
 nix flake check
 ```
 
+## Using NH
+
+Using nh you can simplify a lot of the commands you need to run for nix flakes.
+
+### Rebuilding
+To rebuild the system using nh, you can use
+```
+nh switch . -H hostname
+```
+
+### Updating the flake
+To update the flake using nh, you can use
+```
+nh os switch . -H hostname -u
+```
+
+### Garbage collection
+To run garbage collection using nh, you can use
+```
+nh clean all
+```
+
 ## Userful setup steps
 
 ### Enable nix experimental features

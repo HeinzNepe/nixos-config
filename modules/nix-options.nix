@@ -1,12 +1,21 @@
 { inputs, pkgs, ... }:
 
 {
-  # Remove old generations
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 7d --keep 8";
+    flake = "/home/henrik/GitHub/nixos-config"; # sets NH_OS_FLAKE variable for you
   };
+
+
+  # Remove old generations
+  #nix.gc = {
+  #  automatic = true;
+  #  dates = "weekly";
+  #  options = "--delete-older-than 7d";
+  #};
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
