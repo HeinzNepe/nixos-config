@@ -1,10 +1,10 @@
 { config, pkgs, lib, vars, ... }:
-
+# NixOS autoinstall configuration for ISO installer
+# This module sets up a minimal system for automated installation, including user, SSH, and bootloader settings.
 {
   imports = [
-    ../region.nix
+    ../region.nix # Import regional settings (timezone, locale, keymap)
   ];
-
 
   # Boot configuration for legacy BIOS (GRUB, no EFI)
   boot.loader.grub.enable = true;
@@ -14,16 +14,16 @@
   boot.loader.grub.useOSProber = false; # Optional, for dual-boot
   boot.loader.systemd-boot.enable = false;
 
-  # Enable flakes and nix-command
+  # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Add a standard user for installation purposes
   users.users.henrik = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    hashedPassword = vars.standardPasswordHash;  # Generate with: mkpasswd -m sha-512
+    extraGroups = [ "wheel" ]; # Add to wheel group for sudo
+    hashedPassword = vars.standardPasswordHash;  # Password hash (see vars.nix)
     openssh.authorizedKeys.keys = [
-        vars.sshPublicKeyPersonal
+      vars.sshPublicKeyPersonal # Allow SSH login with this key
     ];
   };
 
@@ -43,7 +43,6 @@
   To install the system, copy and paste the following command:
 
   sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/HeinzNepe/nixos-config/main/install.sh)"
-
   '';
 
   # Enable SSH for remote access during installation
@@ -52,7 +51,6 @@
 
   # Allow passwordless sudo for wheel group during installation
   security.sudo.wheelNeedsPassword = false;
-
 
   # Optional: auto-login or post-install hooks
   system.stateVersion = "25.11";
