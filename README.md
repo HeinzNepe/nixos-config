@@ -53,13 +53,13 @@ Using nh you can simplify a lot of the commands you need to run for nix flakes.
 ### Rebuilding
 To rebuild the system using nh, you can use
 ```
-nh switch . -H hostname
+nh os switch . -H hostname -a
 ```
 
 ### Updating the flake
 To update the flake using nh, you can use
 ```
-nh os switch . -H hostname -u
+nh os switch . -H hostname -a -u
 ```
 
 ### Garbage collection
