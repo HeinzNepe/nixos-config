@@ -8,57 +8,32 @@
   imports =
     [ 
       # Defaults
-      #../../modules/desktop.nix
       ../../modules/nix-options.nix
       ../../modules/region.nix
       ../../modules/cli-programs.nix
 
       # Optional modules
-      # Applications
-      #../../modules/gui-programs.nix
-
+      
       # Add dev modules
-      #../../modules/options/development.nix
-      #../../modules/options/git.nix
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
-      #../../modules/options/vpn.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
 
-      # Cisco Packet Tracer (remember to add to nixcache)
-      #../../modules/options/packet-tracer.nix
-
-      # Java JDK 25 ++
-      #../../modules/options/tdt4100.nix
-
-      # Add password manager
-      #../../modules/1password.nix
-
-      # Add gaming module
-      #../../modules/options/gaming.nix
-
-      # Home-manager
-      #../../homemanager.nix
-     
+      # Gitea module
+      ../../modules/options/gitea.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-
-      # Secure Boot
-      #../../modules/options/secureboot.nix
     ];
 
   networking.hostName = "core-vm-gitea-01"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
+  
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Enable secureboot
-  #custom.security.secureBoot.enable = true;
-
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.henrik = {
     isNormalUser = true;
