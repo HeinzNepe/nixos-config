@@ -26,11 +26,8 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
-      # Cisco Packet Tracer (remember to add to nixcache)
-      #../../modules/options/packet-tracer.nix
-
-      # Java JDK 25 ++
-      #../../modules/options/tdt4100.nix
+      # Gitea module
+      #../../modules/options/gitea.nix
 
       # Add password manager
       ../../modules/1password.nix

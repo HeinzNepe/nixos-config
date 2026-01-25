@@ -16,16 +16,11 @@
       path = "/var/lib/gitea/data/gitea.db";
     };
 
-    # Git over SSH (internal traffic)
-    ssh = {
-      enable = true;
-      port = 2222;  # Internal SSH port for Git
-    };
-
     settings = {
       server = {
         DOMAIN = "git.core.topheinz.com";  # Internal hostname for SSH
         SSH_DOMAIN = "git.core.topheinz.com";
+        SSH_PORT = 2222;  # Internal SSH port for Git
         HTTP_PORT = 3000;
         ROOT_URL = "https://git.core.topheinz.com/";  # Pangolin-facing URL
       };
