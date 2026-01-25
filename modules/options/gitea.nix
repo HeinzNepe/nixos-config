@@ -27,7 +27,7 @@
 
       # Optional: disable registration
       service = {
-        DISABLE_REGISTRATION = true;
+        DISABLE_REGISTRATION = false;
       };
     };
   };
