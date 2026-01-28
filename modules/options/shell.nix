@@ -166,7 +166,7 @@
                 },
                 {
                     "type": "packages",
-                    "format": "{} (pacman)",
+                    "format": "{} (NixOS)",
                     "key": " ├ 󰏖 ",
                     "keyColor": "31",  
                 },
