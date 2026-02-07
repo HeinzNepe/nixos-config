@@ -16,25 +16,45 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # Home Manager for user-level configuration
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    plasma-manager.url = "github:pjones/plasma-manager";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # Plasma Manager for KDE Plasma configuration
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    # DIsko for disk management and auto-installation support
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Sops-nix for managing secrets in NixOS configurations
+    sops-nix ={
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-
-  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, home-manager, plasma-manager, disko, ... }@inputs:
+  # Define the NixOS configurations for different hosts
+  # Each host has its own configuration.nix file that imports common modules and defines host-specific settings
+  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, home-manager, plasma-manager, disko, sops-nix, ... }@inputs:
+    # The outputs function generates the NixOS configurations for each host and the auto-installation ISO configuration.
     let
+      # Import the variables from vars.nix
       vars = import ./vars.nix;
+      
+      # Define a helper function to create NixOS configurations for each host
       mkNixOSConfig = path: extraModules: nixpkgs.lib.nixosSystem {
+        # Pass the inputs and variables to the NixOS configuration for use in the configuration.nix files
         specialArgs = { inherit inputs vars; };
-        modules = [ path ] ++ extraModules;
+        # Define modules to be included for all hosts, and append any extra modules specific to the host
+        modules = [ path sops-nix.nixosModules.sops ] ++ extraModules;
       };
     in {
       nixosConfigurations = {
