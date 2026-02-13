@@ -5,7 +5,7 @@ keys:
   # - &admin_desktop "AGE-RECIPIENT-FOR-desktop"
 
   # Other devices
-  - &core_vm_gitea_01 "AGE-RECIPIENT-FOR-core-vm-gitea-01"
+  - &core_vm_gitea_01 "age1hgtwcdx92kp6s7us6d8lr9473kf23sg6ujse7msuuek75qxz0gmqva3wt7"
   - &laptop "AGE-RECIPIENT-FOR-laptop"
 
 creation_rules:
