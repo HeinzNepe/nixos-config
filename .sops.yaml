@@ -1,0 +1,45 @@
+keys:
+  # Admin devices
+  - &admin_nixos_devbox "age1vcz0a9xzk96xcs8r224f9ckrauaatltej7c9dm3rag8wtn92lc4qy70emv"
+  # - &admin_school_laptop "AGE-RECIPIENT-FOR-school-laptop"
+  # - &admin_desktop "AGE-RECIPIENT-FOR-desktop"
+
+  # Other devices
+  - &core_vm_gitea_01 "AGE-RECIPIENT-FOR-core-vm-gitea-01"
+  - &laptop "AGE-RECIPIENT-FOR-laptop"
+
+creation_rules:
+  # Shared secrets for admins only
+  - path_regex: secrets/common\.ya?ml
+    key_groups:
+      - &admin_group
+        age:
+          - *admin_nixos_devbox
+          # - *admin_school_laptop
+          # - *admin_desktop
+
+  # Admin device secrets
+  - path_regex: secrets/hosts/school-laptop\.ya?ml
+    key_groups:
+      - *admin_group
+
+  - path_regex: secrets/hosts/nixos-devbox\.ya?ml
+    key_groups:
+      - *admin_group
+
+  - path_regex: secrets/hosts/desktop\.ya?ml
+    key_groups:
+      - *admin_group
+
+  # Non-admin device secrets (admins + device)
+  - path_regex: secrets/hosts/laptop\.ya?ml
+    key_groups:
+      - *admin_group
+      - age:
+          - *laptop
+
+  - path_regex: secrets/hosts/core-vm-gitea-01\.ya?ml
+    key_groups:
+      - *admin_group
+      - age:
+          - *core_vm_gitea_01

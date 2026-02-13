@@ -84,6 +84,68 @@ To start a nix shell with git installed, use the following command:
 nix shell nixpkgs#git
 ```
 
+## SOPS secrets
+
+This repo uses sops-nix and derives Age keys from each host SSH key. The shared SOPS configuration lives in [modules/sops.nix](modules/sops.nix), and the key groups are defined in [.sops.yaml](.sops.yaml).
+
+### Device layout and key groups
+
+- Admin devices: school-laptop, nixos-devbox, desktop
+- Non-admin devices: laptop, core-vm-gitea-01
+
+Secrets are organized as:
+- Shared admin secrets: [secrets/common.yaml](secrets/common.yaml)
+- Per-host secrets: [secrets/hosts/](secrets/hosts/)
+
+WSL and autoinstall are currently excluded.
+
+### Adding a new device
+
+1. Get the host SSH public key on the new device:
+```
+cat /etc/ssh/ssh_host_ed25519_key.pub
+```
+
+If the host key does not exist yet, generate it first:
+```
+sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+```
+
+2. Convert the SSH key to an Age recipient:
+```
+ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+```
+
+3. Add the new Age recipient to [.sops.yaml](.sops.yaml):
+  - Add it under `keys:` with a clear anchor name.
+  - If it is an admin device, add it to the `admin_group` anchor.
+  - If it is a non-admin device, add a host-specific rule that includes `admin_group` plus the device key.
+
+4. Create a host secrets file for the device in [secrets/hosts/](secrets/hosts/).
+
+### Creating or editing secrets
+
+Create or edit a shared admin secret:
+```
+sops secrets/common.yaml
+```
+
+Create or edit a host secret:
+```
+sops secrets/hosts/<hostname>.yaml
+```
+
+### Using secrets in NixOS
+
+Define secrets in host config and reference them from sops-nix. Example patterns:
+- Add sops file path(s) to `sops.secrets` in the host configuration.
+- Read the decrypted secret from the path provided by sops-nix.
+
+If you add a new secrets file or update key groups, rebuild the host:
+```
+sudo nixos-rebuild switch --flake .#<hostname>
+```
+
 ## Secure boot
 
 This system uses **Lanzaboote** to provide Secure Boot support on NixOS. Lanzaboote replaces systemd‑boot and handles signing the bootloader and kernel so the firmware can verify them at boot.

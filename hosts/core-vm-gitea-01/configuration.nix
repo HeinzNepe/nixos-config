@@ -11,6 +11,7 @@
       ../../modules/nix-options.nix
       ../../modules/region.nix
       ../../modules/cli-programs.nix
+      ../../modules/sops.nix
 
       # Optional modules
       
