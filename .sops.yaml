@@ -1,7 +1,7 @@
 keys:
   # Admin devices
   - &admin_nixos_devbox "age1vcz0a9xzk96xcs8r224f9ckrauaatltej7c9dm3rag8wtn92lc4qy70emv"
-  # - &admin_school_laptop "AGE-RECIPIENT-FOR-school-laptop"
+  - &admin_school_laptop "age1xkt3kv7ycd5dh4lqk38kpf7tqvfaj4xqaz57p80qhan9s99p0cyshj0r5f"
   # - &admin_desktop "AGE-RECIPIENT-FOR-desktop"
 
   # Other devices
@@ -15,7 +15,7 @@ creation_rules:
       - &admin_group
         age:
           - *admin_nixos_devbox
-          # - *admin_school_laptop
+          - *admin_school_laptop
           # - *admin_desktop
 
   # Admin device secrets
