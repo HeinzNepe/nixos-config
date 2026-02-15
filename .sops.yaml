@@ -43,3 +43,11 @@ creation_rules:
       - *admin_group
       - age:
           - *core_vm_gitea_01
+
+  # Service secrets
+  - path_regex: secrets/service/mail\.ya?ml
+    key_groups:
+      - *admin_group
+      - age:
+          - *core_vm_gitea_01
+ 
