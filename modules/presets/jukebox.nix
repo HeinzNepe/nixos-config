@@ -1,5 +1,16 @@
 { pkgs, ... }:
 {
+    # add shairport-sync user
+    users.users.shairport = {
+      description = "Shairport user";
+      isSystemUser = true;
+      createHome = true;
+      home = "/var/lib/shairport-sync";
+      group = "shairport";
+      extraGroups = [ "pulse-access" ];
+    };
+    users.groups.shairport = {};
+
 
     services.pipewire = {
         enable = true;
@@ -11,7 +22,7 @@
         enable = true;
         openFirewall = true;
         user = "shairport";
-        group = "audio";
+        group = "shairport";
         settings = {
             name = "NixOS-Jukebox";
             audio = {
@@ -22,8 +33,6 @@
             };
         };
     };
-
-    users.users.shairport.extraGroups = [ "audio" ];
 
     services.spotifyd = {
         enable = true;
