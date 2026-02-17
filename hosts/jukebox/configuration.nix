@@ -8,17 +8,31 @@
   imports =
     [ 
      # Defaults
-     ../../modules/desktop.nix
-     ../../modules/nix-options.nix
-     ../../modules/region.nix
-     ../../modules/cli-programs.nix
-    ../../modules/sops.nix
+      ../../modules/desktop.nix
+      ../../modules/nix-options.nix
+      ../../modules/region.nix
+      ../../modules/cli-programs.nix
+      ../../modules/sops.nix
+
+      # Optional modules
+      # Applications
+      ../../modules/gui-programs.nix
+
+      # Add dev modules
+      ../../modules/options/development.nix
+      ../../modules/options/git.nix
+      ../../modules/options/fonts.nix
+      ../../modules/options/shell.nix
+      ../../modules/options/vpn.nix
+      ../../modules/options/docker.nix
+      ../../modules/options/networking-tools.nix
+
+      # Add password manager
+      ../../modules/1password.nix
+
+      # Home-manager
+      ../../homemanager.nix
      
-     # Optional modules
-     ../../modules/gui-programs.nix
-     ../../modules/options/git.nix
-     ../../modules/1password.nix
-     ../../homemanager.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

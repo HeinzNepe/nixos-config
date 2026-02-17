@@ -63,8 +63,8 @@
         # Homelab configuration
         core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
 
-        # Laptop configuration
-        laptop = mkNixOSConfig ./hosts/laptop/configuration.nix [];
+        # Jukebox laptop configuration
+        jukebox = mkNixOSConfig ./hosts/jukebox/configuration.nix [];
         
         # Desktop configuration
         desktop = mkNixOSConfig ./hosts/desktop/configuration.nix [ lanzaboote.nixosModules.lanzaboote ];
