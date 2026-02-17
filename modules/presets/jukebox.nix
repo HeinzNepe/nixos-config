@@ -4,7 +4,7 @@
     services.pipewire = {
         enable = true;
         alsa.enable = true;
-        pulse.enable = true;
+        pulse.enable = false;
     };
 
     services.shairport-sync = {
