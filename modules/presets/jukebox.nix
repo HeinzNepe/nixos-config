@@ -10,9 +10,9 @@
     services.shairport-sync = {
         enable = true;
         openFirewall = true;
-        arguments = [
-            "--name" "NixOS-Jukebox"
-        ];
+        settings = {
+            name = "NixOS-Jukebox";
+        };
     };
 
     services.spotifyd = {
