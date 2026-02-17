@@ -38,7 +38,7 @@
       ./hardware-configuration.nix
     ];
 
-  networking.hostName = "lap-nixos"; # Define your hostname.
+  networking.hostName = "nix-jukebox"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
