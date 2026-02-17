@@ -9,6 +9,7 @@
     [ 
       # Defaults
       ../../modules/desktop.nix
+      ../../modules/options/audio.nix
       ../../modules/nix-options.nix
       ../../modules/region.nix
       ../../modules/cli-programs.nix
