@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
+    nixpkgs.overlays = [ (import ./overlay-shairport.nix) ];
 
     services.pipewire = {
         enable = true;
@@ -12,10 +13,7 @@
         openFirewall = true;
         settings = {
             name = "NixOS-Jukebox";
-            audio = {
-                output_backend = "ao";
-            };
-            ao = {
+            alsa = {
                 output_device = "default";
             };
         };
