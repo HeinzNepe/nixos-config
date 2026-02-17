@@ -10,6 +10,8 @@
     services.shairport-sync = {
         enable = true;
         openFirewall = true;
+        user = "shairport";
+        group = "audio";
         settings = {
             name = "NixOS-Jukebox";
             audio = {
@@ -20,6 +22,8 @@
             };
         };
     };
+
+    users.users.shairport.extraGroups = [ "audio" ];
 
     services.spotifyd = {
         enable = true;
