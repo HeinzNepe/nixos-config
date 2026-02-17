@@ -19,13 +19,12 @@
       ../../modules/gui-programs.nix
 
       # Add dev modules
-      ../../modules/options/development.nix
       ../../modules/options/git.nix
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
-      ../../modules/options/vpn.nix
-      ../../modules/options/docker.nix
-      ../../modules/options/networking-tools.nix
+
+      # Add Jukebox specific features
+      ../../modules/presets/jukebox.nix
 
       # Add password manager
       ../../modules/1password.nix
