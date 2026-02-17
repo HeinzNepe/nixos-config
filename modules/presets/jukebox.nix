@@ -12,7 +12,10 @@
         openFirewall = true;
         settings = {
             name = "NixOS-Jukebox";
-            alsa = {
+            audio = {
+                output_backend = "ao";
+            };
+            ao = {
                 output_device = "default";
             };
         };
