@@ -34,13 +34,5 @@
         };
     };
 
-    services.spotifyd = {
-        enable = true;
-        settings = {
-            device_name = "NixOS-Jukebox";
-            backend = "pipewire";
-        };
-    };
-
 
 }
