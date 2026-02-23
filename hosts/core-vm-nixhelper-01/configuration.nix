@@ -22,9 +22,6 @@
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
 
-      # Gitea module
-      ../../modules/options/gitea.nix
-
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
