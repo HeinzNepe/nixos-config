@@ -1,5 +1,4 @@
 {
-  # Flake for NixOS with importable Secure Boot module (lanzaboote + sbctl)
   description = "Henrik's flake";
 
   # Define the inputs used for the flake
