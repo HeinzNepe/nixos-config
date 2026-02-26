@@ -6,6 +6,7 @@ keys:
 
   # Other devices
   - &core_vm_gitea_01 "age1hgtwcdx92kp6s7us6d8lr9473kf23sg6ujse7msuuek75qxz0gmqva3wt7"
+  - &core_vm_nixhelper_01 "age1yj0t0ljh2tygk5cntqml5y4vdu6zfszcuvnk5u98xt84j25q3a4q22ggrj"
   - &laptop "AGE-RECIPIENT-FOR-laptop"
 
 creation_rules:
@@ -43,6 +44,12 @@ creation_rules:
       - *admin_group
       - age:
           - *core_vm_gitea_01
+
+  - path_regex: secrets/hosts/core-vm-nixhelper-01\.ya?ml
+    key_groups:
+      - *admin_group
+      - age:
+          - *core_vm_nixhelper_01
 
   # Service secrets
   - path_regex: secrets/service/mail\.ya?ml

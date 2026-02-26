@@ -28,6 +28,9 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
+      # Testing
+      ../../modules/services/harmonia.nix
+
       # Gitea module
       #../../modules/options/gitea.nix
 
