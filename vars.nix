@@ -19,4 +19,7 @@
   # SSH public keys for user authentication
   sshPublicKeyPersonal = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHlcSbSiViVlhO3v2jz7U0NYBi8hags7R0TCvhIFSlgA"; # Portunus-Alfa
   sshPublicKeyWork = ""; # No work key (yet)
+
+  # Secrets directory
+  secretsDir = "./secrets";
 }

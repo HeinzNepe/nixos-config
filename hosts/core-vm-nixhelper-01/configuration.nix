@@ -22,6 +22,9 @@
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
 
+      # Harmonia binary cache server
+      ../../modules/services/harmonia.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];

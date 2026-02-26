@@ -1,1 +1,4 @@
 result
+
+# SOPS age keys - never commit private keys
+.config/sops/age/keys.txt

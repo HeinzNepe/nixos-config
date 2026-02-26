@@ -32,29 +32,33 @@ creation_rules:
     key_groups:
       - *admin_group
 
-  # Non-admin device secrets (admins + device)
+  # Non-admin device secrets: admin + device keys in same group (either can decrypt)
   - path_regex: secrets/hosts/laptop\.ya?ml
     key_groups:
-      - *admin_group
       - age:
+          - *admin_nixos_devbox
+          - *admin_school_laptop
           - *laptop
 
   - path_regex: secrets/hosts/core-vm-gitea-01\.ya?ml
     key_groups:
-      - *admin_group
       - age:
+          - *admin_nixos_devbox
+          - *admin_school_laptop
           - *core_vm_gitea_01
 
   - path_regex: secrets/hosts/core-vm-nixhelper-01\.ya?ml
     key_groups:
-      - *admin_group
       - age:
+          - *admin_nixos_devbox
+          - *admin_school_laptop
           - *core_vm_nixhelper_01
 
   # Service secrets
   - path_regex: secrets/service/mail\.ya?ml
     key_groups:
-      - *admin_group
       - age:
+          - *admin_nixos_devbox
+          - *admin_school_laptop
           - *core_vm_gitea_01
  

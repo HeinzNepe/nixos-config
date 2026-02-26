@@ -123,6 +123,27 @@ ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
 
 4. Create a host secrets file for the device in [secrets/hosts/](secrets/hosts/).
 
+### Setting up age keys locally
+
+**Important:** Age keys should **never** be committed to the repository. Instead, they are derived locally from each host's SSH key.
+
+The NixOS configuration automatically handles this through [modules/sops.nix](modules/sops.nix), which configures SOPS to use the SSH host key (`/etc/ssh/ssh_host_ed25519_key`) for age encryption/decryption. After rebuilding with `sudo nixos-rebuild switch --flake .#<hostname>`, SOPS will work automatically.
+
+If you need to edit secrets on a system before the first NixOS rebuild, manually generate the age key:
+
+```bash
+bash setup-sops-age.sh
+```
+
+Or manually:
+
+```bash
+mkdir -p ~/.config/sops/age
+sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
+```
+
+Ensure `.config/sops/age/keys.txt` is in your `.gitignore` so it doesn't get committed.
+
 ### Creating or editing secrets
 
 Create or edit a shared admin secret:
