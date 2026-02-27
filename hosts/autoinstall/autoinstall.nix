@@ -3,7 +3,7 @@
 # This module sets up a minimal system for automated installation, including user, SSH, and bootloader settings.
 {
   imports = [
-    ../region.nix # Import regional settings (timezone, locale, keymap)
+    ../../modules/region.nix # Import regional settings (timezone, locale, keymap)
   ];
 
   # Boot configuration for legacy BIOS (GRUB, no EFI)

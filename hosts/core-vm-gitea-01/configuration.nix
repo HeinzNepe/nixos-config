@@ -14,6 +14,7 @@
       ../../modules/sops.nix
 
       # Optional modules
+      ../../modules/homelab/nix-substitutors.nix
       
       # Add dev modules
       ../../modules/options/fonts.nix
@@ -23,7 +24,7 @@
       ../../modules/options/ssh-server.nix
 
       # Gitea module
-      ../../modules/options/gitea.nix
+      modules/gitea.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

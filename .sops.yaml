@@ -61,4 +61,11 @@ creation_rules:
           - *admin_nixos_devbox
           - *admin_school_laptop
           - *core_vm_gitea_01
+  - path_regex: secrets/service/builder\.ya?ml
+    key_groups:
+      - age:
+          - *admin_nixos_devbox
+          - *admin_school_laptop
+          - *core_vm_gitea_01
+          - *core_vm_nixhelper_01
  

@@ -20,13 +20,13 @@
       ../../modules/options/shell.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
-      ../../modules/options/ssh-server.nix
 
       # Harmonia binary cache server
-      ../../modules/services/harmonia.nix
+      modules/harmonia.nix
+      modules/buildserver.nix
 
       # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./hardware-configuration.nix      
     ];
 
   networking.hostName = "core-vm-nixhelper-01"; # Define your hostname.

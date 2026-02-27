@@ -24,7 +24,7 @@
       ../../modules/options/shell.nix
 
       # Add Jukebox specific features
-      ../../modules/presets/jukebox.nix
+      modules/jukebox.nix
 
       # Add password manager
       ../../modules/1password.nix
