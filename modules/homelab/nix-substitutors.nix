@@ -25,7 +25,7 @@
   nix.buildMachines = [{
     hostName = "core-vm-nixhelper-01.core.topheinz.com";
     system = "x86_64-linux";
-    user = "nixbuilder";
+    sshUser = "nixbuilder";
     sshKey = config.sops.secrets."builder-ssh-key".path;
     maxJobs = 4;
     speedFactor = 2;
