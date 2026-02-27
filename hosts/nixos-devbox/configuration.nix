@@ -28,11 +28,9 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
-      # Testing
-      ../../modules/services/harmonia.nix
 
-      # Gitea module
-      #../../modules/options/gitea.nix
+      # Cache server
+      ../../modules/homelab/nix-substitutors.nix
 
       # Add password manager
       ../../modules/1password.nix

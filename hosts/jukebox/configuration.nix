@@ -15,6 +15,9 @@
       ../../modules/sops.nix
 
       # Optional modules
+      # Cache server
+      ../../modules/homelab/nix-substitutors.nix
+
       # Applications
       ../../modules/gui-programs.nix
 
