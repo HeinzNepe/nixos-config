@@ -5,14 +5,14 @@
     # https://github.com/nix-community/harmonia
 
     sops.secrets."harmonia-secret-signing-key" = {
-        sopsFile = ./../../../secrets/hosts + "/core-vm-nixhelper-01.yaml";
+        sopsFile = ./../../../secrets/hosts/core-vm-nixhelper-01.yaml;
         owner = "harmonia";
         group = "harmonia";
         mode = "0400";
     };
 
     sops.secrets."harmonia-public-signign-key" = {
-        sopsFile = ./../../../secrets/hosts + "/core-vm-nixhelper-01.yaml";
+        sopsFile = ./../../../secrets/hosts/core-vm-nixhelper-01.yaml;
         owner = "harmonia";
         group = "harmonia";
         mode = "0444";
