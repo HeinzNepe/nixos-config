@@ -21,9 +21,9 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
-      # Harmonia binary cache server
-      ./modules/harmonia.nix
-      ./modules/buildserver.nix
+      # Harmonia binary cache server (temporarily disabled)
+      # ./modules/harmonia.nix
+      # ./modules/buildserver.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix      

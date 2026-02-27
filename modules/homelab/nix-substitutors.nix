@@ -5,12 +5,12 @@
   # Binary cache configuration
   nix.settings.substituters = [
     "https://cache.nixos.org"
-    "https://nix-cache.core.topheinz.com"
+    # "https://nix-cache.core.topheinz.com"  # Temporarily disabled - returning corrupt narinfo
   ];
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD2z8VEfzsIlCp8DWJfKgvLDdhmDtLrQz9z5z9E="
-    "nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE="
+    # "nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE="
   ];
 
   # SOPS configuration for builder SSH key (temporarily disabled)
