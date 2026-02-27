@@ -13,28 +13,28 @@
     "nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE="
   ];
 
-  # SOPS configuration for builder SSH key
-  sops.secrets."builder-ssh-key" = {
-    sopsFile = ./../../secrets/service/builder.yaml;
-    owner = "root";
-    group = "root";
-    mode = "0600";
-  };
+  # SOPS configuration for builder SSH key (temporarily disabled)
+  # sops.secrets."builder-ssh-key" = {
+  #   sopsFile = ./../../secrets/service/builder.yaml;
+  #   owner = "root";
+  #   group = "root";
+  #   mode = "0600";
+  # };
 
-  # Remote build machine configuration
-  nix.buildMachines = [{
-    hostName = "core-vm-nixhelper-01.core.topheinz.com";
-    system = "x86_64-linux";
-    sshUser = "nixbuilder";
-    sshKey = config.sops.secrets."builder-ssh-key".path;
-    maxJobs = 4;
-    speedFactor = 2;
-    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-    mandatoryFeatures = [ ];
-  }];
+  # Remote build machine configuration (temporarily disabled)
+  # nix.buildMachines = [{
+  #   hostName = "core-vm-nixhelper-01.core.topheinz.com";
+  #   system = "x86_64-linux";
+  #   sshUser = "nixbuilder";
+  #   sshKey = config.sops.secrets."builder-ssh-key".path;
+  #   maxJobs = 4;
+  #   speedFactor = 2;
+  #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+  #   mandatoryFeatures = [ ];
+  # }];
 
-  # Enable distributed builds
-  nix.distributedBuilds = true;
+  # Enable distributed builds (temporarily disabled)
+  # nix.distributedBuilds = true;
 
   # Allow builders to use substituters (can fetch from caches)
   nix.settings.builders-use-substitutes = true;
