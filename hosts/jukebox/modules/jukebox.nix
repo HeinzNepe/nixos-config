@@ -91,7 +91,7 @@
 
     alsa =
     {
-      output_device = "hw:0,0";
+      output_device = "default";
     };
   '';
 }
