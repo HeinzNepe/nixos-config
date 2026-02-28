@@ -9,7 +9,7 @@
       createHome     = true;
       home           = "/var/lib/shairport-sync";
       group          = "shairport";
-      extraGroups    = [ "pulse-access" ];
+      extraGroups    = [ "audio" ];
     };
     groups.shairport = {};
   };
@@ -91,7 +91,7 @@
 
     alsa =
     {
-      output_device = "default";
+      output_device = "plughw:sofhdadsp,0";
     };
   '';
 }
