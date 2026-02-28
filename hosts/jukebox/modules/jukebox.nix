@@ -48,12 +48,10 @@
 
   # enable pulseaudio
   services.pipewire.enable = false;
-  hardware = {
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      systemWide = true;
-    };
+  services.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+    systemWide = true;
   };
   
   # enable Avahi
@@ -79,10 +77,12 @@
     nix-jukebox = {
       description = "nix-jukebox shairport-sync instance";
       wantedBy = [ "multi-user.target" ];
-      after       = [ "network.target" "avahi-daemon.service" ];
+      after       = [ "network.target" "avahi-daemon.service" "pulseaudio.service" ];
+      requires    = [ "pulseaudio.service" ];
       serviceConfig = {
         User             = "shairport";
         Group            = "shairport";
+        Environment      = "PULSE_SERVER=unix:/run/pulse/native";
         ExecStart = "${pkgs.shairport-sync-airplay2}/bin/shairport-sync -c /etc/nix-jukebox.conf";
         Restart          = "on-failure";
         RuntimeDirectory = "shairport-sync";
