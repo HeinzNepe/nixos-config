@@ -46,10 +46,6 @@
     ];
   };
 
-  # disable pulseaudio and pipewire, use ALSA directly
-  services.pipewire.enable = false;
-  services.pulseaudio.enable = false;
-  
   # enable Avahi
   services.avahi = {
     enable = true;
