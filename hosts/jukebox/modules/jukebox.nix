@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 
+# NixOS module for the jukebox host
+# Provides AirPlay (shairport-sync) audio output to aux via ALSA
+
 {
-  # user and group
+  # System user and group for shairport-sync
   users = {
     users.shairport = {
       description    = "Shairport user";
@@ -9,12 +12,12 @@
       createHome     = true;
       home           = "/var/lib/shairport-sync";
       group          = "shairport";
-      extraGroups    = [ "audio" ];
+      extraGroups    = [ "audio" ]; # Needed for ALSA device access
     };
     groups.shairport = {};
   };
 
-  # open firewall ports
+  # Open required firewall ports for AirPlay and mDNS
   networking.firewall = {
     interfaces."wlp0s20f3" = {
       allowedTCPPorts = [
@@ -37,7 +40,7 @@
     };
   };
 
-  # packages
+  # Essential packages for audio and AirPlay
   environment = {
     systemPackages = with pkgs; [
       alsa-utils
@@ -46,7 +49,7 @@
     ];
   };
 
-  # enable Avahi
+  # Enable Avahi for mDNS/Bonjour discovery (required for AirPlay)
   services.avahi = {
     enable = true;
     publish.enable = true;
@@ -54,7 +57,7 @@
     allowInterfaces = [ "wlp0s20f3" ];
   };
 
-  # systemd services
+  # Systemd services: nqptp for AirPlay 2 timing, shairport-sync for AirPlay audio
   systemd.services = {
     nqptp = {
       description = "Network Precision Time Protocol for Shairport Sync";
@@ -69,7 +72,7 @@
     nix-jukebox = {
       description = "nix-jukebox shairport-sync instance";
       wantedBy = [ "multi-user.target" ];
-      after       = [ "network.target" "avahi-daemon.service" ];
+      after       = [ "network.target" "avahi-daemon.service" ]; # Ensure network and Avahi are up
       serviceConfig = {
         User             = "shairport";
         Group            = "shairport";
@@ -80,22 +83,22 @@
     };
   };
 
-  # write shairport-sync config
+  # Write shairport-sync config for ALSA output
   environment.etc."nix-jukebox.conf".text = ''
     general =
     {
       name = "nix-jukebox";
-      output_backend = "alsa";
+      output_backend = "alsa"; # Use ALSA directly (no PulseAudio/PipeWire)
       port = 7000;
     };
 
     alsa =
     {
-      output_device = "plughw:sofhdadsp,0";
+      output_device = "plughw:sofhdadsp,0"; # Card name for aux output, with plug for format conversion
+
+    # For volume control and troubleshooting:
+    # - Use `alsamixer` to adjust output levels
+    # - Use `alsactl store` to persist volume settings
     };
   '';
 }
-
-# run `sudo -u pulse PULSE_RUNTIME_PATH=/run/pulse pactl list sinks short` to display available sinks
-# run `sudo -u pulse alsamixer` to adjust volume levels
-# run `sudo alsactl store` so save the volume levels persistently
