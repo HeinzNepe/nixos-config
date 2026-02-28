@@ -46,13 +46,9 @@
     ];
   };
 
-  # enable pulseaudio
+  # disable pulseaudio and pipewire, use ALSA directly
   services.pipewire.enable = false;
-  services.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-    systemWide = true;
-  };
+  services.pulseaudio.enable = false;
   
   # enable Avahi
   services.avahi = {
@@ -77,12 +73,10 @@
     nix-jukebox = {
       description = "nix-jukebox shairport-sync instance";
       wantedBy = [ "multi-user.target" ];
-      after       = [ "network.target" "avahi-daemon.service" "pulseaudio.service" ];
-      requires    = [ "pulseaudio.service" ];
+      after       = [ "network.target" "avahi-daemon.service" ];
       serviceConfig = {
         User             = "shairport";
         Group            = "shairport";
-        Environment      = "PULSE_SERVER=unix:/run/pulse/native";
         ExecStart = "${pkgs.shairport-sync-airplay2}/bin/shairport-sync -c /etc/nix-jukebox.conf";
         Restart          = "on-failure";
         RuntimeDirectory = "shairport-sync";
@@ -95,13 +89,13 @@
     general =
     {
       name = "nix-jukebox";
-      output_backend = "pa";
+      output_backend = "alsa";
       port = 7000;
     };
 
-    pa =
+    alsa =
     {
-      sink = "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink";
+      output_device = "hw:0,0";
     };
   '';
 }
