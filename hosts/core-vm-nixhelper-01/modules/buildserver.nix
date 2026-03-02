@@ -20,7 +20,9 @@
   # Enable SSH server for remote builds
   services.openssh = {
     enable = true;
+    ports = [ 22 ];
     settings = {
+      AllowUsers = [ "remotebuild" "henrik" "heinz" ]; # Allow SSH access for builder and admins
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = false;
     };
