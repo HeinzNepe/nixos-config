@@ -14,6 +14,7 @@
       ../../modules/region.nix
       ../../modules/cli-programs.nix
       ../../modules/sops.nix
+      ../../modules/options/bluetooth.nix
 
       # Optional modules
       # Applications
