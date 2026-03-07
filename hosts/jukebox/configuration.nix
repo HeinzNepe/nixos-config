@@ -8,7 +8,6 @@
   imports =
     [ 
      # Defaults
-      ../../modules/desktop.nix
       ../../modules/nix-options.nix
       ../../modules/region.nix
       ../../modules/cli-programs.nix
@@ -27,7 +26,8 @@
       ../../modules/options/shell.nix
 
       # Add Jukebox specific features
-      modules/jukebox.nix
+      ./modules/desktop.nix
+      ./modules/jukebox.nix
 
       # Add password manager
       ../../modules/1password.nix
