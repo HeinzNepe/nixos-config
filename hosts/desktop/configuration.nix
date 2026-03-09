@@ -78,6 +78,26 @@
     enable32Bit = true;
   };
 
+  # Monitor and workspace configuration for hyprland
+  home-manager.sharedModules = [
+    {
+      wayland.windowManager.hyprland.settings = {
+        monitor = [
+          "HDMI-A-1, 1920x1080@120, 0x180, 1"
+          "DP-2, 3440x1440@165, 1920x0, 1"
+          "DP-1, 1920x1080@144, 5360x180, 1"
+        ];
+        workspace = [
+          "1, monitor:HDMI-A-1, default:true"
+          "2, monitor:HDMI-A-1"
+          "3, monitor:DP-2, default:true"
+          "4, monitor:DP-2"
+          "5, monitor:DP-1, default:true"
+          "6, monitor:DP-1"
+        ];
+      };
+    }
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

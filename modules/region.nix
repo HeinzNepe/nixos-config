@@ -13,4 +13,7 @@
 
   # Set the console keymap (keyboard layout)
   console.keyMap = "no";
+
+  # Set the keyboard layout for X11/Wayland desktop environments (e.g. Plasma)
+  services.xserver.xkb.layout = "no";
 }
