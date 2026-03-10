@@ -79,6 +79,25 @@
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+    # Monitor and workspace configuration for hyprland
+  home-manager.sharedModules = [
+    {
+      wayland.windowManager.hyprland.settings = {
+        monitor = [
+          "eDP-1, 1920x1080@60, 0x0, 1"
+        ];
+        workspace = [
+          "1, monitor:eDP-1, default:true"
+          "2, monitor:eDP-1"
+          "3, monitor:eDP-1"
+          "4, monitor:eDP-1"
+          "5, monitor:eDP-1"
+          "6, monitor:eDP-1"
+        ];
+      };
+    }
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
