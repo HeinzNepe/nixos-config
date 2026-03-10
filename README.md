@@ -227,6 +227,18 @@ After rebuilding use sbctl to verify Secure Boot status:
 sudo sbctl status
 ```
 
+## Using hyprland
+To use hyprland, the section containing the monitor configuration must be added. This is stored in the configuration.nix file of each respective host, as it is individual.
+
+To find the name of the display, run the following command
+```
+kscreen-doctor -o
+```
+
+The output here, will contain a line something like this:
+`Output: 1 eDP-1 e8a4ce12-6b2f-4e83-bb12-100234ace57f`
+Where `eDP-1` is the display name,
+
 ## Custom ISO image
 This flake contains a custom ISO image, that is imagined primarily for setting up VMs on proxmox. The approximate task list of the ISO is the following:
 
