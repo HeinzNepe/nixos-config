@@ -52,7 +52,7 @@
   networking.hostName = "NixOS-Devbox"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
+  # Enable networking with DHCP for all non-configured links
   networking.networkmanager.enable = true;
 
   # Enable secureboot
