@@ -4,18 +4,18 @@
     networking = {
         # IPv4 address
         interfaces.enp1s0 = { 
-            ipv4.addresses = {
+            ipv4.addresses = [{
                 # VPS public IPv4
                 address = "46.62.198.145";
                 prefixLength = 32;
-            };
+            }];
 
             # IPv6 address
-            ipv6.addresses = {
+            ipv6.addresses = [{
                 # VPS public IPv6
                 address = "2a01:4f9:c013:7b50::1";
                 prefixLength = 64;
-            };
+            }];
         
         };
         
