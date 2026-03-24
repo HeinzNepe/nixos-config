@@ -25,16 +25,14 @@
     networking.defaultGateway6 = "fe80::1";
 
     # DNS servers (Hetzner's public DNS)
-    networking.nameservers = [ "185.12.64.2" "185.12.64.1" ];
-    networking.nameservers6 = [ "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ];
-    networking.search = [ ];
+    networking.nameservers = [ "185.12.64.2" "185.12.64.1" "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ];
+    networking.nameservers = [ "185.12.64.2" "185.12.64.1" "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ];
+    #networking.search = [ ];
 
     # Enable and open ports in the firewall.
     networking.firewall.enable = true;
     networking.firewall.allowedTCPPorts = [ 22 80 443 ]; # SSH, HTTP, HTTPS
     networking.firewall.allowedUDPPorts = [ 51820 21820 ]; # Pangolin Wireguard and NEWT 
-    networking.firewall.allowedTCPPorts6 = [ 22 80 443 ]; # IPv6-specific rules
-    networking.firewall.allowedUDPPorts6 = [ 51820 21820 ]; # IPv6-specific rules
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
 }
