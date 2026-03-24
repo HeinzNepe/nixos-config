@@ -26,7 +26,7 @@
 
     # DNS servers (Hetzner's public DNS)
     networking.nameservers = [ "185.12.64.2" "185.12.64.1" "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ];
-    networking.nameservers = [ "185.12.64.2" "185.12.64.1" "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ];
+    #networking.nameservers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ]; # Cloudflare
     #networking.search = [ ];
 
     # Enable and open ports in the firewall.
