@@ -23,13 +23,13 @@
         # Hetzner's default gateway for this subnet
         defaultGateway = {
             address = "172.31.1.1";
-            interface = enp1s0; # Required since the gateway is not in the same subnet as the VPS's IP
+            interface = "enp1s0"; # Required since the gateway is not in the same subnet as the VPS's IP
         };
 
         # Hetzners link-local default gateway for IPv6
         defaultGateway6 = {
             address = "fe80::1";
-            interface = enp1s0; # Required since the gateway is not in the same subnet as the VPS's IP
+            interface = "enp1s0"; # Required since the gateway is not in the same subnet as the VPS's IP
         };
 
         # DNS servers
