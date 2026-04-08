@@ -1,9 +1,11 @@
 { ... }:
 
 {
+    # Static network configuration for the VPS. This is included in the main configuration.nix file.
     networking = {
-        # IPv4 address
+        # Set the configuraion on the interface
         interfaces.enp1s0 = { 
+            # IPv4 address
             ipv4.addresses = [{
                 # VPS public IPv4
                 address = "46.62.198.145";
