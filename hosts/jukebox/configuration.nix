@@ -25,6 +25,12 @@
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
 
+      # Geoguessr
+      ../../modules/options/bluetooth.nix
+      ../../modules/options/development.nix
+      ../../modules/options/gaming.nix
+
+
       # Add Jukebox specific features
       ./modules/desktop.nix
       ./modules/jukebox.nix
