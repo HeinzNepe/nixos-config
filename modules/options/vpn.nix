@@ -6,6 +6,6 @@
         wireguard-tools
 
         # Install proton-vpn gui client
-        protonvpn-gui
+        proton-vpn
     ];
 }
