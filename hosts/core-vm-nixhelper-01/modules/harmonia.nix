@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ config, ... }:
 
 {
     # Harmonia - Nix binary cache server

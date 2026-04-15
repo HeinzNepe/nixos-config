@@ -21,7 +21,7 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
-      # Harmonia binary cache server (temporarily disabled)
+      # Harmonia binary cache server
       ./modules/harmonia.nix
       ./modules/buildserver.nix
 

@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
-# Build server configuration
-# This module configures a machine to act as a remote Nix build server for other machines
+# Build server configuration.
+# This host accepts remote SSH build jobs from other machines.
 {
   # Create a dedicated builder user
   users.users.remotebuild = {
@@ -20,6 +20,7 @@
   # Enable SSH server for remote builds
   services.openssh = {
     enable = true;
+    openFirewall = true;
     ports = [ 22 ];
     settings = {
       AllowUsers = [ "remotebuild" "henrik" "heinz" ]; # Allow SSH access for builder and admins
@@ -36,13 +37,7 @@
     # Optimize build settings
     max-jobs = "auto";
     cores = 0; # Use all available cores
-    
-    # Enable experimental features if needed
-    experimental-features = [ "nix-command" "flakes" ];
   };
-
-  # Open SSH port for remote builders
-  networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Increase system limits for building
   security.pam.loginLimits = [

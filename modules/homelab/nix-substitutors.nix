@@ -8,15 +8,15 @@
 
 
   # Binary cache configuration
-  #nix.settings.substituters = [
-  #  "https://cache.nixos.org"
-  # "https://nix-cache.core.topheinz.com"  # Temporarily disabled - returning corrupt narinfo
-  #];
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://nix-cache.core.topheinz.com"
+  ];
 
-  #nix.settings.trusted-public-keys = [
-  #  "cache.nixos.org-1:6NCHdD2z8VEfzsIlCp8DWJfKgvLDdhmDtLrQz9z5z9E="
-    # "nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE="
-  #];
+  nix.settings.trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD2z8VEfzsIlCp8DWJfKgvLDdhmDtLrQz9z5z9E="
+    "nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE="
+  ];
 
   #
   # Builder configuration
@@ -39,8 +39,7 @@
   # Remote build machine configuration
   nix.buildMachines = [{
     hostName = "core-vm-nixhelper-01";
-    #system = "x86_64-linux";
-    system = pkgs.stdenv.hostPlatform.system;
+    system = "x86_64-linux";
     sshUser = "remotebuild";
     sshKey = config.sops.secrets."builder-ssh-key".path;
     #maxJobs = 4;
