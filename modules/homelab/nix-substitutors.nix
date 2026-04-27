@@ -57,7 +57,12 @@
     before = [ "nix-daemon.service" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "/bin/sh -c '/bin/mkdir -p /etc/nix && /usr/bin/base64 --decode < " + config.sops.secrets."builder-ssh-key-b64".path + " > /etc/nix/builder-ssh-key && /bin/chown root:root /etc/nix/builder-ssh-key && /bin/chmod 600 /etc/nix/builder-ssh-key'";
+      ExecStart =
+        "" +
+        ${pkgs.coreutils}/bin/mkdir + " -p /etc/nix && " +
+        ${pkgs.coreutils}/bin/base64 + " --decode < " + config.sops.secrets."builder-ssh-key-b64".path + " > /etc/nix/builder-ssh-key && " +
+        ${pkgs.coreutils}/bin/chown + " root:root /etc/nix/builder-ssh-key && " +
+        ${pkgs.coreutils}/bin/chmod + " 600 /etc/nix/builder-ssh-key";
       RemainAfterExit = "yes";
     };
   };
