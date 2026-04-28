@@ -64,6 +64,7 @@
         
         # Homelab configuration
         core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
+        core-vm-minecraft-01 = mkNixOSConfig ./hosts/core-vm-minecraft-01/configuration.nix [];
         core-vm-nixhelper-01 = mkNixOSConfig ./hosts/core-vm-nixhelper-01/configuration.nix [];
 
         # Jukebox laptop configuration
