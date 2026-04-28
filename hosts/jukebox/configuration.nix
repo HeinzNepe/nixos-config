@@ -25,6 +25,12 @@
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
 
+      # Geoguessr
+      ../../modules/options/bluetooth.nix
+      ../../modules/options/development.nix
+      ../../modules/options/gaming.nix
+
+
       # Add Jukebox specific features
       ./modules/desktop.nix
       ./modules/jukebox.nix
@@ -43,7 +49,7 @@
   networking.hostName = "nix-jukebox"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
+  # Enable networking with DHCP for all non-configured links
   networking.networkmanager.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

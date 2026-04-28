@@ -32,7 +32,7 @@
 
   networking.hostName = "core-vm-gitea-01"; # Define your hostname.
   
-  # Enable networking
+  # Enable networking with DHCP for all non-configured links
   networking.networkmanager.enable = true;
 
   

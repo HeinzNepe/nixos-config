@@ -19,13 +19,16 @@
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
 
+      # Include the static network configuration for the VPS
+      ./networking.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   networking.hostName = "hel1-vps-01"; # Define your hostname.
   
-  # Enable networking
+  # Enable networking with DHCP for all non-configured links
   networking.networkmanager.enable = true;
 
   

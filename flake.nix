@@ -9,6 +9,9 @@
     # Add nixpkgs-stable input for stable packages
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
+    # Add nixos-hardware for hardware-specific modules, especially useful for Raspberry Pi configurations
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     # Lanzaboote for Secure Boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -42,7 +45,7 @@
 
   # Define the NixOS configurations for different hosts
   # Each host has its own configuration.nix file that imports common modules and defines host-specific settings
-  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, home-manager, plasma-manager, disko, sops-nix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, home-manager, plasma-manager, disko, sops-nix, nixos-hardware, ... }@inputs:
     # The outputs function generates the NixOS configurations for each host and the auto-installation ISO configuration.
     let
       # Import the variables from vars.nix
@@ -66,6 +69,16 @@
         core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
         core-vm-minecraft-01 = mkNixOSConfig ./hosts/core-vm-minecraft-01/configuration.nix [];
         core-vm-nixhelper-01 = mkNixOSConfig ./hosts/core-vm-nixhelper-01/configuration.nix [];
+        core-rpi-node-01 = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs vars; };
+          modules = [
+            ./hosts/core-rpi-node-01/configuration.nix
+            sops-nix.nixosModules.sops
+            nixos-hardware.nixosModules.raspberry-pi-4
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          ];
+        };
 
         # Jukebox laptop configuration
         jukebox = mkNixOSConfig ./hosts/jukebox/configuration.nix [];

@@ -21,9 +21,9 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
-      # Harmonia binary cache server (temporarily disabled)
-      # ./modules/harmonia.nix
-      # ./modules/buildserver.nix
+      # Harmonia binary cache server
+      ./modules/harmonia.nix
+      ./modules/buildserver.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix      
@@ -31,7 +31,7 @@
 
   networking.hostName = "core-vm-nixhelper-01"; # Define your hostname.
   
-  # Enable networking
+  # Enable networking with DHCP for all non-configured links
   networking.networkmanager.enable = true;
 
   

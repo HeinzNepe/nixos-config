@@ -51,7 +51,7 @@
   networking.hostName = "eagle-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
+  # Enable networking with DHCP for all non-configured links
   networking.networkmanager.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ config, ... }:
 
 {
     # Harmonia - Nix binary cache server
@@ -18,7 +18,7 @@
         mode = "0444";
     };
 
-    services.harmonia = {
+    services.harmonia.cache = {
         enable = true;
         # Generated with `sudo nix-store --generate-binary-cache-key cache.domain-1 \ secret-key.pem public-key.pem`
         signKeyPaths = [ config.sops.secrets."harmonia-secret-signing-key".path ];
