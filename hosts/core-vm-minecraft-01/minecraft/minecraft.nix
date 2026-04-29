@@ -24,6 +24,9 @@ in {
     enable = mkEnableOption "Enable Minecraft Server";
   };
 
+  # Enable and open ports in the firewall.
+  firewall.allowedTCPPorts = [ 25565 ]; # Minecraft
+
   config = mkIf cfg.enable {
     services = {
       minecraft-servers = {

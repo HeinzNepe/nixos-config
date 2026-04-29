@@ -146,13 +146,14 @@ All mods in this file are confirmed server-compatible. Client-only mods from the
 1. Go to the mod's page on [Modrinth](https://modrinth.com) and find the version compatible with your current `mcVersion`.
 
 2. Copy the **Version ID** for the new release.
-  ```
-  If the download link is:
-  https://cdn.modrinth.com/data/u6dRKJwZ/versions/riutbbC6/jei-26.1.2-fabric-29.5.0.27.jar
   
-  The version id is:
-  riutbbC6
-  ```
+    ```bash
+    # If the download link is:
+    https://cdn.modrinth.com/data/u6dRKJwZ/versions/riutbbC6/jei-26.1.2-fabric-29.5.0.27.jar
+
+    # The version id is:
+    riutbbC6
+    ```
 
 3. Run the prefetch helper:
 
@@ -253,9 +254,6 @@ sudo systemctl restart minecraft-server-fabulously-optimized
 
 **Hash mismatch error during build**
 The `sha512` in the file doesn't match the downloaded jar. Re-run the prefetch tool for that mod and replace the hash. Never copy hashes manually — always use `nix-modrinth-prefetch`.
-
-**JEI sha512 is still a placeholder**
-Run `nix run github:Infinidoge/nix-minecraft#nix-modrinth-prefetch -- wUnAuqGV` and paste the resulting hash into the `JustEnoughItems` block before building.
 
 **`fabricServers.<version>` attribute not found**
 The Minecraft or Fabric version isn't available in your current `nix-minecraft` revision. Run `nix flake update nix-minecraft` and try again. For very new releases there may be a short delay before nix-minecraft adds support.

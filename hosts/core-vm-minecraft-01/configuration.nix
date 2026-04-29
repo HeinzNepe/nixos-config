@@ -23,6 +23,8 @@
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
 
+      # Nix Minecraft module for managing Minecraft server configurations
+      ./minecraft/minecraft.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

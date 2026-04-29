@@ -10,7 +10,16 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # Add nixos-hardware for hardware-specific modules, especially useful for Raspberry Pi configurations
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nix minecraft for managing Minecraft server configurations with Nix
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Lanzaboote for Secure Boot support
     lanzaboote = {
@@ -45,7 +54,7 @@
 
   # Define the NixOS configurations for different hosts
   # Each host has its own configuration.nix file that imports common modules and defines host-specific settings
-  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, home-manager, plasma-manager, disko, sops-nix, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, nix-minecraft, home-manager, plasma-manager, disko, sops-nix, nixos-hardware, ... }@inputs:
     # The outputs function generates the NixOS configurations for each host and the auto-installation ISO configuration.
     let
       # Import the variables from vars.nix
