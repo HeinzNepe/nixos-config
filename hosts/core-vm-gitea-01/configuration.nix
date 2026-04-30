@@ -14,7 +14,7 @@
       ../../modules/sops.nix
 
       # Optional modules
-      ../../modules/homelab/nix-substitutors.nix
+      #../../modules/homelab/nix-substitutors.nix
       
       # Add dev modules
       ../../modules/options/fonts.nix
