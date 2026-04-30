@@ -12,7 +12,6 @@
     # Add nixos-hardware for hardware-specific modules, especially useful for Raspberry Pi configurations
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Nix minecraft for managing Minecraft server configurations with Nix
