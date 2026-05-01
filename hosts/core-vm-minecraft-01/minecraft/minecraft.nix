@@ -14,7 +14,6 @@ with lib; let
   cfg = config.common.minecraft;
   mcVersion = "26.1.2";
   fabricVersion = "0.19.2";
-  serverVersion = lib.replaceStrings ["."] ["_"] "fabric-${mcVersion}";
 in {
   imports = [
     inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -35,7 +34,9 @@ in {
         dataDir = "/minecraft/2026-04-25-fabulously-optimized"; 
         servers.fabulously-optimized = {
           enable = true;
-          package = pkgs.fabricServers.${serverVersion}.override { loaderVersion = fabricVersion; };
+          package = inputs.nix-minecraft.packages.${pkgs.system}.fabric-server.override {
+            loaderVersion = fabricVersion;
+          };
           serverProperties = {
             server-port = 25565;
             gamemode = "survival";
@@ -117,7 +118,7 @@ in {
               # Then replace the sha512 value below with the output.
               JustEnoughItems = pkgs.fetchurl {
                 url = "https://cdn.modrinth.com/data/u6dRKJwZ/versions/wUnAuqGV/jei-1.21.10-fabric-26.1.1.25.jar";
-                sha512 = "1acef022b97deb6d6f7ee096fa6244dc835883f3351c549363788c4d723d443d78a35d928ac5d441db755f33bd6a85f2b9d445ac5963b6150f059a2a86f0e9f2";
+                sha512 = "e302ec0db3027b9a200ac7d5f90350c29335699be45e153bcf4d78922b2707f39cedd0967c151b08eef7d404bfe055421c4108d52fe1be2ca767053e352caadc";
               };
 
               PaginatedAdvancements = pkgs.fetchurl {
