@@ -40,7 +40,7 @@
         motd = "A declarative Minecraft server managed by NixOS!";
         online-mode = true;
         spawn-protection = 0;
-        view-distance = 10;
+        view-distance = 32;
       };
     };
   };
