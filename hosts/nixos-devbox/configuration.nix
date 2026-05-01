@@ -30,7 +30,7 @@
 
 
       # Cache server
-      ../../modules/homelab/nix-substitutors.nix
+      #../../modules/homelab/nix-substitutors.nix
 
       # Add password manager
       ../../modules/1password.nix
