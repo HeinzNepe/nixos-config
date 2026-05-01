@@ -32,6 +32,9 @@
       # Cache server
       #../../modules/homelab/nix-substitutors.nix
 
+      # Minecraft server
+      ../core-vm-minecraft-01/minecraft/minecraft.nix
+
       # Add password manager
       ../../modules/1password.nix
 

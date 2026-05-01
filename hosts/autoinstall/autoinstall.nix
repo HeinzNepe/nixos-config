@@ -21,7 +21,7 @@
   users.users.henrik = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Add to wheel group for sudo
-    hashedPassword = vars.standardPasswordHash;  # Password hash (see vars.nix)
+    hashedPassword = vars.hashedPassword;  # Password hash (see vars.nix)
     openssh.authorizedKeys.keys = [
       vars.sshPublicKeyPersonal # Allow SSH login with this key
     ];
