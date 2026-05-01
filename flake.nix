@@ -75,7 +75,11 @@
         
         # Homelab configuration
         core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
-        core-vm-minecraft-01 = mkNixOSConfig ./hosts/core-vm-minecraft-01/configuration.nix [];
+        core-vm-minecraft-01 = mkNixOSConfig ./hosts/core-vm-minecraft-01/configuration.nix [ 
+          # Needed for the Minecraft server configuration
+          nix-minecraft.nixosModules.minecraft-servers 
+          { nixpkgs.overlays = [ nix-minecraft.overlay ]; }
+          ];
         core-vm-nixhelper-01 = mkNixOSConfig ./hosts/core-vm-nixhelper-01/configuration.nix [];
         #core-rpi-node-01 = nixpkgs.lib.nixosSystem {
         #  system = "aarch64-linux";
@@ -98,7 +102,10 @@
         school-laptop = mkNixOSConfig ./hosts/school-laptop/configuration.nix [ lanzaboote.nixosModules.lanzaboote ];
         
         # VM for development
-        nixos-devbox = mkNixOSConfig ./hosts/nixos-devbox/configuration.nix [];
+        nixos-devbox = mkNixOSConfig ./hosts/nixos-devbox/configuration.nix [ 
+          #nix-minecraft.nixosModules.minecraft-servers 
+          #{ nixpkgs.overlays = [ nix-minecraft.overlay ]; }
+          ];
 
         # Define the auto-installation ISO configuration
         autoinstall = nixpkgs.lib.nixosSystem {

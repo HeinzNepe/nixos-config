@@ -67,13 +67,6 @@ All mods in this file are confirmed server-compatible. Client-only mods from the
 | `Lithium` | 0.24.2 | Server-side tick and chunk optimisations |
 | `FerriteCore` | 9.0.0 | Memory usage reduction |
 
-### Entity Rendering
-
-| Mod | Version | Purpose |
-|-----|---------|---------|
-| `EntityModelFeatures` | 3.1.1 | Custom entity model support |
-| `EntityTextureFeatures` | 7.1 | Custom entity texture support |
-
 ### Gameplay / UI
 
 | Mod | Version | Purpose |
