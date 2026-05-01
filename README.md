@@ -30,7 +30,6 @@ Where \#device is any of the following devices:
 
 ### Updating the flake
 Updating the flake is done with
-```
 
 ```
 sudo nix-collect-garbage -d
@@ -38,6 +37,7 @@ sudo nix-collect-garbage -d
 
 ### Checking the flake for syntax errors
 To check the flake for syntax errors, you can use
+
 ```
 nix flake check
 ```
