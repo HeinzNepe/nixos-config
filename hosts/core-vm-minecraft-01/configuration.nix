@@ -31,6 +31,9 @@
     ];
 
   networking.hostName = "core-vm-minecraft-01"; # Define your hostname.
+
+  # Enable Minecraft server module for this host.
+  common.minecraft.enable = true;
   
   # Enable networking
   networking.networkmanager.enable = true;
