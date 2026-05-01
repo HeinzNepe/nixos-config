@@ -31,11 +31,7 @@ Where \#device is any of the following devices:
 ### Updating the flake
 Updating the flake is done with
 ```
-sudo nix flake update
-```
 
-### Garbage collection
-To remove un-needed packages from the local nix store, you can use
 ```
 sudo nix-collect-garbage -d
 ```
@@ -166,6 +162,19 @@ If you add a new secrets file or update key groups, rebuild the host:
 ```
 sudo nixos-rebuild switch --flake .#<hostname>
 ```
+
+### Manual builder key
+
+The builder SSH key used by [modules/homelab/nix-substitutors.nix](modules/homelab/nix-substitutors.nix) can also be stored manually on the machine at `/var/lib/nix/builder-ssh-key`.
+
+If that file exists, it is copied to `/etc/nix/builder-ssh-key` at boot and takes precedence over the SOPS secret. A quick way to install it is:
+
+```bash
+sudo install -d -m 700 /var/lib/nix
+sudo install -m 600 /dev/stdin /var/lib/nix/builder-ssh-key
+```
+
+Then paste the private key contents and finish with `Ctrl-D`.
 
 ## Secure boot
 

@@ -11,7 +11,7 @@
     #createHome = true;
     useDefaultShell = true;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmLe1jJP+wP7xq5AeOjxi+ZibXyorKIs1ZxxpHxYJKY nixos-builder"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJsA/51Z5YRn563KaUZxUWmbIOlwoAhWb9gW8qvePwW/ nixos-builder"
     ];
   };
 
