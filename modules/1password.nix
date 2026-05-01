@@ -5,8 +5,6 @@
     "1password-gui"
     "1password"
   ];
-  # Alternatively, you could also just allow all unfree packages
-  # nixpkgs.config.allowUnfree = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {

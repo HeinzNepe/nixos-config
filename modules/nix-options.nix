@@ -19,11 +19,12 @@
   #   options = "--delete-older-than 7d";
   # };
 
-  # Enable flakes and nix-command for advanced Nix features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow unfree packages (e.g., proprietary software)
-  nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = true;
+
+ # Enable flakes and nix-command for advanced Nix features
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Overlay for nvchad (Neovim config)
   # TODO: Move this overlay to a more appropriate location
