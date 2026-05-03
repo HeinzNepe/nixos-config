@@ -29,8 +29,9 @@
       ../../modules/options/networking-tools.nix
 
 
-      # Cache server
-      #../../modules/homelab/nix-substitutors.nix
+      # Cache and builder configuration
+      ../../modules/nix-substitutors.nix
+      #../../modules/homelab/nix-remotebuilder.nix
 
       # Minecraft server
       #../core-vm-minecraft-01/minecraft/minecraft.nix

@@ -19,6 +19,10 @@
       # Applications
       ../../modules/gui-programs.nix
 
+      # Cache and builder configuration
+      ../../modules/nix-substitutors.nix
+      #../../modules/homelab/nix-remotebuilder.nix
+
       # Add dev modules
       ../../modules/options/development.nix
       ../../modules/options/git.nix

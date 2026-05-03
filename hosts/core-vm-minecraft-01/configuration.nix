@@ -13,8 +13,9 @@
       ../../modules/cli-programs.nix
       ../../modules/sops.nix
 
-      # Optional modules
-      # ../../modules/homelab/nix-substitutors.nix
+      # Cache and builder configuration
+      ../../modules/nix-substitutors.nix
+      # ../../modules/homelab/nix-remotebuilder.nix
       
       # Add dev modules
       ../../modules/options/fonts.nix

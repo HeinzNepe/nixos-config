@@ -165,7 +165,7 @@ sudo nixos-rebuild switch --flake .#<hostname>
 
 ### Manual builder key
 
-The builder SSH key used by [modules/homelab/nix-substitutors.nix](modules/homelab/nix-substitutors.nix) can also be stored manually on the machine at `/var/lib/nix/builder-ssh-key`.
+The builder SSH key used by [modules/homelab/nix-remotebuilder.nix](modules/homelab/nix-remotebuilder.nix) can also be stored manually on the machine at `/var/lib/nix/builder-ssh-key`.
 
 If that file exists, it is copied to `/etc/nix/builder-ssh-key` at boot and takes precedence over the SOPS secret. A quick way to install it is:
 
