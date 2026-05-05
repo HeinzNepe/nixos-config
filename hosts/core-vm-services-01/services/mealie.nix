@@ -3,10 +3,11 @@
 {
     services.mealie = {
         enable = true;
-        port = 9925;
         settings = {
             # The publicly accessible URL of your Mealie instance
             BASE_URL = "https://mealie.topheinz.com";
         };
     };
+
+    networking.firewall.allowedTCPPorts = [ 9000 ]; # Allow Mealie's port through the firewall
 }
