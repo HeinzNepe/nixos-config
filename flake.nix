@@ -81,6 +81,7 @@
           { nixpkgs.overlays = [ nix-minecraft.overlay ]; }
           ];
         core-vm-nixhelper-01 = mkNixOSConfig ./hosts/core-vm-nixhelper-01/configuration.nix [];
+        core-vm-services-01 = mkNixOSConfig ./hosts/core-vm-services-01/configuration.nix [];
         #core-rpi-node-01 = nixpkgs.lib.nixosSystem {
         #  system = "aarch64-linux";
         #  specialArgs = { inherit inputs vars; };

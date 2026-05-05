@@ -8,7 +8,7 @@
 
   # Boot configuration for legacy BIOS (GRUB, no EFI)
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
+  #boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/vda";
   boot.loader.grub.efiSupport = false;
   boot.loader.grub.useOSProber = false; # Optional, for dual-boot
