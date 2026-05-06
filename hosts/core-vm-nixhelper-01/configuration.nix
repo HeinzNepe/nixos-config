@@ -24,6 +24,7 @@
       # Harmonia binary cache server
       ./modules/harmonia.nix
       ./modules/buildserver.nix
+      ./modules/cache-populator.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix      
