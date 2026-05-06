@@ -24,7 +24,7 @@
       # Harmonia binary cache server
       ./modules/harmonia.nix
       ./modules/buildserver.nix
-      ./modules/cache-populator.nix
+      #./modules/cache-populator.nix - Disabled because its slow
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix      
