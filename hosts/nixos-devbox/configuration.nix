@@ -106,6 +106,10 @@
   # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Grant users access to the Nix store (required for allowing non-root users to use nix)
+  nix.settings.allowed-users = [ "@wheel" "henrik" "heinz" ];
+
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
