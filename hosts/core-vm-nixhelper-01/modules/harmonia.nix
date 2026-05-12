@@ -4,6 +4,15 @@
     # Harmonia - Nix binary cache server
     # https://github.com/nix-community/harmonia
 
+    # Create harmonia user and group
+    users.groups.harmonia = {};
+    users.users.harmonia = {
+        isSystemUser = true;
+        group = "harmonia";
+        home = "/var/lib/harmonia";
+        createHome = true;
+    };
+
     sops.secrets."harmonia-secret-signing-key" = {
         sopsFile = ./../../../secrets/hosts/core-vm-nixhelper-01.yaml;
         owner = "harmonia";
