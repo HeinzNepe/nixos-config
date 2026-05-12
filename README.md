@@ -99,17 +99,17 @@ WSL and autoinstall are currently excluded.
 
 1. Get the host SSH public key on the new device:
 ```
-cat /etc/ssh/ssh_host_ed25519_key.pub
+cat /persist/etc/ssh/ssh_host_ed25519_key.pub
 ```
 
 If the host key does not exist yet, generate it first:
 ```
-sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+sudo ssh-keygen -t ed25519 -f /persist/etc/ssh/ssh_host_ed25519_key -N ""
 ```
 
 2. Convert the SSH key to an Age recipient:
 ```
-ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+ssh-to-age -i /persist/etc/ssh/ssh_host_ed25519_key.pub
 ```
 
 3. Add the new Age recipient to [.sops.yaml](.sops.yaml):
@@ -123,7 +123,7 @@ ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
 
 **Important:** Age keys should **never** be committed to the repository. Instead, they are derived locally from each host's SSH key.
 
-The NixOS configuration automatically handles this through [modules/sops.nix](modules/sops.nix), which configures SOPS to use the SSH host key (`/etc/ssh/ssh_host_ed25519_key`) for age encryption/decryption. After rebuilding with `sudo nixos-rebuild switch --flake .#<hostname>`, SOPS will work automatically.
+The NixOS configuration automatically handles this through [modules/sops.nix](modules/sops.nix), which configures SOPS to use the SSH host key (`/persist/etc/ssh/ssh_host_ed25519_key`) for age encryption/decryption. After rebuilding with `sudo nixos-rebuild switch --flake .#<hostname>`, SOPS will work automatically.
 
 If you need to edit secrets on a system before the first NixOS rebuild, manually generate the age key:
 
@@ -135,7 +135,7 @@ Or manually:
 
 ```bash
 mkdir -p ~/.config/sops/age
-sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
+sudo ssh-to-age -private-key -i /persist/etc/ssh/ssh_host_ed25519_key > ~/.config/sops/age/keys.txt
 ```
 
 Ensure `.config/sops/age/keys.txt` is in your `.gitignore` so it doesn't get committed.

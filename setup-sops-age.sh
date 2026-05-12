@@ -7,15 +7,24 @@ set -e
 
 SOPS_AGE_DIR="${HOME}/.config/sops/age"
 SOPS_AGE_KEY_FILE="${SOPS_AGE_DIR}/keys.txt"
-SSH_HOST_KEY="/etc/ssh/ssh_host_ed25519_key"
+SSH_HOST_KEY="/persist/etc/ssh/ssh_host_ed25519_key"
 
 echo "Setting up SOPS age keys..."
 
 # Check if SSH host key exists
 if [ ! -f "$SSH_HOST_KEY" ]; then
-    echo "Error: SSH host key not found at $SSH_HOST_KEY"
-    echo "Please ensure the system has generated host keys."
-    exit 1
+    echo "⚠️  SSH host key not found at $SSH_HOST_KEY"
+    read -p "Would you like to generate a new SSH host key? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Generating SSH host key..."
+        sudo mkdir -p "$(dirname "$SSH_HOST_KEY")"
+        sudo ssh-keygen -t ed25519 -f "$SSH_HOST_KEY" -N "" -C "host-key-$(hostname)"
+        echo "✓ SSH host key generated at $SSH_HOST_KEY"
+    else
+        echo "Error: SSH host key is required. Please ensure the system has generated host keys."
+        exit 1
+    fi
 fi
 
 # Check if ssh-to-age is available
