@@ -5,9 +5,9 @@ keys:
   # - &admin_desktop "AGE-RECIPIENT-FOR-desktop"
 
   # Other devices
-  - &core_vm_gitea_01 "age1hgtwcdx92kp6s7us6d8lr9473kf23sg6ujse7msuuek75qxz0gmqva3wt7"
-  - &core_vm_nixhelper_01 "age1yj0t0ljh2tygk5cntqml5y4vdu6zfszcuvnk5u98xt84j25q3a4q22ggrj"
-  - &laptop "AGE-RECIPIENT-FOR-laptop"
+  - &core_vm_gitea_01 "age1ck97naztjgqjapjxdxulnrwpc2h8lkhynw53v4y2y3dm2vdqydls9sp0l0"
+  - &core_vm_nixhelper_01 "age1y380h5hld5pafedjjgzcuhnaw06q5ptlt8dy8v25mn08tjkr4uvsgfwmwx"
+  #- &laptop "AGE-RECIPIENT-FOR-laptop"
 
 creation_rules:
   # Shared secrets for admins only
@@ -38,7 +38,7 @@ creation_rules:
       - age:
           - *admin_nixos_devbox
           - *admin_school_laptop
-          - *laptop
+          #- *laptop
 
   - path_regex: secrets/hosts/core-vm-gitea-01\.ya?ml
     key_groups:
