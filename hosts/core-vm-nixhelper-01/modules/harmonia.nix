@@ -11,18 +11,10 @@
         mode = "0400";
     };
 
-    sops.secrets."harmonia-public-signing-key" = {
-        sopsFile = ./../../../secrets/hosts/core-vm-nixhelper-01.yaml;
-        owner = "harmonia";
-        group = "harmonia";
-        mode = "0444";
-    };
-
     services.harmonia.cache = {
         enable = true;
         # Generated with `sudo nix-store --generate-binary-cache-key cache.domain-1 \ secret-key.pem public-key.pem`
         signKeyPaths = [ config.sops.secrets."harmonia-secret-signing-key".path ];
-        publicKeyPaths = [ config.sops.secrets."harmonia-public-signing-key".path ];
         settings = {
             bind = "0.0.0.0:5000";
         };
