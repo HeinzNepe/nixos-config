@@ -30,7 +30,7 @@
     };
 
     # Allow harmonia to access the Nix store without breaking access for other users
-    nix.settings.allowed-users = [ "@wheel" "harmonia" ];
+    nix.settings.allowed-users = [ "@wheel" "harmonia" "henrik" "heinz" ];
 
     # Expose harmonia directly on port 5000 (no reverse proxy)
     networking.firewall.allowedTCPPorts = [ 5000 ];
