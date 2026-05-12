@@ -17,7 +17,7 @@
         sopsFile = ./../../../secrets/hosts/core-vm-nixhelper-01.yaml;
         owner = "harmonia";
         group = "harmonia";
-        mode = "0400";
+        mode = "0600";
     };
 
     services.harmonia.cache = {
