@@ -75,6 +75,13 @@
   # Bootloader
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Add Windows 11 entry to systemd-boot
+  boot.loader.systemd-boot.extraEntries = {
+  "windows.conf" = ''
+    title   Windows 11
+    efi     /EFI/Microsoft/Boot/bootmgfw.efi
+  '';
+  };
 
   # Enable hardware accelerated graphics (Do i need this?)
   hardware.graphics = {

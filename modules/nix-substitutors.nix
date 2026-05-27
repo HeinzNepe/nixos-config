@@ -18,5 +18,9 @@
     "nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE="
   ];
 
+  #
+  #--option extra-substituters https://nix-cache.core.topheinz.com --option extra-trusted-public-keys nix-cache.core.topheinz.com-1:kq/BstEjECBOnZQ8lv+K+UhMgiTeA8YQIhztrwrGqKE=
+  #
+
 }
 
