@@ -29,6 +29,10 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
 
+      # Cache and builder configuration
+      ../../modules/nix-substitutors.nix
+      #../../modules/homelab/nix-remotebuilder.nix
+
       # Cisco Packet Tracer (remember to add to nixcache)
       #../../modules/options/packet-tracer.nix
 
