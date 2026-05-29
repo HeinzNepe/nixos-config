@@ -41,6 +41,9 @@
       # Add gaming module
       ../../modules/options/gaming.nix
 
+      # Bluetooth
+      ../../modules/options/bluetooth.nix
+
       # Home-manager
       ../../homemanager.nix
 
