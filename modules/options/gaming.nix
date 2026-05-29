@@ -7,9 +7,11 @@
 
     # Tetris desktop game
     tetrio-desktop
+    modrinth-app # Modrinth client for Minecraft mods.
+
   ] ++ (with pkgs-stable; [
     # From stable channel
-    #modrinth-app # Modrinth client for Minecraft mods. (Currently broken)
+    #modrinth-app # Modrinth client for Minecraft mods.
 
   ]);
 
