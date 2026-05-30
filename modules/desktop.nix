@@ -5,8 +5,14 @@
   # Enable Plasma 6
   services.desktopManager.plasma6.enable = true;
 
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.theme = "breeze-dark";
+
+
   # Enable gdm display manager
-  services.displayManager.gdm.enable = true;
+  #services.displayManager.gdm.enable = true; # BROKEN! Check https://nixpk.gs/pr-tracker.html?pr=525968
+
 
 
   # Enable CUPS to print documents.
