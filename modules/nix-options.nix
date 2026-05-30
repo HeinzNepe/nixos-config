@@ -8,7 +8,8 @@
   programs.nh = {
     enable = true; # Enable nh
     clean.enable = true; # Enable cleaning of old generations
-    clean.extraArgs = "--keep-since 7d --keep 8"; # Keep generations from last 7 days and 8 most recent
+    #clean.extraArgs = "--keep-since 7d --keep 8"; # Keep generations from last 7 days and 8 most recent
+    clean.extraArgs = "--keep 8"; # Keep 8 most recent generations
     #flake = "/home/henrik/GitHub/nixos-config"; # Optionally set the flake path for nh
   };
 
@@ -26,11 +27,4 @@
  # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Overlay for nvchad (Neovim config)
-  # TODO: Move this overlay to a more appropriate location
-  nixpkgs.overlays = [
-    (final: prev: {
-      nvchad = inputs.nix4nvchad.packages."${pkgs.system}".nvchad;
-    })
-  ];
 }
