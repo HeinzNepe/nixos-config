@@ -10,6 +10,7 @@
     modrinth-app # Modrinth client for Minecraft mods.
 
     # Add Java JDK for minecraft
+    # Available through symlink: /run/current-system/sw/bin/java
     #jdk8 
     #jdk17 
     #jdk21
