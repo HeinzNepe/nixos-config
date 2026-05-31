@@ -9,11 +9,12 @@
     tetrio-desktop
     modrinth-app # Modrinth client for Minecraft mods.
 
-  ] ++ (with pkgs-stable; [
-    # From stable channel
-    #modrinth-app # Modrinth client for Minecraft mods.
-
-  ]);
+    # Add Java JDK for minecraft
+    #jdk8 
+    #jdk17 
+    #jdk21
+    jdk25
+  ];
 
   # Steam
   programs.steam.enable = true;
