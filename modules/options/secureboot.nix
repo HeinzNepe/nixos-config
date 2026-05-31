@@ -8,7 +8,8 @@
   # Enable Lanzaboote
   boot.lanzaboote = {
     enable = true;
-    pkiBundle = "/etc/secureboot";  # Where keys will be stored
+    #pkiBundle = "/etc/secureboot";  # Where keys will be stored
+    pkiBundle = "/var/lib/sbctl";  # Where keys will be stored
     autoEnrollKeys = {
       enable = true; # Enable automatic key enrollment
       autoReboot = true;  # Reboot automatically after enrolling keys
