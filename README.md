@@ -196,7 +196,8 @@ sudo sbctl create-keys
 
 This creates the Platform Key (PK), Key Exchange Key (KEK), and signature database (db) used by your firmware in the file path /var/lib/sbctl/
 
-I then move them to the /etc/secureboot directory so Lanzaboote can find them. (because I've set /etc/secureboot as the key location)
+OLD: I then move them to the /etc/secureboot directory so Lanzaboote can find them. (because I've set /etc/secureboot as the key location) - This is now left at /var/lib/sbctl/
+**SKIP THIS**
 ```bash
 sudo mv /var/lib/sbctl/ /etc/secureboot/
 ```
