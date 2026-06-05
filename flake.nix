@@ -72,6 +72,7 @@
 
         # VPS configuration
         hel1-vps-01 = mkNixOSConfig ./hosts/hel1-vps-01/configuration.nix [];
+        no-vps-01 = mkNixOSConfig ./hosts/no-vps-01/configuration.nix [];
         
         # Homelab configuration
         core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
