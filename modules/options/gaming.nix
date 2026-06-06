@@ -18,5 +18,13 @@
   ];
 
   # Steam
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    fontPackages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+    ];
+  };
+
 }
