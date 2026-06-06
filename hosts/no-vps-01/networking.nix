@@ -3,13 +3,16 @@
 {
     # Static network configuration for the VPS. This is included in the main configuration.nix file.
     networking = {
+        useDHCP = false;
+
         # Set the configuraion on the interface
-        interfaces.enp1s0 = { 
+        interfaces.eth0 = { 
             # IPv4 address
             ipv4.addresses = [{
                 # VPS public IPv4
                 address = "185.248.146.218";
-                prefixLength = 32;
+                prefixLength = 25; # Sharp gives a /25 subnet
+                #prefixLength = 32;
             }];
 
             # IPv6 address
@@ -45,8 +48,11 @@
         firewall.allowedUDPPorts = [ 51820 21820 ]; # Pangolin Wireguard and NEWT 
         # Or disable the firewall altogether.
         # firewall.enable = false;
+    };
 
-        # Enable Fail2Ban to protect against brute-force attacks on SSH
-        services.fail2ban.enable = true;
+    # Enable Fail2Ban to protect against brute-force attacks on SSH
+    services.fail2ban = {
+        enable = true;
+        ignoreIP = [ "core.ip.topheinz.com" ];
     };
 }

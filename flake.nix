@@ -38,14 +38,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # DIsko for disk management and auto-installation support
+    # Disko for disk management and auto-installation support
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Sops-nix for managing secrets in NixOS configurations
-    sops-nix ={
+    sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -54,35 +54,46 @@
   # Define the NixOS configurations for different hosts
   # Each host has its own configuration.nix file that imports common modules and defines host-specific settings
   outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, nix-minecraft, home-manager, plasma-manager, disko, sops-nix, nixos-hardware, ... }@inputs:
-    # The outputs function generates the NixOS configurations for each host and the auto-installation ISO configuration.
     let
       # Import the variables from vars.nix
       vars = import ./vars.nix;
-      
+
       # Define a helper function to create NixOS configurations for each host
-      mkNixOSConfig = path: extraModules: nixpkgs.lib.nixosSystem {
-        # Pass the inputs and variables to the NixOS configuration for use in the configuration.nix files
-        specialArgs = { inherit inputs vars; };
-        # Define modules to be included for all hosts, and append any extra modules specific to the host
-        modules = [ path sops-nix.nixosModules.sops ] ++ extraModules;
-      };
+      # NOTE: system must be explicit for correctness
+      mkNixOSConfig = system: path: extraModules:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          # Pass the inputs and variables to the NixOS configuration for use in the configuration.nix files
+          specialArgs = { inherit inputs vars; };
+
+          # Define modules to be included for all hosts, and append any extra modules specific to the host
+          modules = [
+            path
+            sops-nix.nixosModules.sops
+          ] ++ extraModules;
+        };
     in {
       nixosConfigurations = {
-        # Define NixOS configurations for different hosts
-
         # VPS configuration
-        hel1-vps-01 = mkNixOSConfig ./hosts/hel1-vps-01/configuration.nix [];
-        no-vps-01 = mkNixOSConfig ./hosts/no-vps-01/configuration.nix [];
-        
+        hel1-vps-01 = mkNixOSConfig "x86_64-linux" ./hosts/hel1-vps-01/configuration.nix [];
+
+        no-vps-01 = mkNixOSConfig "x86_64-linux" ./hosts/no-vps-01/configuration.nix [
+          disko.nixosModules.disko
+        ];
+
         # Homelab configuration
-        core-vm-gitea-01 = mkNixOSConfig ./hosts/core-vm-gitea-01/configuration.nix [];
-        core-vm-minecraft-01 = mkNixOSConfig ./hosts/core-vm-minecraft-01/configuration.nix [ 
+        core-vm-gitea-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-gitea-01/configuration.nix [];
+
+        core-vm-minecraft-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-minecraft-01/configuration.nix [
           # Needed for the Minecraft server configuration
-          nix-minecraft.nixosModules.minecraft-servers 
+          nix-minecraft.nixosModules.minecraft-servers
           { nixpkgs.overlays = [ nix-minecraft.overlay ]; }
-          ];
-        core-vm-nixhelper-01 = mkNixOSConfig ./hosts/core-vm-nixhelper-01/configuration.nix [];
-        core-vm-services-01 = mkNixOSConfig ./hosts/core-vm-services-01/configuration.nix [];
+        ];
+
+        core-vm-nixhelper-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-nixhelper-01/configuration.nix [];
+        core-vm-services-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-services-01/configuration.nix [];
+
         #core-rpi-node-01 = nixpkgs.lib.nixosSystem {
         #  system = "aarch64-linux";
         #  specialArgs = { inherit inputs vars; };
@@ -95,27 +106,34 @@
         #};
 
         # Jukebox laptop configuration
-        jukebox = mkNixOSConfig ./hosts/jukebox/configuration.nix [];
-        
+        jukebox = mkNixOSConfig "x86_64-linux" ./hosts/jukebox/configuration.nix [];
+
         # Desktop configuration
-        desktop = mkNixOSConfig ./hosts/desktop/configuration.nix [ lanzaboote.nixosModules.lanzaboote ];
-        
+        desktop = mkNixOSConfig "x86_64-linux" ./hosts/desktop/configuration.nix [
+          lanzaboote.nixosModules.lanzaboote
+        ];
+
         # School laptop configuration
-        school-laptop = mkNixOSConfig ./hosts/school-laptop/configuration.nix [ lanzaboote.nixosModules.lanzaboote ];
-        
+        school-laptop = mkNixOSConfig "x86_64-linux" ./hosts/school-laptop/configuration.nix [
+          lanzaboote.nixosModules.lanzaboote
+        ];
+
         # VM for development
-        nixos-devbox = mkNixOSConfig ./hosts/nixos-devbox/configuration.nix [ 
-          #nix-minecraft.nixosModules.minecraft-servers 
+        nixos-devbox = mkNixOSConfig "x86_64-linux" ./hosts/nixos-devbox/configuration.nix [
+          #nix-minecraft.nixosModules.minecraft-servers
           #{ nixpkgs.overlays = [ nix-minecraft.overlay ]; }
-          ];
+        ];
 
         # Define the auto-installation ISO configuration
         autoinstall = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           specialArgs = { inherit inputs vars; };
           modules = [
             ./hosts/autoinstall/configuration.nix
             disko.nixosModules.disko
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+
+            # ISO image settings
             ({ pkgs, ... }: {
               image = { fileName = "nix-autoinstall.iso"; };
               isoImage = {

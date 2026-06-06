@@ -2,12 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, vars, ... }:
+{ modulesPath, config, pkgs, vars, lib, ... }:
 
 {
+  # NixosAnywhere needs kexec-tools
+  # apt install kexec-tools
 
   # Nixos anywhere can be ran with the following command
   # nix run github:nix-community/nixos-anywhere -- --flake .#no-vps-01 no-vps-01 
+  # nix run github:nix-community/nixos-anywhere -- --flake .#no-vps-01 --generate-hardware-config nixos-generate-config ./hardware-configuration.nix no-vps-01
 
   imports =
     [ 
@@ -27,21 +30,24 @@
       ./networking.nix
 
       # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./disko.nix
+      #./hardware-configuration.nix
+      (modulesPath + "/profiles/qemu-guest.nix")
+      #"${pkgs.path}/nixos/modules/profiles/qemu-guest.nix"
+      ./disko.nix # Disko for disk formatting
     ];
 
   networking.hostName = "no-vps-01"; # Define your hostname.
   
   # Enable networking with DHCP for all non-configured links
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
 
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.henrik = {
     isNormalUser = true;
     description = "Henrik Nepstad";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    #extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" ];
     hashedPassword = vars.hashedPassword;
     openssh.authorizedKeys.keys = [
       vars.sshPublicKeyPersonal
@@ -60,6 +66,10 @@
 
   # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  # Host platform
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
