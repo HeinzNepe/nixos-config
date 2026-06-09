@@ -92,6 +92,14 @@
     enable32Bit = true;
   };
 
+  # Add aditional datadrive
+  fileSystems."/mnt/489GB" = {
+    device = "/dev/disk/by-label/489GB";
+    fsType = "ext4";
+  };
+
+
+
   # Monitor and workspace configuration for hyprland
   home-manager.sharedModules = [
     {
