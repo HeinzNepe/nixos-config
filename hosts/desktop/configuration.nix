@@ -96,11 +96,11 @@
   fileSystems."/mnt/489GB" = {
     device = "/dev/disk/by-label/489GB";
     fsType = "ext4";
-    options = [
-      "uid=1000"   # Primary user ID
-      "gid=100"    # Primary user group ID
-      "umask=0002" # Permissions: 775 for directories and 664 for files
-    ];
+    #options = [
+    #  "uid=1000"   # Primary user ID
+    #  "gid=100"    # Primary user group ID
+    #  "umask=0002" # Permissions: 775 for directories and 664 for files
+    #];
   };
 
 
