@@ -9,6 +9,7 @@ Things i want to look into for the desktop host.
     - Plasma login manager
     - TUIgreet
 - Remove discord as a service. Set it to autostart instead 
+- https://github.com/DocBrown101/org.kde.plasma.nixos.channelstatus
 
 ## NO-VPS-01
 
