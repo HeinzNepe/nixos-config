@@ -31,6 +31,7 @@
       ../../modules/options/vpn.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
+      ./ai.nix
 
       # Java JDK 25 ++
       #../../modules/options/tdt4100.nix
