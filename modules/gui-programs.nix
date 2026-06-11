@@ -15,17 +15,18 @@
     discord # Discord chat client
   ];
 
+  # Testing if autostart breaks discord. Disabling for now
   # Autostart Discord after Plasma loads using a user systemd service
-  systemd.user.services.discord = {
-    name = "discord.service";
-    enable = true;
-    description = "Autostart Discord after Plasma loads";
-    wantedBy = [ "plasma-workspace.target" ];
-    after = [ "plasma-workspace.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.discord}/bin/discord";
-      Restart = "on-failure";
-    };
-  };
+  #systemd.user.services.discord = {
+  #  name = "discord.service";
+  #  enable = true;
+  #  description = "Autostart Discord after Plasma loads";
+  #  wantedBy = [ "plasma-workspace.target" ];
+  #  after = [ "plasma-workspace.target" ];
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.discord}/bin/discord";
+  #    Restart = "on-failure";
+  #  };
+  #};
 }
 
