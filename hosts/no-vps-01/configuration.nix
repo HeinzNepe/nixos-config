@@ -38,9 +38,6 @@
 
   networking.hostName = "no-vps-01"; # Define your hostname.
   
-  # Enable networking with DHCP for all non-configured links
-  #networking.networkmanager.enable = true;
-
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.henrik = {

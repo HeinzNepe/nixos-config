@@ -3,8 +3,9 @@
 {
     # Static network configuration for the VPS. This is included in the main configuration.nix file.
     networking = {
-        useDHCP = false;
+        useDHCP = true;
 
+        /* 
         # Set the configuraion on the interface
         interfaces.eth0 = { 
             # IPv4 address
@@ -35,7 +36,8 @@
         defaultGateway6 = {
             address = "2a12:6bc0:1337:100::1";
             interface = "eth0";
-        };
+        }; 
+        */
 
         # DNS servers
         #nameservers = [ "185.12.64.2" "185.12.64.1" "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ]; # Hetzner
@@ -49,6 +51,10 @@
         # Or disable the firewall altogether.
         # firewall.enable = false;
     };
+
+    # Enable networking with DHCP for all non-configured links
+    #networking.networkmanager.enable = true;
+
 
     # Enable Fail2Ban to protect against brute-force attacks on SSH
     services.fail2ban = {
