@@ -14,6 +14,7 @@ Things i want to look into for the desktop host.
     - OpenCode with tools
     - Find good model
 - Middle mouse button scrolling?
+- Fix Windows boot entry (Copy EFI parition to the NixOS drive)
 - Deep dive into display freeze
 
 ## NO-VPS-01
