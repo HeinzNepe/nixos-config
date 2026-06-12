@@ -13,6 +13,10 @@ Things i want to look into for the desktop host.
 - AI
     - OpenCode with tools
     - Find good model
+    - llama-bench (find optimal agent values)
+    - llama36-reap (coder)
+    - glm-4.7-flash-reap (chat)
+    - Codacus has good videoes on it
 - Middle mouse button scrolling?
 - Fix Windows boot entry (Copy EFI parition to the NixOS drive)
 - Deep dive into display freeze
