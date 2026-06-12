@@ -42,6 +42,9 @@
       # Add gaming module
       ../../modules/options/gaming.nix
 
+      # Streamdeck support
+      #../../modules/streamdeck.nix
+
       # Bluetooth
       ../../modules/options/bluetooth.nix
 

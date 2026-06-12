@@ -30,8 +30,22 @@
   };
 
   /*
-  Pulling the AI model:
-  ollama pull qwen2.5-coder:14b
+  Pulling AI models for Ollama (done once per model):
+    - ollama pull gemma4:latest
+  To update the model later:
+    - ollama pull gemma4:latest
+
+  Usage:
+  - Start Ollama service (auto by NixOS if enabled above).
+  - Start pi in your terminal: `pi` (after installing with npm globally, see below)
+  - Switch model in pi with `/model ollama/gemma4`
+
+  ## pi.coding.agent install notes
+  Install pi via npm (recommended):
+    npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+  Alternate (or for updates):
+    curl -fsSL https://pi.dev/install.sh | sh
+  Documentation: https://pi.dev
 
   */
 
@@ -43,6 +57,8 @@
     ollama
     opencode
     python3
+    nodejs_20
+    npm
   ];
 
   #### ---------------------------------------------------------
@@ -57,3 +73,4 @@
   #### ---------------------------------------------------------
   networking.firewall.allowedTCPPorts = [ 11434 ];
 }
+
