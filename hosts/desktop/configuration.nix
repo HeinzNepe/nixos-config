@@ -43,7 +43,7 @@
       ../../modules/options/gaming.nix
 
       # Streamdeck support
-      #../../modules/streamdeck.nix
+      #../../modules/options/streamdeck.nix
 
       # Bluetooth
       ../../modules/options/bluetooth.nix

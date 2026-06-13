@@ -5,10 +5,10 @@
 { pkgs, config, lib, ... }:
 
 {
-
-
-  programs.streamdeck-ui {
+  # Not the Windows Stream Deck software, but an open-source alternative for Linux. 
+  # Need to see if i find an alternative thats better
+  programs.streamdeck-ui = {
     enable = true; # Enable the Stream Deck UI program
     autoStart = true; # Start the program automatically on login
-  }
+  };
 }

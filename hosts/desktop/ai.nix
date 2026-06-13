@@ -57,9 +57,13 @@
     ollama
     opencode
     python3
-    nodejs_20
-    npm
+    nodejs
   ];
+  
+  programs.npm = {
+    enable = true; 
+    package = pkgs.nodejs;
+  };
 
   #### ---------------------------------------------------------
   ####  User permissions
