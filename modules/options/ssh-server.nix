@@ -12,8 +12,8 @@
             # Sets PasswordAuthentication to "no" to disable password-based authentication
             PasswordAuthentication = false;
             # Usernames allowed to connect via SSH
-            AllowUsers = ["root" "henrik" "heinz"]; 
-            #AllowUsers = ["henrik"]; 
+            #AllowUsers = ["root" "henrik" "heinz"]; 
+            AllowUsers = ["henrik"]; 
             # Disable root login via SSH using password. This forces key-based authentication for root.
             PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         };
