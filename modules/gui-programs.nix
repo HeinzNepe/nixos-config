@@ -13,6 +13,7 @@
   # Install GUI applications system-wide
   environment.systemPackages = with pkgs; [
     discord # Discord chat client
+    vlc     # VLC media player
   ];
 
   # Testing if autostart breaks discord. Disabling for now
