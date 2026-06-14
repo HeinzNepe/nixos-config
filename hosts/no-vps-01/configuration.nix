@@ -30,10 +30,11 @@
       ./networking.nix
 
       # Include the results of the hardware scan.
-      #./hardware-configuration.nix
-      (modulesPath + "/profiles/qemu-guest.nix")
+      ./hardware-configuration.nix
+      
+      #(modulesPath + "/profiles/qemu-guest.nix")
       #"${pkgs.path}/nixos/modules/profiles/qemu-guest.nix"
-      ./disko.nix # Disko for disk formatting
+      #./disko.nix # Disko for disk formatting
     ];
 
   networking.hostName = "no-vps-01"; # Define your hostname.
