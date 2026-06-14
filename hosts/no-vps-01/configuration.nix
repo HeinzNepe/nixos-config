@@ -39,6 +39,9 @@
     ];
 
   networking.hostName = "no-vps-01"; # Define your hostname.
+
+  # Keep SSH from auto-opening port 22 in the firewall on this host.
+  services.openssh.openFirewall = false;
   
   
   # Define a user account. Don't forget to set a password with ‘passwd’.

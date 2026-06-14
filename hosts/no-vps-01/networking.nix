@@ -44,11 +44,12 @@
         nameservers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ]; # Cloudflare
         #search = [ ]; # Search domains, not relevant for a VPS with a single hostname
 
-        # Enable and open ports in the firewall.
+        # Enable the firewall. Inbound traffic is dropped by default unless explicitly allowed.
         firewall.enable = true;
-        #firewall.allowedTCPPorts = [ 22 80 443 ]; # SSH, HTTP, HTTPS
-        firewall.allowedTCPPorts = [ 80 443 ]; # HTTP, HTTPS
-        firewall.allowedUDPPorts = [ 51820 21820 ]; # Pangolin Wireguard and NEWT 
+        firewall.interfaces.eth0 = {
+            allowedTCPPorts = [ 80 443 ]; # HTTP, HTTPS
+            allowedUDPPorts = [ 51820 21820 ]; # Pangolin Wireguard and NEWT
+        };
         # Or disable the firewall altogether.
         # firewall.enable = false;
     };
