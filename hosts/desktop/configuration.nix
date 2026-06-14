@@ -25,6 +25,7 @@
 
       # Add dev modules
       ../../modules/options/development.nix
+      ../../modules/options/tailscale-client.nix
       ../../modules/options/git.nix
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix

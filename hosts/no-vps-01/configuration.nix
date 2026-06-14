@@ -19,12 +19,13 @@
       ../../modules/region.nix
       ../../modules/cli-programs.nix
 
-      # Add dev modules
+      # Add modules
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
+      ../../modules/options/tailscale-server.nix
 
       # Include the static network configuration for the VPS
       ./networking.nix
