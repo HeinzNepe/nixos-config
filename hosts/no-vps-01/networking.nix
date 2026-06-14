@@ -46,7 +46,8 @@
 
         # Enable and open ports in the firewall.
         firewall.enable = true;
-        firewall.allowedTCPPorts = [ 22 80 443 ]; # SSH, HTTP, HTTPS
+        #firewall.allowedTCPPorts = [ 22 80 443 ]; # SSH, HTTP, HTTPS
+        firewall.allowedTCPPorts = [ 80 443 ]; # HTTP, HTTPS
         firewall.allowedUDPPorts = [ 51820 21820 ]; # Pangolin Wireguard and NEWT 
         # Or disable the firewall altogether.
         # firewall.enable = false;
