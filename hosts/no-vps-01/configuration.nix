@@ -54,9 +54,21 @@
     ];
   };
 
+  users.users.root = {
+    hashedPassword = vars.hashedPassword;
+    openssh.authorizedKeys.keys = [
+      vars.sshPublicKeyPersonal
+    ];
+
+  };
+
   # Bootloader (Systemd-boot is recommended for UEFI systems)
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
+
+  # Bootloader 
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

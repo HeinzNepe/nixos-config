@@ -3,9 +3,9 @@
 {
     # Static network configuration for the VPS. This is included in the main configuration.nix file.
     networking = {
-        useDHCP = true;
+        #useDHCP = true;
 
-        /* 
+        
         # Set the configuraion on the interface
         interfaces.eth0 = { 
             # IPv4 address
@@ -37,7 +37,7 @@
             address = "2a12:6bc0:1337:100::1";
             interface = "eth0";
         }; 
-        */
+        
 
         # DNS servers
         #nameservers = [ "185.12.64.2" "185.12.64.1" "2a01:4ff:ff00::add:2" "2a01:4ff:ff00::add:1" ]; # Hetzner
