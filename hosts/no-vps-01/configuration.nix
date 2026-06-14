@@ -24,11 +24,11 @@
       ../../modules/options/shell.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
-      ../../modules/options/ssh-server.nix
       ../../modules/options/tailscale-server.nix
 
       # Include the static network configuration for the VPS
       ./networking.nix
+      ./ssh-server.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
