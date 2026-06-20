@@ -20,8 +20,6 @@ Things i want to look into for the desktop host.
 
 Things that need doing
 
-- Configure root user with SSH key and password
-- Look for other uses nixos config
-- Try with DHCP set up instead of static address
+- Configure SSH to start after tailscale
 - Migrate data
 - Configure backups
