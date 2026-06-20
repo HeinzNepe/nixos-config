@@ -1,13 +1,19 @@
 { inputs, pkgs, system, ... }:
 
 {
+
+  imports =
+    [ 
+      # Enable greetd display manager
+      ./options/greetd.nix
+ 
+      # Enable sddm display manager
+      #./options/sddm.nix
+    ];
+
   # Enable the KDE Plasma Desktop Environment.
   # Enable Plasma 6
   services.desktopManager.plasma6.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.theme = "breeze-dark";
 
 
   # Enable gdm display manager
