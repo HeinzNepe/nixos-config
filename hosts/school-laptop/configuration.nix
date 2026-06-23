@@ -28,6 +28,7 @@
       ../../modules/options/vpn.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
+      ../../modules/options/tailscale-client.nix
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix
