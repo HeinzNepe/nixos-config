@@ -21,9 +21,6 @@
   # };
 
 
-  # Allow unfree packages (e.g., proprietary software)
-  nixpkgs.config.allowUnfree = true;
-
  # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

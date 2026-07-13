@@ -7,7 +7,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # Add nixpkgs-stable input for stable packages
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-26.05";
 
     # Add nixos-hardware for hardware-specific modules, especially useful for Raspberry Pi configurations
     nixos-hardware = {
@@ -61,18 +61,40 @@
       # Define a helper function to create NixOS configurations for each host
       # NOTE: system must be explicit for correctness
       mkNixOSConfig = system: path: extraModules:
+        let
+          pkgs-stable-import = import nixpkgs-stable {
+            inherit system;
+          };
+        in
         nixpkgs.lib.nixosSystem {
           inherit system;
 
-          # Pass the inputs and variables to the NixOS configuration for use in the configuration.nix files
-          specialArgs = { inherit inputs vars; };
+          # Pass inputs, vars, AND pkgs-stable to all modules
+          specialArgs = {
+            inherit inputs vars;
+            pkgs-stable = pkgs-stable-import;
+          };
+
+          
+
 
           # Define modules to be included for all hosts, and append any extra modules specific to the host
           modules = [
             path
             sops-nix.nixosModules.sops
+            
+            # Allow unfree packages
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
+
+            # Inject pkgs-stable into module args
+            {
+              _module.args.pkgs-stable = pkgs-stable-import;
+            }
           ] ++ extraModules;
         };
+
     in {
       nixosConfigurations = {
         # VPS configuration

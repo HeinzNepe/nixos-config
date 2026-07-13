@@ -2,20 +2,22 @@
 
 {
   # Add gaming related packages to system environment
-  environment.systemPackages = with pkgs; [
-    # From unstable channel
+  environment.systemPackages = [
+    # From stable channel
+    pkgs-stable.modrinth-app
 
-    # Tetris desktop game
-    tetrio-desktop
-    modrinth-app # Modrinth client for Minecraft mods.
+    # From unstable channel
+    pkgs.tetrio-desktop
 
     # Add Java JDK for minecraft
     # Available through symlink: /run/current-system/sw/bin/java
-    #jdk8 
-    #jdk17 
-    #jdk21
-    jdk25
+    #pkgs.jdk8 
+    #pkgs.jdk17 
+    #pkgs.jdk21
+    pkgs.jdk25
   ];
+
+  
 
   # Steam
   programs.steam = {
