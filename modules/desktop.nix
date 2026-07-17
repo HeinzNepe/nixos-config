@@ -14,10 +14,11 @@
   # Enable the KDE Plasma Desktop Environment.
   # Enable Plasma 6
   services.desktopManager.plasma6.enable = true;
+  services.displayManager.plasma-login-manager.enable = true;
 
 
   # Enable gdm display manager
-  services.displayManager.gdm.enable = true; 
+  #services.displayManager.gdm.enable = true; 
   # Might break. Follow up on https://nixpk.gs/pr-tracker.html?pr=525968
 
 
