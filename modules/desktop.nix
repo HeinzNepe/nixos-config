@@ -8,7 +8,7 @@
       #./options/greetd.nix
  
       # Enable sddm display manager
-      ./options/sddm.nix
+      #./options/sddm.nix
     ];
 
   # Enable the KDE Plasma Desktop Environment.
@@ -17,7 +17,8 @@
 
 
   # Enable gdm display manager
-  #services.displayManager.gdm.enable = true; # BROKEN! Check https://nixpk.gs/pr-tracker.html?pr=525968
+  services.displayManager.gdm.enable = true; 
+  # Might break. Follow up on https://nixpk.gs/pr-tracker.html?pr=525968
 
 
 
