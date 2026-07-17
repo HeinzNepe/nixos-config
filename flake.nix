@@ -64,6 +64,7 @@
         let
           pkgs-stable-import = import nixpkgs-stable {
             inherit system;
+            config.allowUnfree = true; # Ensures unfree packages can be used in stable nixpkgs
           };
         in
         nixpkgs.lib.nixosSystem {
