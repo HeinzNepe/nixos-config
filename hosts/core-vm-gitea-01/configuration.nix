@@ -11,7 +11,7 @@
       ../../modules/nix-options.nix
       ../../modules/region.nix
       ../../modules/cli-programs.nix
-      ../../modules/sops.nix
+      #../../modules/sops.nix
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix
