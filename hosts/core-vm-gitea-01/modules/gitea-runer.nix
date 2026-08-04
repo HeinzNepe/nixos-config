@@ -19,7 +19,7 @@
             name = "gitea-runner";
             # The token used to register the runner (stored in SOPS)
             #tokenFile = "/run/secrets/gitea-runner-join-token";
-            tokenFile = "${config.sops.secrets."gitea-runner-join-token".path} ";
+            tokenFile = "${config.sops.secrets."gitea-runner-join-token".path}";
             #token = config.sops.secrets."gitea-runner-join-token".value;
         };
     };
