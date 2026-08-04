@@ -11,7 +11,7 @@
       ../../modules/nix-options.nix
       ../../modules/region.nix
       ../../modules/cli-programs.nix
-      #../../modules/sops.nix
+      ../../modules/sops.nix
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix
@@ -26,6 +26,7 @@
 
       # Gitea module
       ./modules/gitea.nix
+      ./modules/gitea-runer.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
