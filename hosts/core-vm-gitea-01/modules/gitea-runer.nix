@@ -3,7 +3,7 @@
 {
     # SOPS configuration for builder SSH key (stored base64-encoded in the SOPS file)
     sops.secrets."gitea-runner-join-token" = {
-        sopsFile = ./../../../secrets/service/builder.yaml;
+        sopsFile = ./../../../secrets/hosts/core-vm-gitea-01.yml;
         owner = "root";
         group = "root";
         mode = "0600";

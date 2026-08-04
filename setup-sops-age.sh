@@ -3,6 +3,11 @@
 # This script generates age keys from the host SSH key for use with SOPS encryption/decryption.
 # Age keys are derived locally and should NEVER be committed to the repository.
 
+# ======================================= #
+# TRY RUNNING SCRIPT AS SUDO AND NOT SUDO #
+# ======================================= #
+
+
 set -e
 
 SOPS_AGE_DIR="${HOME}/.config/sops/age"
