@@ -18,10 +18,9 @@
             # The name of the runner
             name = "gitea-runner";
             # The token used to register the runner (stored in SOPS)
-            #tokenFile = "/run/secrets/gitea-runner-join-token";
-            #tokenFile = "${config.sops.secrets."gitea-runner-join-token".path}";
+            # Format needs to be like this, because the value is interpreted as a ENV file by the gitea-runner service: 
+            # gitea-runner-join-token: TOKEN=asupersecretvalue
             tokenFile = config.sops.secrets."gitea-runner-join-token".path;
-            #token = config.sops.secrets."gitea-runner-join-token".value;
         };
     };
 
