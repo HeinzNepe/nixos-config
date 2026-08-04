@@ -2,11 +2,10 @@ keys:
   # Admin devices
   - &admin_nixos_devbox "age1ujmqwrphlu65y57y8cstg3mtcwuxf7640ef3ezd9a6dej5q6jpdqapnvf8"
   - &admin_school_laptop "age1nkg89p5dpgpxq8008y9u3qseq2hj7hjx9r6mj223e5pj2z2pqa2sep9vzg"
-  # - &admin_desktop "AGE-RECIPIENT-FOR-desktop"
+  - &admin_desktop "age1ufkgv5xv3udnpl289c07gaq7ycvy6dv3zavxph9wtn3jhyax8e0sw7kq4u"
 
   # Other devices
   - &core_vm_gitea_01 "age1eqn25wngk6c29uejpzqxcvj85ukqy44y59qcjkaqwh978ht5uafqf7upv4"
-  - &core_vm_nixhelper_01 "age1y380h5hld5pafedjjgzcuhnaw06q5ptlt8dy8v25mn08tjkr4uvsgfwmwx"
   #- &laptop "AGE-RECIPIENT-FOR-laptop"
 
 creation_rules:
@@ -17,7 +16,7 @@ creation_rules:
         age:
           - *admin_nixos_devbox
           - *admin_school_laptop
-          # - *admin_desktop
+          - *admin_desktop
 
   # Admin device secrets
   - path_regex: secrets/hosts/school-laptop\.ya?ml
@@ -45,27 +44,14 @@ creation_rules:
       - age:
           - *admin_nixos_devbox
           - *admin_school_laptop
+          - *admin_desktop
           - *core_vm_gitea_01
-
-  - path_regex: secrets/hosts/core-vm-nixhelper-01\.ya?ml
-    key_groups:
-      - age:
-          - *admin_nixos_devbox
-          - *admin_school_laptop
-          - *core_vm_nixhelper_01
 
   # Service secrets
   - path_regex: secrets/service/mail\.ya?ml
     key_groups:
       - age:
           - *admin_nixos_devbox
+          - *admin_desktop
           - *admin_school_laptop
           - *core_vm_gitea_01
-  - path_regex: secrets/service/builder\.ya?ml
-    key_groups:
-      - age:
-          - *admin_nixos_devbox
-          - *admin_school_laptop
-          - *core_vm_gitea_01
-          - *core_vm_nixhelper_01
- 
