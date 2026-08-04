@@ -26,7 +26,7 @@
 
       # Gitea module
       ./modules/gitea.nix
-      ./modules/gitea-runer.nix
+      ./modules/gitea-runner.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
