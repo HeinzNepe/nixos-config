@@ -16,6 +16,13 @@
       path = "/var/lib/gitea/data/gitea.db";
     };
 
+    # Large File Storage (LFS) configuration
+    lfs = {
+      enable = true;
+      # Default storage path for LFS files (optional, defaults to ${config.services.gitea.stateDir}/data/lfs)
+      #storagePath = "/var/lib/gitea/data/lfs";
+    };
+
     settings = {
       server = {
         DOMAIN = "git.nepstad.it";  # Internal hostname for SSH
