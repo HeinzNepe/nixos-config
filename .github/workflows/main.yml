@@ -1,9 +1,9 @@
 name: Nix Flake Syntax Check
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
+  #push:
+  #  branches: ["main"]
+  #pull_request:
   workflow_dispatch:
 
 jobs:
