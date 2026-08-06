@@ -116,6 +116,7 @@
 
         core-vm-nixhelper-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-nixhelper-01/configuration.nix [];
         core-vm-services-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-services-01/configuration.nix [];
+        core-vm-internal-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-internal-01/configuration.nix [];
 
 
         # Jukebox laptop configuration
