@@ -27,6 +27,9 @@
       # Services
       #./services/mealie.nix
 
+      # Qemu guest agent for better VM integration
+      ../../modules/qemu-guestagent.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
