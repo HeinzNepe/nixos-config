@@ -11,6 +11,8 @@
     fastfetch # System information tool
     sbctl     # Secure boot management program
     htop      # Process management
+    zip       # For zipping files
+    unzip     # For unzipping files
   ];
 
   # Enable Git and Git LFS
