@@ -15,7 +15,7 @@
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix
-      #../../modules/homelab/nix-remotebuilder.nix
+      # #../../modules/homelab/nix-remotebuilder.nix
       
       # Add dev modules
       ../../modules/options/fonts.nix
@@ -24,10 +24,9 @@
       ../../modules/options/networking-tools.nix
       ../../modules/options/ssh-server.nix
 
-      # Gitea module
-      ./modules/gitea.nix
-      ./modules/gitea-runner.nix
-      
+      # Services
+      #./services/mealie.nix
+
       # Qemu guest agent for better VM integration
       ../../modules/qemu-guestagent.nix
 
@@ -35,9 +34,9 @@
       ./hardware-configuration.nix
     ];
 
-  networking.hostName = "core-vm-gitea-01"; # Define your hostname.
-  
-  # Enable networking with DHCP for all non-configured links
+  networking.hostName = "core-vm-internal-01"; # Define your hostname.
+
+  # Enable networking
   networking.networkmanager.enable = true;
 
   
@@ -72,6 +71,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.11"; # Did you read the comment?
 
 }

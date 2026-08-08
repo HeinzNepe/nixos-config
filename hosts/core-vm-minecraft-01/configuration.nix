@@ -15,7 +15,7 @@
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix
-      # ../../modules/homelab/nix-remotebuilder.nix
+      # #../../modules/homelab/nix-remotebuilder.nix
       
       # Add dev modules
       ../../modules/options/fonts.nix
@@ -26,6 +26,9 @@
 
       # Nix Minecraft module for managing Minecraft server configurations
       ./minecraft/minecraft.nix
+
+      # Qemu guest agent for better VM integration
+      ../../modules/qemu-guestagent.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

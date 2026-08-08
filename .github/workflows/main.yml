@@ -1,0 +1,24 @@
+name: Nix Flake Syntax Check
+
+on:
+  #push:
+  #  branches: ["main"]
+  #pull_request:
+  workflow_dispatch:
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install Nix
+      - uses: DeterminateSystems/determinate-nix-action@v3
+
+      # Optional: cache Nix builds for faster CI
+      #- uses: DeterminateSystems/flakehub-cache-action@main
+
+      # Run flake check
+      - name: Run nix flake check
+        run: nix flake check

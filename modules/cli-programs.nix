@@ -6,13 +6,22 @@
     vim       # Vim text editor
     wget      # Network downloader
     tmux      # Terminal multiplexer
-    git       # Version control system
     lazygit   # Git UI
     lf        # Terminal file manager
     fastfetch # System information tool
     sbctl     # Secure boot management program
     htop      # Process management
+    zip       # For zipping files
+    unzip     # For unzipping files
   ];
+
+  # Enable Git and Git LFS
+  programs = {
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
+  };
 
 }
 

@@ -116,17 +116,8 @@
 
         core-vm-nixhelper-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-nixhelper-01/configuration.nix [];
         core-vm-services-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-services-01/configuration.nix [];
+        core-vm-internal-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-internal-01/configuration.nix [];
 
-        #core-rpi-node-01 = nixpkgs.lib.nixosSystem {
-        #  system = "aarch64-linux";
-        #  specialArgs = { inherit inputs vars; };
-        #  modules = [
-        #    ./hosts/core-rpi-node-01/configuration.nix
-        #    sops-nix.nixosModules.sops
-        #    nixos-hardware.nixosModules.raspberry-pi-4
-        #    "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-        #  ];
-        #};
 
         # Jukebox laptop configuration
         jukebox = mkNixOSConfig "x86_64-linux" ./hosts/jukebox/configuration.nix [];

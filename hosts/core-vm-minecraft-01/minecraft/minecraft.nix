@@ -21,7 +21,8 @@
       jvmOpts = "-Xmx4G -Xms2G"; # JVM options for memory allocation
 
       # Specify the custom minecraft server package
-      package = pkgs.fabricServers.fabric-26_1_2.override { jre_headless = pkgs.openjdk25_headless; };
+      # Fabric 26.2 with OpenJDK 25 headless. Change the version as needed.
+      package = pkgs.fabricServers.fabric-26_2.override { jre_headless = pkgs.openjdk25_headless; };
 
       # Define server operators (admins) with their UUIDs
       operators = {

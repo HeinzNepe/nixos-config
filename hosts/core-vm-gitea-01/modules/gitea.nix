@@ -16,18 +16,31 @@
       path = "/var/lib/gitea/data/gitea.db";
     };
 
+    # Large File Storage (LFS) configuration
+    lfs = {
+      enable = true;
+      # Default storage path for LFS files (optional, defaults to ${config.services.gitea.stateDir}/data/lfs)
+      #storagePath = "/var/lib/gitea/data/lfs";
+    };
+
     settings = {
       server = {
-        DOMAIN = "git.core.topheinz.com";  # Internal hostname for SSH
-        SSH_DOMAIN = "git.core.topheinz.com";
+        DOMAIN = "git.nepstad.it";  # Internal hostname for SSH
+        SSH_DOMAIN = "git.nepstad.it";
+        ROOT_URL = "https://git.nepstad.it/";  # Pangolin-facing URL
         SSH_PORT = 2222;  # Internal SSH port for Git
         HTTP_PORT = 3000;
-        ROOT_URL = "https://git.core.topheinz.com/";  # Pangolin-facing URL
+        
+        # Old domain
+        #DOMAIN = "git.core.topheinz.com";  # Internal hostname for SSH
+        #SSH_DOMAIN = "git.core.topheinz.com";        
+        #ROOT_URL = "https://git.core.topheinz.com/";  # Pangolin-facing URL
+        
       };
 
       # Optional: disable registration
       service = {
-        DISABLE_REGISTRATION = false;
+        DISABLE_REGISTRATION = true;
       };
     };
   };
