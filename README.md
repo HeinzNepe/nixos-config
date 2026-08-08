@@ -237,6 +237,65 @@ After rebuilding use sbctl to verify Secure Boot status:
 sudo sbctl status
 ```
 
+### Creating a windows boot entry for a install on a seperate disk
+
+To create a windows entry for a install on a seperate disk, one of the easiest ways is to copy the EFI entries from the windows disk, onto the NixOS disk. Lanzaboote will then automatically generate a boot entry upon rebooting. Note that you might have to rebuild when the files are copied
+
+#### Mounting the Windows disk
+
+```bash
+lsblk -f
+```
+
+Look for the FAT32 partition (usually labeled ESP, type vfat, ~100–500MB) on the Windows disk.
+
+You can assume that the NixOS EFI partition is already mounted on `/boot`
+
+To confirm the disk type, you can use
+
+```bash
+fdisk -l
+```
+
+Mount the correct partition into a temporary directory
+
+Use the following command (assuming that the EFI partition for windows in this case is `sda1`)
+```bash
+sudo mkdir /mnt/win-efi
+sudo mount /dev/sda1 /mnt/win-efi        # Windows ESP
+```
+
+#### Copying the EFI files
+
+Copy the EFI files from the mount, to the EFI partition
+
+```bash
+cp -r /mnt/win-efi/EFI/Microsoft /boot/EFI/
+```
+
+This should leave you with a folder structure like following (though note that you might have more or less entries)
+
+```
+/boot
+├── EFI
+│   ├── Boot
+│   ├── Linux
+│   ├── Microsoft
+│   ├── nixos
+│   └── systemd
+├── loader
+└── System Volume Information
+```
+
+#### Unmounting the EFI partition
+
+When this is finished, unmount the partition
+
+```
+umount /mnt/nix-efi
+```
+
+
 ## Using hyprland
 To use hyprland, the section containing the monitor configuration must be added. This is stored in the configuration.nix file of each respective host, as it is individual.
 
