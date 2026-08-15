@@ -12,8 +12,9 @@
 
   # Install GUI applications system-wide
   environment.systemPackages = with pkgs; [
-    discord # Discord chat client
-    vlc     # VLC media player
+    discord           # Discord chat client
+    vlc               # VLC media player
+    telegram-desktop  # Telegram desktop client
   ];
 
   # Testing if autostart breaks discord. Disabling for now
