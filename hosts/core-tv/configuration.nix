@@ -20,7 +20,6 @@
       ../../modules/gui-programs.nix
 
       # Add dev modules
-      ../../modules/options/development.nix
       ../../modules/options/fonts.nix
       ../../modules/options/shell.nix
       ../../modules/options/vpn.nix
