@@ -11,6 +11,7 @@
         # GUI SDR receivers
         gqrx
         cubicsdr
+        welle-io
 
         # Spectrum analysis
         #qspectrumanalyzer
