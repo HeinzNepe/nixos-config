@@ -40,6 +40,9 @@
       # Add password manager
       ../../modules/1password.nix
 
+      # Add SDR module
+      ../../modules/rtl-srd.nix
+
       # Add gaming module
       ../../modules/options/gaming.nix
 
