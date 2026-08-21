@@ -28,6 +28,9 @@
       # Home-manager
       ../../homemanager.nix
 
+      # Gaming
+      ./modules/tv-gaming.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
