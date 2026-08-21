@@ -28,6 +28,9 @@
       # Home-manager
       ../../homemanager.nix
 
+      # Bluetooth
+      ../../modules/options/bluetooth.nix
+
       # Gaming
       ./modules/tv-gaming.nix
 
