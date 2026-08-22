@@ -28,6 +28,12 @@
       # Home-manager
       ../../homemanager.nix
 
+      # Bluetooth
+      ../../modules/options/bluetooth.nix
+
+      # Gaming
+      ./modules/tv-gaming.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
