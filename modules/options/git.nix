@@ -22,7 +22,7 @@
       };
     
       # Add user config 
-      user.name = "Henrik Nepstad";
+      user.name = "Henrik Xavier Nepstad";
       user.email = "github@topheinz.com";
 
       # Allow for SSH signing
