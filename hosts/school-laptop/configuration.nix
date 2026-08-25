@@ -46,6 +46,9 @@
       # Add gaming module
       ../../modules/options/gaming.nix
 
+      # Add 3D printing module
+      ../../modules/options/ntnu-3dprint.nix
+
       # Home-manager
       ../../homemanager.nix
      
