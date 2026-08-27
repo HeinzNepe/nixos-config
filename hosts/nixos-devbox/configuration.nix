@@ -27,6 +27,8 @@
       ../../modules/options/vpn.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
+      ../../modules/options/mistral.nix
+
 
 
       # Cache and builder configuration

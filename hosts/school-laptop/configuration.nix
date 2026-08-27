@@ -29,6 +29,7 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
       ../../modules/options/tailscale-client.nix
+      ../../modules/options/mistral.nix
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix

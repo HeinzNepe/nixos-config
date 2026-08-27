@@ -33,6 +33,8 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
       ./ai.nix
+      ../../modules/options/mistral.nix
+
 
       # Java JDK 25 ++
       #../../modules/options/tdt4100.nix
