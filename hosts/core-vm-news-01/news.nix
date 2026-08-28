@@ -269,8 +269,10 @@ in
         
         # Add cache control headers for static content
         locations."/{yr}/{mo}/{d}/index.html" = {
-          addHeader = "X-Robots-Tag none";
-          addHeader = "Cache-Control public, max-age=3600";
+          addHeader = [
+            "X-Robots-Tag none"
+            "Cache-Control public, max-age=3600"
+          ];
         };
         
         # API proxy for external AI webhook
