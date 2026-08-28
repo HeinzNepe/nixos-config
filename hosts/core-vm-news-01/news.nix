@@ -350,6 +350,6 @@ in
     time.timeZone = "Europe/Oslo";
     
     # --- Journal Persistence ---
-    services.journald.settings.Storage = "persistent";
+    services.journald.storage = "persistent";
   };
 }
