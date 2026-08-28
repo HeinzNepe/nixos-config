@@ -147,7 +147,7 @@ in
     # --- Ollama Configuration ---
     services.ollama = {
       enable = true;
-      package = pkgs.ollama-cpu;
+      package = pkgs.ollama;
       host = "127.0.0.1";
       port = 11434;
       home = "/var/lib/ollama";
