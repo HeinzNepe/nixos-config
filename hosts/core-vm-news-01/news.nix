@@ -306,9 +306,9 @@ in
           set_real_ip_from 127.0.0.1;
           real_ip_header X-Forwarded-For;
           real_ip_recursive on;
+          root ${staticDir};
         '';
         default = true;
-        documentRoot = staticDir;
         
         # Trust the Host header from the reverse proxy
         serverName = "_";
