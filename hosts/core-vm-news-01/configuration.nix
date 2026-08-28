@@ -1,6 +1,6 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# and in the NixOS manual (accessible by running 'nixos-help').
 
 { config, pkgs, pkgs-stable, vars, ... }:
 
@@ -27,6 +27,9 @@
       # Services
       #./services/mealie.nix
 
+      # News Digest service
+      ../../modules/news.nix
+
       # Qemu guest agent for better VM integration
       ../../modules/qemu-guestagent.nix
 
@@ -40,7 +43,7 @@
   networking.networkmanager.enable = true;
 
   
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.henrik = {
     isNormalUser = true;
     description = "Henrik Nepstad";
@@ -65,9 +68,35 @@
   # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Required overlay for CPU-only Ollama (for News Digest AI)
+  nixpkgs.overlays = [
+    (self: super: {
+      ollama-cpu = super.ollama.override { enableCUDA = false; };
+    })
+  ];
+
+  # News Digest service configuration
+  services.news = {
+    enable = true;
+    schedule = "06:30";
+    selfUrl = "https://news.nepstad.it";
+    apiPort = 8080;
+    externalAiTimeoutMinutes = 10;
+    keepRawDays = 7;
+    keepArchivesYears = 10;
+    
+    # Path where news digest code is cloned
+    repoPath = "/var/src/news";
+    
+    # Git configuration for nightly archival
+    gitRemote = "origin";
+    gitEmail = "news@topheinz.com";
+    gitName = "News Digest Bot";
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
