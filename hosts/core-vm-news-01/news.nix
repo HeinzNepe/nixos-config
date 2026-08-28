@@ -295,15 +295,18 @@ in
       enable = true;
       recommendedTlsSettings = true;
       
-      # Trust proxy headers since we're behind a reverse proxy
-      proxyHeaders = {
-        enable = true;
-        trusted = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "127.0.0.1" ];
-      };
-      
       # Virtual host for internal traffic (from reverse proxy)
       virtualHosts."0.0.0.0:80" = {
         enableACME = false;
+        # Trust proxy headers since we're behind a reverse proxy
+        extraConfig = ''
+          set_real_ip_from 10.0.0.0/8;
+          set_real_ip_from 172.16.0.0/12;
+          set_real_ip_from 192.168.0.0/16;
+          set_real_ip_from 127.0.0.1;
+          real_ip_header X-Forwarded-For;
+          real_ip_recursive on;
+        '';
         default = true;
         documentRoot = staticDir;
         
