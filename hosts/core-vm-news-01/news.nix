@@ -314,7 +314,7 @@ in
         serverName = "_";
         
         locations."/" = {
-          config = "try_files $uri $uri/ $uri/index.html;";
+          extraConfig = "try_files $uri $uri/ $uri/index.html;";
         };
         
         # Add cache control headers for static content
