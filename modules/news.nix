@@ -73,6 +73,8 @@ in
     users.groups.${newsGroup} = { };
     
     # Create data directories
+    
+    # Ensure repository directory exists
     systemd.tmpfiles.rules = [
       "d ${dataDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${rawDir} 0755 ${newsUser} ${newsGroup} - -"
@@ -83,10 +85,6 @@ in
       "d ${pendingDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${dataDir}/source-probe 0755 ${newsUser} ${newsGroup} - -"
       "d ${dataDir}/log 0755 ${newsUser} ${newsGroup} - -"
-    ];
-    
-    # Ensure repository directory exists
-    systemd.tmpfiles.rules = [
       "d ${config.services.news.repoPath} 0755 root root - -"
     ] ++ (config.systemd.tmpfiles.rules or []);
     
