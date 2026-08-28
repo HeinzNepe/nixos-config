@@ -28,7 +28,7 @@
       #./services/mealie.nix
 
       # News Digest service
-      ../../modules/news.nix
+      ./news.nix
 
       # Qemu guest agent for better VM integration
       ../../modules/qemu-guestagent.nix

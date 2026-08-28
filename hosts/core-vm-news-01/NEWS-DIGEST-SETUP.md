@@ -5,14 +5,14 @@ This file documents the News Digest service integration into core-vm-news-01.
 ## Changes Made
 
 ### 1. Added News Module
-- **File**: `modules/news.nix`
+- **File**: `hosts/core-vm-news-01/news.nix`
 - **Source**: Copied from the News Digest repository (`nixos/news.nix`)
 - **Purpose**: Provides all News Digest services (Ollama, API, nginx, timers, etc.)
 
 ### 2. Updated Host Configuration
 - **File**: `hosts/core-vm-news-01/configuration.nix`
 - **Changes**:
-  - Added import for `../../modules/news.nix`
+  - Added import for `../../hosts/core-vm-news-01/news.nix`
   - Added `nixpkgs.overlays` for CPU-only Ollama
   - Added `services.news` configuration block
 
@@ -298,7 +298,7 @@ See the News Digest repository [docs/07-roadmap.md](https://github.com/HeinzNepe
 
 ## Files Modified
 
-- `modules/news.nix` - News Digest NixOS module (NEW)
+- `hosts/core-vm-news-01/news.nix` - News Digest NixOS module (NEW)
 - `hosts/core-vm-news-01/configuration.nix` - Updated with news service config
 
 ## Useful Commands
