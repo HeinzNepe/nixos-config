@@ -3,8 +3,6 @@
 # News Digest NixOS Module
 # This module provides all the services needed for the News Digest service
 
-with lib;
-
 let
   # Module arguments with defaults
   cfg = config.services.news;
@@ -41,24 +39,72 @@ in
 
 {
   options.services.news = {
-    enable = mkOptionDefault true "Enable the News Digest service";
+    enable = mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable the News Digest service";
+    };
     
     # Service configuration
-    schedule = mkOptionDefault "06:30" "Daily run time (HH:MM) in Europe/Oslo timezone";
-    selfUrl = mkOptionDefault "https://news.nepstad.it" "Base URL for the news digest site";
-    apiPort = mkOptionDefault 8080 "Port for the external AI webhook API";
-    externalAiTimeoutMinutes = mkOptionDefault 10 "Timeout in minutes for external AI";
-    externalAiApiKey = mkOptionDefault "" "Optional API key for external AI authentication";
-    keepRawDays = mkOptionDefault 7 "Number of days to keep raw feed data";
-    keepArchivesYears = mkOptionDefault 10 "Number of years to keep digest archives";
+    schedule = mkOption {
+      type = lib.types.str;
+      default = "06:30";
+      description = "Daily run time (HH:MM) in Europe/Oslo timezone";
+    };
+    selfUrl = mkOption {
+      type = lib.types.str;
+      default = "https://news.nepstad.it";
+      description = "Base URL for the news digest site";
+    };
+    apiPort = mkOption {
+      type = lib.types.int;
+      default = 8080;
+      description = "Port for the external AI webhook API";
+    };
+    externalAiTimeoutMinutes = mkOption {
+      type = lib.types.int;
+      default = 10;
+      description = "Timeout in minutes for external AI";
+    };
+    externalAiApiKey = mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Optional API key for external AI authentication";
+    };
+    keepRawDays = mkOption {
+      type = lib.types.int;
+      default = 7;
+      description = "Number of days to keep raw feed data";
+    };
+    keepArchivesYears = mkOption {
+      type = lib.types.int;
+      default = 10;
+      description = "Number of years to keep digest archives";
+    };
     
     # Repository path (where the code is installed)
-    repoPath = mkOptionDefault "/opt/news" "Path to the news digest repository";
+    repoPath = mkOption {
+      type = lib.types.path;
+      default = "/opt/news";
+      description = "Path to the news digest repository";
+    };
     
     # Git configuration for archival
-    gitRemote = mkOptionDefault "origin" "Git remote name for archival push";
-    gitEmail = mkOptionDefault "" "Git commit email for archival";
-    gitName = mkOptionDefault "News Digest" "Git commit name for archival";
+    gitRemote = mkOption {
+      type = lib.types.str;
+      default = "origin";
+      description = "Git remote name for archival push";
+    };
+    gitEmail = mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Git commit email for archival";
+    };
+    gitName = mkOption {
+      type = lib.types.str;
+      default = "News Digest";
+      description = "Git commit name for archival";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -75,7 +121,8 @@ in
     # Create data directories
     
     # Ensure repository directory exists
-    systemd.tmpfiles.rules = [
+    # Use mkForce to override any existing tmpfiles rules
+    systemd.tmpfiles.rules = mkForce [
       "d ${dataDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${rawDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${digestsDir} 0755 ${newsUser} ${newsGroup} - -"
@@ -85,11 +132,11 @@ in
       "d ${pendingDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${dataDir}/source-probe 0755 ${newsUser} ${newsGroup} - -"
       "d ${dataDir}/log 0755 ${newsUser} ${newsGroup} - -"
-      "d ${config.services.news.repoPath} 0755 root root - -"
-    ] ++ (config.systemd.tmpfiles.rules or []);
+      "d ${cfg.repoPath} 0755 root root - -"
+    ];
     
     # Install required packages
-    environment.systemPackages = (config.environment.systemPackages or []) ++ [
+    environment.systemPackages = mkForce (config.environment.systemPackages or []) ++ [
       python
       pkgs.git
       pkgs.curl
@@ -269,10 +316,10 @@ in
         
         # Add cache control headers for static content
         locations."/{yr}/{mo}/{d}/index.html" = {
-          addHeader = [
-            "X-Robots-Tag none"
-            "Cache-Control public, max-age=3600"
-          ];
+          extraConfig = ''
+            add_header X-Robots-Tag none;
+            add_header Cache-Control "public, max-age=3600";
+          '';
         };
         
         # API proxy for external AI webhook
@@ -297,7 +344,7 @@ in
     
     # --- Firewall ---
     # Allow HTTP (80) and optionally HTTPS (443) in the future
-    networking.firewall.allowedTCPPorts = [ 80 ];
+    networking.firewall.allowedTCPPorts = mkForce [ 80 ];
     
     # --- Timezone ---
     time.timeZone = "Europe/Oslo";
