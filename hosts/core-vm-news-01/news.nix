@@ -39,75 +39,75 @@ in
 
 {
   options.services.news = {
-    enable = mkOption {
+    enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
       description = "Enable the News Digest service";
     };
     
     # Service configuration
-    schedule = mkOption {
+    schedule = lib.mkOption {
       type = lib.types.str;
       default = "06:30";
       description = "Daily run time (HH:MM) in Europe/Oslo timezone";
     };
-    selfUrl = mkOption {
+    selfUrl = lib.mkOption {
       type = lib.types.str;
       default = "https://news.nepstad.it";
       description = "Base URL for the news digest site";
     };
-    apiPort = mkOption {
+    apiPort = lib.mkOption {
       type = lib.types.int;
       default = 8080;
       description = "Port for the external AI webhook API";
     };
-    externalAiTimeoutMinutes = mkOption {
+    externalAiTimeoutMinutes = lib.mkOption {
       type = lib.types.int;
       default = 10;
       description = "Timeout in minutes for external AI";
     };
-    externalAiApiKey = mkOption {
+    externalAiApiKey = lib.mkOption {
       type = lib.types.str;
       default = "";
       description = "Optional API key for external AI authentication";
     };
-    keepRawDays = mkOption {
+    keepRawDays = lib.mkOption {
       type = lib.types.int;
       default = 7;
       description = "Number of days to keep raw feed data";
     };
-    keepArchivesYears = mkOption {
+    keepArchivesYears = lib.mkOption {
       type = lib.types.int;
       default = 10;
       description = "Number of years to keep digest archives";
     };
     
     # Repository path (where the code is installed)
-    repoPath = mkOption {
+    repoPath = lib.mkOption {
       type = lib.types.path;
       default = "/opt/news";
       description = "Path to the news digest repository";
     };
     
     # Git configuration for archival
-    gitRemote = mkOption {
+    gitRemote = lib.mkOption {
       type = lib.types.str;
       default = "origin";
       description = "Git remote name for archival push";
     };
-    gitEmail = mkOption {
+    gitEmail = lib.mkOption {
       type = lib.types.str;
       default = "";
       description = "Git commit email for archival";
     };
-    gitName = mkOption {
+    gitName = lib.mkOption {
       type = lib.types.str;
       default = "News Digest";
       description = "Git commit name for archival";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Create the news user and group
     users.users.${newsUser} = {
       isSystemUser = true;
@@ -121,8 +121,8 @@ in
     # Create data directories
     
     # Ensure repository directory exists
-    # Use mkForce to override any existing tmpfiles rules
-    systemd.tmpfiles.rules = mkForce [
+    # Use lib.mkForce to override any existing tmpfiles rules
+    systemd.tmpfiles.rules = lib.mkForce [
       "d ${dataDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${rawDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${digestsDir} 0755 ${newsUser} ${newsGroup} - -"
@@ -136,7 +136,7 @@ in
     ];
     
     # Install required packages
-    environment.systemPackages = mkForce (config.environment.systemPackages or []) ++ [
+    environment.systemPackages = lib.mkForce (config.environment.systemPackages or []) ++ [
       python
       pkgs.git
       pkgs.curl
@@ -344,7 +344,7 @@ in
     
     # --- Firewall ---
     # Allow HTTP (80) and optionally HTTPS (443) in the future
-    networking.firewall.allowedTCPPorts = mkForce [ 80 ];
+    networking.firewall.allowedTCPPorts = lib.mkForce [ 80 ];
     
     # --- Timezone ---
     time.timeZone = "Europe/Oslo";
