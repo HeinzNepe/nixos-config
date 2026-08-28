@@ -123,6 +123,7 @@ in
     # Ensure repository directory exists
     # Use lib.mkForce to override any existing tmpfiles rules
     systemd.tmpfiles.rules = lib.mkForce [
+      "d /etc/news 0755 root root - -"
       "d ${dataDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${rawDir} 0755 ${newsUser} ${newsGroup} - -"
       "d ${digestsDir} 0755 ${newsUser} ${newsGroup} - -"
@@ -341,10 +342,7 @@ in
     };
     
     # --- Environment File ---
-    # This is created by the user; we provide the directory
-    environment.etc."news/news.env".mode = "0600";
-    environment.etc."news/news.env".user = newsUser;
-    environment.etc."news/news.env".group = newsGroup;
+    # This is created by the user; /etc/news directory is created via tmpfiles above
     
     # --- Firewall ---
     # Allow HTTP (80) and optionally HTTPS (443) in the future
