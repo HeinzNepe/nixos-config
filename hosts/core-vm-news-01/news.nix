@@ -136,7 +136,7 @@ in
     ];
     
     # Install required packages
-    environment.systemPackages = lib.mkForce (config.environment.systemPackages or []) ++ [
+    environment.systemPackages = [
       python
       pkgs.git
       pkgs.curl
@@ -151,7 +151,7 @@ in
       host = "127.0.0.1";
       port = 11434;
       home = "/var/lib/ollama";
-      models = "/var/lib/ollama/models";
+      modelsDir = "/var/lib/ollama/models";
       loadModels = [ "gemma4:12b" ];
       syncModels = true;
       environmentVariables = {
@@ -166,7 +166,7 @@ in
       description = "News Digest - Daily news processing service";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" "ollama.service" "news-api.service" ];
-      wants = [ "ollama.service" "news-api.service" ];
+      wants = [ "network-online.target" "ollama.service" "news-api.service" ];
       
       serviceConfig = {
         User = newsUser;
@@ -207,6 +207,7 @@ in
       description = "News Digest API - External AI webhook endpoint";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
       
       serviceConfig = {
         User = newsUser;
