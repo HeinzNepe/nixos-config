@@ -324,7 +324,7 @@ in
         };
         
         # Add cache control headers for JSON files
-        locations."/{yr}/{mo}/{d}/digest.json" = {
+        locations."~/^[0-9]{4}/[0-9]{2}/[0-9]{2}/digest\.json$" = {
           extraConfig = "add_header X-Robots-Tag none; add_header Cache-Control \"public, max-age=3600\";";
         };
         
