@@ -117,7 +117,6 @@
         core-vm-nixhelper-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-nixhelper-01/configuration.nix [];
         core-vm-services-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-services-01/configuration.nix [];
         core-vm-internal-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-internal-01/configuration.nix [];
-        core-vm-news-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-news-01/configuration.nix [];
         
         core-tv = mkNixOSConfig "x86_64-linux" ./hosts/core-tv/configuration.nix [];
 
