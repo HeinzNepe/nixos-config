@@ -89,6 +89,13 @@ in
       description = "Path to the news digest repository";
     };
     
+    # Web root for static files (where viewer.html and JSON digests are served from)
+    webrootPath = lib.mkOption {
+      type = lib.types.path;
+      default = "${config.services.news.repoPath}/webroot";
+      description = "Path to web root directory for static files";
+    };
+    
     # Git configuration for archival
     gitRemote = lib.mkOption {
       type = lib.types.str;
@@ -308,7 +315,7 @@ in
           set_real_ip_from 127.0.0.1;
           real_ip_header X-Forwarded-For;
           real_ip_recursive on;
-          root ${staticDir};
+          root ${cfg.webrootPath};
         '';
         default = true;
         
@@ -319,11 +326,18 @@ in
           extraConfig = "try_files $uri $uri/ $uri/index.html;";
         };
         
-        # Add cache control headers for static content
-        locations."/{yr}/{mo}/{d}/index.html" = {
+        # Add cache control headers for JSON files
+        locations."/{yr}/{mo}/{d}/digest.json" = {
           extraConfig = ''
             add_header X-Robots-Tag none;
             add_header Cache-Control "public, max-age=3600";
+          '';
+        };
+        
+        # Archive JSON - cache for 5 minutes
+        locations."/archive/all-years.json" = {
+          extraConfig = ''
+            add_header Cache-Control "public, max-age=300";
           '';
         };
         

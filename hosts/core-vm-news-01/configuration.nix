@@ -64,6 +64,11 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  
+  # Ensure webroot directory exists for news service
+  systemd.tmpfiles.rules = [
+    "d /home/henrik/GitHub/news/webroot 0755 Henrik users - -"
+  ];
 
   # Enable flakes and nix-command for advanced Nix features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -86,7 +91,10 @@
     keepArchivesYears = 10;
     
     # Path where news digest code is cloned
-    repoPath = "/var/src/news";
+    repoPath = "/home/henrik/GitHub/news";
+    
+    # Web root for static files (served by nginx)
+    webrootPath = "${config.services.news.repoPath}/webroot";
     
     # Git configuration for nightly archival
     gitRemote = "origin";
