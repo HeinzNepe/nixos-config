@@ -67,7 +67,7 @@
   
   # Ensure webroot directory exists for news service
   systemd.tmpfiles.rules = [
-    "d /home/henrik/GitHub/news/webroot 0755 Henrik users - -"
+    "d /home/henrik/GitHub/news/webroot 0755 henrik users - -"
   ];
 
   # Enable flakes and nix-command for advanced Nix features
