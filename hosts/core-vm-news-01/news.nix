@@ -346,7 +346,7 @@ in
     
     # --- Firewall ---
     # Allow HTTP (80) and optionally HTTPS (443) in the future
-    networking.firewall.allowedTCPPorts = lib.mkForce [ 80 ];
+    networking.firewall.allowedTCPPorts = [ 80 ];
     
     # --- Timezone ---
     time.timeZone = "Europe/Oslo";
