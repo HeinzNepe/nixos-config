@@ -304,20 +304,19 @@ in
       enable = true;
       recommendedTlsSettings = true;
       
+      # Trust proxy headers since we're behind a reverse proxy
+      proxyHeaders = {
+        enable = true;
+        trusted = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "127.0.0.1" ];
+      };
+      
       # Virtual host for internal traffic (from reverse proxy)
       virtualHosts."0.0.0.0:80" = {
         enableACME = false;
-        # Trust proxy headers since we're behind a reverse proxy
-        extraConfig = ''
-          set_real_ip_from 10.0.0.0/8;
-          set_real_ip_from 172.16.0.0/12;
-          set_real_ip_from 192.168.0.0/16;
-          set_real_ip_from 127.0.0.1;
-          real_ip_header X-Forwarded-For;
-          real_ip_recursive on;
-          root ${cfg.webrootPath};
-        '';
         default = true;
+        
+        # Serve from webroot directory
+        documentRoot = cfg.webrootPath;
         
         # Trust the Host header from the reverse proxy
         serverName = "_";
@@ -328,17 +327,13 @@ in
         
         # Add cache control headers for JSON files
         locations."/{yr}/{mo}/{d}/digest.json" = {
-          extraConfig = ''
-            add_header X-Robots-Tag none;
-            add_header Cache-Control "public, max-age=3600";
-          '';
+          addHeader = "X-Robots-Tag none";
+          extraConfig = "add_header Cache-Control \"public, max-age=3600\";";
         };
         
         # Archive JSON - cache for 5 minutes
         locations."/archive/all-years.json" = {
-          extraConfig = ''
-            add_header Cache-Control "public, max-age=300";
-          '';
+          extraConfig = "add_header Cache-Control \"public, max-age=300\";";
         };
         
         # API proxy for external AI webhook
