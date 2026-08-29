@@ -298,52 +298,33 @@ in
     };
     
     # --- Nginx Configuration ---
-    # Note: This VM runs behind a reverse proxy that terminates TLS
-    # and handles domain routing. Nginx on the VM serves internal traffic only.
+    # Minimal config: serve static files from webroot
     services.nginx = {
       enable = true;
       recommendedTlsSettings = true;
       
-      # Trust proxy headers since we're behind a reverse proxy
-      # Use recommendedProxySettings for standard proxy header handling
-      recommendedProxySettings = true;
-      
-      # Virtual host for internal traffic (from reverse proxy)
       virtualHosts."0.0.0.0:80" = {
         enableACME = false;
         default = true;
-        
-        # Trust the Host header from the reverse proxy
         serverName = "_";
         
-        # Serve from webroot directory (hardcoded path)
-        extraConfig = "root /home/henrik/GitHub/news/webroot;";
-        
-        locations."/" = {
-          extraConfig = "try_files $uri $uri/ $uri/index.html;";
-        };
-        
-        # Add cache control headers for JSON files
-        locations."~/^[0-9]{4}/[0-9]{2}/[0-9]{2}/digest\.json$" = {
-          extraConfig = "add_header X-Robots-Tag none; add_header Cache-Control \"public, max-age=3600\";";
-        };
-        
-        # Archive JSON - cache for 5 minutes
-        locations."/archive/all-years.json" = {
-          extraConfig = "add_header Cache-Control \"public, max-age=300\";";
-        };
-        
-        # API proxy for external AI webhook
-        locations."/api/" = {
-          extraConfig = ''
-            proxy_pass http://127.0.0.1:${toString cfg.apiPort};
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header X-Forwarded-Host $host;
-          '';
-        };
+        # Single extraConfig block with all directives
+        extraConfig = ''
+          root /home/henrik/GitHub/news/webroot;
+          
+          location / {
+              try_files $uri $uri/ /index.html;
+          }
+          
+          location /api/ {
+              proxy_pass http://127.0.0.1:${toString cfg.apiPort};
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header X-Forwarded-Host $host;
+          }
+        '';
       };
     };
     
