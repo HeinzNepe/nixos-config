@@ -316,8 +316,8 @@ in
         # Trust the Host header from the reverse proxy
         serverName = "_";
         
-        # Serve from webroot directory (set via extraConfig with string concatenation)
-        extraConfig = "root " + cfg.webrootPath + ";";
+        # Serve from webroot directory (hardcoded path)
+        extraConfig = "root /home/henrik/GitHub/news/webroot;";
         
         locations."/" = {
           extraConfig = "try_files $uri $uri/ $uri/index.html;";
