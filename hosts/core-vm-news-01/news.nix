@@ -313,11 +313,13 @@ in
         enableACME = false;
         default = true;
         
-        # Serve from webroot directory
-        documentRoot = cfg.webrootPath;
-        
         # Trust the Host header from the reverse proxy
         serverName = "_";
+        
+        # Serve from webroot directory (set via extraConfig since documentRoot is deprecated)
+        extraConfig = ''
+          root ${cfg.webrootPath};
+        '';
         
         locations."/" = {
           extraConfig = "try_files $uri $uri/ $uri/index.html;";
