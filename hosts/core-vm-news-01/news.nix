@@ -305,10 +305,8 @@ in
       recommendedTlsSettings = true;
       
       # Trust proxy headers since we're behind a reverse proxy
-      proxyHeaders = {
-        enable = true;
-        trusted = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "127.0.0.1" ];
-      };
+      # Use recommendedProxySettings for standard proxy header handling
+      recommendedProxySettings = true;
       
       # Virtual host for internal traffic (from reverse proxy)
       virtualHosts."0.0.0.0:80" = {
