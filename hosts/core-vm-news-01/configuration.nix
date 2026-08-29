@@ -67,7 +67,8 @@
   
   # Ensure webroot directory exists for news service
   systemd.tmpfiles.rules = [
-    "d /home/henrik/GitHub/news/webroot 0755 henrik users - -"
+    "d /var/www/news/webroot 0755 henrik nginx - -"
+    "d /var/www/news 0755 henrik nginx - -"
   ];
 
   # Enable flakes and nix-command for advanced Nix features
@@ -91,7 +92,7 @@
     keepArchivesYears = 10;
     
     # Path where news digest code is cloned
-    repoPath = "/home/henrik/GitHub/news";
+    repoPath = "/var/www/news";
     
     # Web root for static files (served by nginx)
     webrootPath = "${config.services.news.repoPath}/webroot";

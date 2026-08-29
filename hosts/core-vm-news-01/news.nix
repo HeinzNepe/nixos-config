@@ -310,7 +310,7 @@ in
         
         # Single extraConfig block with all directives
         extraConfig = ''
-          root /home/henrik/GitHub/news/webroot;
+          root /var/www/news/webroot;
           
           location / {
               try_files $uri $uri/ /index.html;
