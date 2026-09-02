@@ -1,10 +1,7 @@
 { inputs, pkgs, pkgs-stable, ... }:
 
 {
-  # Add virtualbox package to system environment
-  environment.systemPackages = [
-    # From stable channel
-    pkgs-stable.virtualbox
-  ];
-
+  # Add virtualbox to system environment
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 }
