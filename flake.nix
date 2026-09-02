@@ -49,11 +49,17 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Mistral Vibe - CLI coding agent by Mistral AI
+    mistral-vibe = {
+      url = "github:mistralai/mistral-vibe";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Define the NixOS configurations for different hosts
   # Each host has its own configuration.nix file that imports common modules and defines host-specific settings
-  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, nix-minecraft, home-manager, plasma-manager, disko, sops-nix, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, lanzaboote, nix-minecraft, home-manager, plasma-manager, disko, sops-nix, nixos-hardware, mistral-vibe, ... }@inputs:
     let
       # Import the variables from vars.nix
       vars = import ./vars.nix;
