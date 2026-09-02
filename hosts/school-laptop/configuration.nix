@@ -47,6 +47,9 @@
       # Add gaming module
       ../../modules/options/steam-gaming.nix
 
+      # Add virtualbox module
+      ../../modules/options/virtualbox.nix
+
       # Add 3D printing module
       ../../modules/options/ntnu-3dprint.nix
 
