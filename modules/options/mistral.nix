@@ -3,8 +3,15 @@
 {
   # Mistral related packages to system environment
   environment.systemPackages = [
-    # From unstable channel
-    pkgs.mistral-vibe
+    # From the official mistral-vibe flake
+    inputs.mistral-vibe.packages.${pkgs.system}.default
+  ];
+
+  # Add the overlay to make mistral-vibe available in pkgs
+  nixpkgs.overlays = [
+    (final: prev: {
+      mistral-vibe = inputs.mistral-vibe.packages.${pkgs.system}.default;
+    })
   ];
 
 }
