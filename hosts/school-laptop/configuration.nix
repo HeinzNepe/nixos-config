@@ -29,7 +29,7 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
       ../../modules/options/tailscale-client.nix
-      ../../modules/options/mistral.nix
+      #../../modules/options/mistral.nix
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix
@@ -45,7 +45,7 @@
       ../../modules/1password.nix
 
       # Add gaming module
-      ../../modules/options/gaming.nix
+      ../../modules/options/steam-gaming.nix
 
       # Add 3D printing module
       ../../modules/options/ntnu-3dprint.nix

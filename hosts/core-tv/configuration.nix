@@ -32,7 +32,7 @@
       ../../modules/options/bluetooth.nix
 
       # Gaming
-      ./modules/tv-gaming.nix
+      ../../modules/options/steam-gaming.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
