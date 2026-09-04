@@ -38,15 +38,26 @@
       Restart = "always";
       RestartSec = "10";
 
-      ExecStart = "${pkgs.screen}/bin/screen -DmS mc-atm10-sky /bin/bash /minecraft/atm10-sky/run.sh";
+      ExecStart = "${pkgs.writeShellScriptBin "start-minecraft" ''
+        #!${pkgs.bash}/bin/bash
+        export SCREENDIR=/minecraft/.screen
+        export HOME=/minecraft
+        mkdir -p "$SCREENDIR"
+        chmod 700 "$SCREENDIR"
+        exec ${pkgs.screen}/bin/screen -dmS mc-atm10-sky ${pkgs.bash}/bin/bash /minecraft/atm10-sky/run.sh
+      ''}";
 
-      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit";
+      ExecStop = "${pkgs.writeShellScriptBin "stop-minecraft" ''
+        #!${pkgs.bash}/bin/bash
+        ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit
+      ''}";
 
       Environment = [
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
         "PATH=${pkgs.jdk21}/bin:${pkgs.screen}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:${pkgs.bash}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         "TERM=xterm-256color"
         "SCREENDIR=/minecraft/.screen"
+        "HOME=/minecraft"
       ];
     };
   };
