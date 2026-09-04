@@ -20,9 +20,9 @@
     group = "minecraft";
   };
 
-  # Create the minecraft directory and screen socket directory
+  # Create screen socket directory
   systemd.tmpfiles.rules = [
-    "d /run/minecraft 0700 minecraft minecraft - -"  # Fixed: changed from 0755 to 0700
+    "d /run/minecraft 0700 minecraft minecraft - -"
   ];
 
   # Manual Minecraft Server service using screen
@@ -33,7 +33,7 @@
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      Type = "simple";
+      Type = "forking";  # Fixed: changed from simple to forking
       User = "minecraft";
       Group = "minecraft";
       WorkingDirectory = "/minecraft/atm10-sky";
