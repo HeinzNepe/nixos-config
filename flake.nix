@@ -119,11 +119,6 @@
           nix-minecraft.nixosModules.minecraft-servers
           { nixpkgs.overlays = [ nix-minecraft.overlay ]; }
         ];
-        core-vm-minecraft-02 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-minecraft-02/configuration.nix [
-          # Needed for the Minecraft server configuration
-          nix-minecraft.nixosModules.minecraft-servers
-          { nixpkgs.overlays = [ nix-minecraft.overlay ]; }
-        ];
 
         core-vm-nixhelper-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-nixhelper-01/configuration.nix [];
         core-vm-services-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-services-01/configuration.nix [];
