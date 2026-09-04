@@ -43,18 +43,18 @@
       RestartSec = "10";
       
       # Start the server using the startserver.sh script
-      ExecStart = "${pkgs.procps}/bin/env -i /usr/bin/screen -DmS mc-atm10-sky /bin/bash /minecraft/atm10-manual/startserver.sh";
+      ExecStart = "${pkgs.screen}/bin/screen -DmS mc-atm10-sky /bin/bash /minecraft/atm10-manual/startserver.sh";
       
       # Graceful shutdown sequence
-      ExecStop = "${pkgs.procps}/bin/env -i /usr/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"say SERVER SHUTTING DOWN IN 5 SECONDS. SAVING ALL MAPS...\"\\015'";
+      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"say SERVER SHUTTING DOWN IN 5 SECONDS. SAVING ALL MAPS...\"\\015'";
       ExecStop = "${pkgs.coreutils}/bin/sleep 5";
-      ExecStop = "${pkgs.procps}/bin/env -i /usr/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"save-all\"\\015'";
-      ExecStop = "${pkgs.procps}/bin/env -i /usr/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"stop\"\\015'";
+      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"save-all\"\\015'";
+      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"stop\"\\015'";
       
-      # Environment variables for Java
+      # Environment variables for Java and screen
       Environment = [
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
-        "PATH=${pkgs.jdk21}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        "PATH=${pkgs.jdk21}/bin:${pkgs.screen}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       ];
     };
   };
