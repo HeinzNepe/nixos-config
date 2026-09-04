@@ -13,12 +13,10 @@
 
 let
   # ATM10 Sky modpack version 2.0.2 for Minecraft 1.21.1 with NeoForge
-  # To get the correct hash, run:
-  # nix-prefetch-url --unpack "https://media.forgecdn.net/files/6958/969/ATM10%20To%20the%20Sky-2.0.2.zip"
-  # Then replace the sha256 hash below with the output
+  # Hash obtained via: nix-prefetch-url --name ATM10-To-The-Sky-2.0.2.zip 'https://mediafilez.forgecdn.net/files/7854/204/ATM10%20To%20the%20Sky-2.0.2.zip'
   modpack = pkgs.fetchurl {
-    url = "https://media.forgecdn.net/files/6958/969/ATM10%20To%20the%20Sky-2.0.2.zip";
-    sha256 = "sha256-0000000000000000000000000000000000000000000000000000";
+    url = "https://mediafilez.forgecdn.net/files/7854/204/ATM10%20To%20the%20Sky-2.0.2.zip";
+    sha256 = "105db3d32603nq3jl15n42ryf9gxcifhsz7hxjhjanqmq8j0zxp3";
   };
   
   # Extract the modpack to access its contents
