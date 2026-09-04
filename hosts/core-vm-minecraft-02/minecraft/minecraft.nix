@@ -1,7 +1,9 @@
 # minecraft.nix
 # https://mich-murphy.com/nixos-minecraft-server/
 # All The Mods 10: To the Sky (ATM10SKY) - Skyblock modpack for Minecraft 1.21.1 with NeoForge
-# GitHub Repository: https://github.com/AllTheMods/All-the-mods-10-Sky
+# CurseForge Project: https://www.curseforge.com/minecraft/modpacks/all-the-mods-10-sky
+# Project ID: 1298402
+# Version: 2.0.2
 
 {
   config,
@@ -11,13 +13,12 @@
 }:
 
 let
-  # Fetch the modpack from GitHub releases
-  # ATM10 Sky 2.0.2 release from the official repository
-  # To get the correct hash, run:
-  #   nix-prefetch-url --name "ATM10-To-The-Sky-2.0.2.zip" "https://github.com/AllTheMods/All-the-mods-10-Sky/releases/download/2.0.2/ATM10.To.the.Sky-2.0.2.zip"
+  # Fetch the modpack from CurseForge CDN
+  # ATM10 Sky 2.0.2 for Minecraft 1.21.1 with NeoForge
+  # Hash verified via: sha256sum on downloaded file
   modpack = pkgs.fetchurl {
-    url = "https://github.com/AllTheMods/All-the-mods-10-Sky/releases/download/2.0.2/ATM10.To.the.Sky-2.0.2.zip";
-    sha256 = "sha256-0000000000000000000000000000000000000000000000000000";
+    url = "https://mediafilez.forgecdn.net/files/7854/204/ATM10%20To%20the%20Sky-2.0.2.zip";
+    sha256 = "e3f60f24c2155b25a1ecf07c0d5d64fd25e7b320b6042a07b6031831da58ad80";
   };
   
   # Extract the modpack to access its contents
