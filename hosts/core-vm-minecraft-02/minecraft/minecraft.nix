@@ -48,8 +48,8 @@
       # Start the server using the existing run.sh script
       ExecStart = "${pkgs.screen}/bin/screen -DmS mc-atm10-sky /bin/bash /minecraft/atm10-sky/run.sh";
 
-      # Graceful shutdown sequence
-      ExecStop = "${pkgs.bash}/bin/bash -c '\n        ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"say SERVER SHUTTING DOWN IN 5 SECONDS. SAVING ALL MAPS...\"\\015' &&\n        ${pkgs.coreutils}/bin/sleep 5 &&\n        ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"save-all\"\\015' &&\n        ${pkgs.coreutils}/bin/sleep 2 &&\n        ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"stop\"\\015'\n      '";
+      # Simple ExecStop - just kill the screen session
+      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit";
 
       Environment = [
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
