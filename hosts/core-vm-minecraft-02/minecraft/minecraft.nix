@@ -77,16 +77,15 @@ in
         view-distance = 32;
       };
 
-      # Symlink the mods directory from the extracted modpack
+      # Symlink directories from the extracted modpack
+      # Only include directories that exist in the modpack
       symlinks = {
         "mods" = "${modpack-extracted}/mods";
+        "config" = "${modpack-extracted}/config";
       };
       
-      # Copy configuration files from the extracted modpack
-      files = {
-        "config" = "${modpack-extracted}/config";
-        "scripts" = "${modpack-extracted}/scripts";
-      };
+      # Files to copy (empty - we're using symlinks for everything)
+      files = {};
     };
   };
 }
