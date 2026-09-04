@@ -9,7 +9,7 @@
 }:
 
 let
-  startScript = pkgs.writeShellScriptBin "start-minecraft" ''
+  startScript = pkgs.writeScriptBin "start-minecraft" ''
     #!${pkgs.bash}/bin/bash
     export SCREENDIR=/minecraft/.screen
     export HOME=/minecraft
@@ -17,7 +17,7 @@ let
     chmod 700 "$SCREENDIR"
     exec ${pkgs.screen}/bin/screen -dmS mc-atm10-sky ${pkgs.bash}/bin/bash /minecraft/atm10-sky/run.sh
   '';
-  stopScript = pkgs.writeShellScriptBin "stop-minecraft" ''
+  stopScript = pkgs.writeScriptBin "stop-minecraft" ''
     #!${pkgs.bash}/bin/bash
     export SCREENDIR=/minecraft/.screen
     ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit
