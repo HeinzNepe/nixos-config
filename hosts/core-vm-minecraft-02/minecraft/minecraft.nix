@@ -31,6 +31,7 @@
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
+      Type = "forking";
       User = "minecraft";
       Group = "minecraft";
       WorkingDirectory = "/minecraft/atm10-sky";
