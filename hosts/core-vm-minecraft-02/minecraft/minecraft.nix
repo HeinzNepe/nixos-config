@@ -38,19 +38,9 @@
       Restart = "always";
       RestartSec = "10";
 
-      ExecStart = "${pkgs.writeShellScriptBin "start-minecraft" ''
-        #!${pkgs.bash}/bin/bash
-        export SCREENDIR=/minecraft/.screen
-        export HOME=/minecraft
-        mkdir -p "$SCREENDIR"
-        chmod 700 "$SCREENDIR"
-        exec ${pkgs.screen}/bin/screen -dmS mc-atm10-sky ${pkgs.bash}/bin/bash /minecraft/atm10-sky/run.sh
-      ''}";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'export SCREENDIR=/minecraft/.screen; export HOME=/minecraft; mkdir -p \"$SCREENDIR\"; chmod 700 \"$SCREENDIR\"; exec ${pkgs.screen}/bin/screen -dmS mc-atm10-sky ${pkgs.bash}/bin/bash /minecraft/atm10-sky/run.sh'";
 
-      ExecStop = "${pkgs.writeShellScriptBin "stop-minecraft" ''
-        #!${pkgs.bash}/bin/bash
-        ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit
-      ''}";
+      ExecStop = "${pkgs.bash}/bin/bash -c 'export SCREENDIR=/minecraft/.screen; ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit'";
 
       Environment = [
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
