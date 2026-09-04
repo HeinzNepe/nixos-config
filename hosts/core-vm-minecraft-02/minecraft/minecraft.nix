@@ -27,7 +27,7 @@
   systemd.services.minecraft-atm10-sky = {
     description = "Minecraft Server: ATM10 Sky";
 
-    after = [ "network.target" ];
+    after = [ "network.target" "systemd-tmpfiles-setup.service" ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
@@ -46,6 +46,7 @@
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
         "PATH=${pkgs.jdk21}/bin:${pkgs.screen}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:${pkgs.bash}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         "TERM=xterm-256color"
+        "SCREENDIR=/minecraft/.screen"
       ];
     };
   };
