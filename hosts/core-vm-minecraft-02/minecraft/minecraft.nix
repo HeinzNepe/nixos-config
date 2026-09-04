@@ -3,6 +3,7 @@
 # All The Mods 10: To the Sky (ATM10SKY) - Skyblock modpack for Minecraft 1.21.1 with NeoForge
 # CurseForge Project: https://www.curseforge.com/minecraft/modpacks/all-the-mods-10-sky
 # Project ID: 1298402
+# Version: 2.0.2
 
 {
   config,
@@ -12,11 +13,12 @@
 }:
 
 let
-  # ATM10 Sky modpack version 2.0.2 for Minecraft 1.21.1 with NeoForge
-  # Hash obtained via: nix-prefetch-url --name ATM10-To-The-Sky-2.0.2.zip 'https://mediafilez.forgecdn.net/files/7854/204/ATM10%20To%20the%20Sky-2.0.2.zip'
+  # Fetch the modpack from CurseForge CDN
+  # ATM10 Sky 2.0.2 for Minecraft 1.21.1 with NeoForge
+  # Hash verified via: sha256sum on downloaded file
   modpack = pkgs.fetchurl {
     url = "https://mediafilez.forgecdn.net/files/7854/204/ATM10%20To%20the%20Sky-2.0.2.zip";
-    sha256 = "105db3d32603nq3jl15n42ryf9gxcifhsz7hxjhjanqmq8j0zxp3";
+    sha256 = "e3f60f24c2155b25a1ecf07c0d5d64fd25e7b320b6042a07b6031831da58ad80";
   };
   
   # Extract the modpack to access its contents
@@ -26,10 +28,17 @@ let
     mkdir -p $out
     cd $out
     unzip ${modpack} -d .
-    # Remove the top-level directory if it exists (CurseForge zips often have one)
+    # Handle the directory structure - CurseForge/Modrinth packs often have a top-level folder
     if [ -d "ATM10 To the Sky-2.0.2" ]; then
       mv "ATM10 To the Sky-2.0.2"/* .
       rmdir "ATM10 To the Sky-2.0.2"
+    elif [ -d "ATM10.To.the.Sky-2.0.2" ]; then
+      mv "ATM10.To.the.Sky-2.0.2"/* .
+      rmdir "ATM10.To.the.Sky-2.0.2"
+    elif [ -d "overrides" ]; then
+      # Some packs use 'overrides' as the root
+      mv overrides/* .
+      rmdir overrides
     fi
   '';
 in
