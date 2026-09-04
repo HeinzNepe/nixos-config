@@ -1,9 +1,7 @@
 # minecraft.nix
-# https://mich-murphy.com/nixos-minecraft-server/
-# All The Mods 10: To the Sky (ATM10SKY) - Skyblock modpack for Minecraft 1.21.1 with NeoForge
-# CurseForge Project: https://www.curseforge.com/minecraft/modpacks/all-the-mods-10-sky
-# Project ID: 1298402
-# Version: 2.0.2
+# Manual Minecraft Server Configuration for ATM10 Sky
+# Server files are pre-downloaded at /minecraft/atm10-manual/
+# Uses Java 21 and screen for process management
 
 {
   config,
@@ -12,93 +10,55 @@
   ...
 }:
 
-let
-  # Fetch the modpack from CurseForge CDN
-  # ATM10 Sky 2.0.2 for Minecraft 1.21.1 with NeoForge
-  # Hash verified via: sha256sum on downloaded file
-  modpack = pkgs.fetchurl {
-    url = "https://mediafilez.forgecdn.net/files/7854/204/ATM10%20To%20the%20Sky-2.0.2.zip";
-    sha256 = "e3f60f24c2155b25a1ecf07c0d5d64fd25e7b320b6042a07b6031831da58ad80";
-  };
-  
-  # Extract the modpack to access its contents
-  # ATM10 Sky uses 'overrides/' directory for mods and config
-  modpack-extracted = pkgs.runCommand "atm10-sky-extracted" {
-    nativeBuildInputs = [ pkgs.unzip ];
-  } ''
-    mkdir -p $out
-    cd $out
-    unzip ${modpack} -d .
-    # Handle the directory structure - ATM10 Sky has a top-level folder
-    if [ -d "ATM10 To the Sky-2.0.2" ]; then
-      mv "ATM10 To the Sky-2.0.2"/* .
-      rmdir "ATM10 To the Sky-2.0.2"
-    elif [ -d "ATM10.To.the.Sky-2.0.2" ]; then
-      mv "ATM10.To.the.Sky-2.0.2"/* .
-      rmdir "ATM10.To.the.Sky-2.0.2"
-    fi
-    
-    # ATM10 Sky modpack structure: mods and config are in 'overrides/'
-    # Move everything from overrides/ to the root
-    if [ -d "overrides" ]; then
-      mv overrides/* .
-      rmdir overrides 2>/dev/null || true
-    fi
-    
-    # Also handle the case where config is at root level
-    # Merge root-level config with any from overrides
-    if [ -d "config" ]; then
-      : # config directory already exists
-    fi
-  '';
-in
 {
-  # Minecraft server settings
-  services.minecraft-servers = {
-    enable = true;
-    eula = true;
-    openFirewall = true;
-    dataDir = "/minecraft";
-    servers.atm10-sky = {
-      enable = true; # Enable this specific server configuration
-      autoStart = true; # Automatically start the server on boot
-      jvmOpts = "-Xmx8G -Xms4G"; # JVM options for memory allocation - adjust based on available RAM
+  # Ensure Java 21 and screen are available
+  environment.systemPackages = [ pkgs.jdk21 pkgs.screen ];
 
-      # Use NeoForge server for Minecraft 1.21.1 to match the modpack
-      package = pkgs.neoforgeServers.neoforge-1_21_1;
+  # Create minecraft user and group
+  users.groups.minecraft = {};
+  users.users.minecraft = {
+    isSystemUser = true;
+    group = "minecraft";
+  };
 
-      # Define server operators (admins) with their UUIDs
-      operators = {
-        "HeinzNepe" = {
-          uuid = "dafc1b14-fdf3-4f76-bf61-83e88125e912";
-          bypassesPlayerLimit = true;
-        };
-      };
+  # Create the minecraft directory
+  systemd.tmpfiles.rules = [
+    "d /opt/minecraft 0755 minecraft minecraft - -"
+    "d /opt/minecraft/atm10-sky 0755 minecraft minecraft - -"
+  ];
 
-      # Server properties configuration
-      serverProperties = {
-        server-port = 25566;
-        difficulty = "normal";
-        gamemode = "survival";
-        max-players = 20;
-        motd = "All The Mods 10: To the Sky - Skyblock Adventure!";
-        online-mode = true;
-        spawn-protection = 0;
-        view-distance = 32;
-      };
-
-      # Symlink directories from the extracted modpack
-      # ATM10 Sky structure: mods and config are in the extracted directory
-      symlinks = {
-        "mods" = "${modpack-extracted}/mods";
-        "config" = "${modpack-extracted}/config";
-        "defaultconfigs" = "${modpack-extracted}/defaultconfigs";
-        "kubejs" = "${modpack-extracted}/kubejs";
-        "local" = "${modpack-extracted}/local";
-      };
+  # Manual Minecraft Server service using screen
+  systemd.services.minecraft-atm10-sky = {
+    description = "Minecraft Server: ATM10 Sky";
+    
+    after = [ "network.target" ];
+    
+    wantedBy = [ "multi-user.target" ];
+    
+    serviceConfig = {
+      User = "minecraft";
+      Group = "minecraft";
+      WorkingDirectory = "/minecraft/atm10-manual";
+      Restart = "always";
+      RestartSec = "10";
       
-      # Files to copy (empty - we're using symlinks for everything)
-      files = {};
+      # Start the server using the startserver.sh script
+      ExecStart = "${pkgs.procps}/bin/env -i /usr/bin/screen -DmS mc-atm10-sky /bin/bash /minecraft/atm10-manual/startserver.sh";
+      
+      # Graceful shutdown sequence
+      ExecStop = "${pkgs.procps}/bin/env -i /usr/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"say SERVER SHUTTING DOWN IN 5 SECONDS. SAVING ALL MAPS...\"\\015'";
+      ExecStop = "${pkgs.coreutils}/bin/sleep 5";
+      ExecStop = "${pkgs.procps}/bin/env -i /usr/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"save-all\"\\015'";
+      ExecStop = "${pkgs.procps}/bin/env -i /usr/bin/screen -p 0 -S mc-atm10-sky -X eval 'stuff \"stop\"\\015'";
+      
+      # Environment variables for Java
+      Environment = [
+        "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
+        "PATH=${pkgs.jdk21}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      ];
     };
   };
+
+  # Open firewall port for the server
+  networking.firewall.allowedTCPPorts = [ 25566 ];
 }
