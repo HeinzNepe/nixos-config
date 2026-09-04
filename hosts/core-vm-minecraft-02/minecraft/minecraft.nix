@@ -34,6 +34,7 @@
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
+      Type = "simple";
       User = "minecraft";
       Group = "minecraft";
       WorkingDirectory = "/minecraft/atm10-sky";
