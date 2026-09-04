@@ -20,10 +20,11 @@
     group = "minecraft";
   };
 
-  # Create the minecraft directory
+  # Create the minecraft directory and screen socket directory
   systemd.tmpfiles.rules = [
     "d /minecraft 0755 minecraft minecraft - -"
     "d /minecraft/atm10-sky 0755 minecraft minecraft - -"
+    "d /run/minecraft 0755 minecraft minecraft - -"
   ];
 
   # Manual Minecraft Server service using screen
@@ -42,7 +43,7 @@
       # Prevent rapid restart loop
       Restart = "on-failure";
       RestartSec = "30";
-      StartLimitIntervalSec = 120;
+      StartLimitInterval = 120;  # Fixed: removed Sec suffix
       StartLimitBurst = 3;
 
       # Start the server using the existing run.sh script
@@ -55,6 +56,7 @@
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
         "PATH=${pkgs.jdk21}/bin:${pkgs.screen}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:${pkgs.bash}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         "TERM=xterm-256color"
+        "SCREENDIR=/run/minecraft"  # Fixed: screen socket directory
       ];
     };
   };
