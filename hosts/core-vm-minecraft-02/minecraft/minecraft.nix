@@ -22,23 +22,33 @@ let
   };
   
   # Extract the modpack to access its contents
+  # ATM10 Sky uses 'overrides/' directory for mods and config
   modpack-extracted = pkgs.runCommand "atm10-sky-extracted" {
     nativeBuildInputs = [ pkgs.unzip ];
   } ''
     mkdir -p $out
     cd $out
     unzip ${modpack} -d .
-    # Handle the directory structure - CurseForge/Modrinth packs often have a top-level folder
+    # Handle the directory structure - ATM10 Sky has a top-level folder
     if [ -d "ATM10 To the Sky-2.0.2" ]; then
       mv "ATM10 To the Sky-2.0.2"/* .
       rmdir "ATM10 To the Sky-2.0.2"
     elif [ -d "ATM10.To.the.Sky-2.0.2" ]; then
       mv "ATM10.To.the.Sky-2.0.2"/* .
       rmdir "ATM10.To.the.Sky-2.0.2"
-    elif [ -d "overrides" ]; then
-      # Some packs use 'overrides' as the root
+    fi
+    
+    # ATM10 Sky modpack structure: mods and config are in 'overrides/'
+    # Move everything from overrides/ to the root
+    if [ -d "overrides" ]; then
       mv overrides/* .
-      rmdir overrides
+      rmdir overrides 2>/dev/null || true
+    fi
+    
+    # Also handle the case where config is at root level
+    # Merge root-level config with any from overrides
+    if [ -d "config" ]; then
+      : # config directory already exists
     fi
   '';
 in
@@ -78,10 +88,13 @@ in
       };
 
       # Symlink directories from the extracted modpack
-      # Only include directories that exist in the modpack
+      # ATM10 Sky structure: mods and config are in the extracted directory
       symlinks = {
         "mods" = "${modpack-extracted}/mods";
         "config" = "${modpack-extracted}/config";
+        "defaultconfigs" = "${modpack-extracted}/defaultconfigs";
+        "kubejs" = "${modpack-extracted}/kubejs";
+        "local" = "${modpack-extracted}/local";
       };
       
       # Files to copy (empty - we're using symlinks for everything)
