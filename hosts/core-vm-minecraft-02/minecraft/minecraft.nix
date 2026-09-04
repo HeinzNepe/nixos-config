@@ -35,21 +35,22 @@
 
       Restart = "on-failure";
       RestartSec = "30";
-      StartLimitInterval = 120;
-      StartLimitBurst = 3;
 
-      # Ensure directory exists, then start screen
-      ExecStartPre = "${pkgs.bash}/bin/bash -c 'mkdir -p /run/minecraft && chmod 700 /run/minecraft && chown minecraft:minecraft /run/minecraft'";
+      ExecStart = "${pkgs.writeShellScriptBin \"start-minecraft\" ''
+        #!${pkgs.bash}/bin/bash
+        export SCREENDIR=/run/minecraft
+        mkdir -p "$SCREENDIR"
+        chmod 700 "$SCREENDIR"
+        exec ${pkgs.screen}/bin/screen -dmS mc-atm10-sky /bin/bash /minecraft/atm10-sky/run.sh
+      ''}";
 
-      # Start with explicit SCREENDIR in the command
-      ExecStart = "${pkgs.bash}/bin/bash -c 'SCREENDIR=/run/minecraft ${pkgs.screen}/bin/screen -dmS mc-atm10-sky /bin/bash /minecraft/atm10-sky/run.sh'";
-
-      ExecStop = "${pkgs.bash}/bin/bash -c 'SCREENDIR=/run/minecraft ${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit'";
+      ExecStop = "${pkgs.screen}/bin/screen -p 0 -S mc-atm10-sky -X quit";
 
       Environment = [
         "JAVA_HOME=${pkgs.jdk21}/lib/openjdk"
         "PATH=${pkgs.jdk21}/bin:${pkgs.screen}/bin:${pkgs.coreutils}/bin:${pkgs.procps}/bin:${pkgs.bash}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
         "TERM=xterm-256color"
+        "SCREENDIR=/run/minecraft"
       ];
     };
   };
