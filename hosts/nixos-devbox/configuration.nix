@@ -28,7 +28,7 @@
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
       ../../modules/options/mistral.nix
-
+      ../../modules/options/cisco-anyconnect.nix
 
 
       # Cache and builder configuration

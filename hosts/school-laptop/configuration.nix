@@ -30,6 +30,7 @@
       ../../modules/options/networking-tools.nix
       ../../modules/options/tailscale-client.nix
       ../../modules/options/mistral.nix
+      ../../modules/options/cisco-anyconnect.nix
 
       # Cache and builder configuration
       ../../modules/nix-substitutors.nix

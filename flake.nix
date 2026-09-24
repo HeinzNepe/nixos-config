@@ -32,6 +32,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Openconnect SSO for Cisco AnyConnect VPN support
+    # Main repository not updated since 2023, using a fork with last commit (per 17.09.2026)
+    openconnect-sso = {
+      url = "github:chpxu/openconnect-sso/bbec987524660950b7e265d7f17bcb8009d77090";
+      flake = false;
+    };
+
     # Plasma Manager for KDE Plasma configuration
     plasma-manager = {
       url = "github:pjones/plasma-manager";
