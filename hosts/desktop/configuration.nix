@@ -32,8 +32,8 @@
       ../../modules/options/vpn.nix
       ../../modules/options/docker.nix
       ../../modules/options/networking-tools.nix
-      ./ai.nix
-      ../../modules/options/mistral.nix
+      #./ai.nix
+      #../../modules/options/mistral.nix
 
 
       # Java JDK 25 ++
@@ -43,7 +43,7 @@
       ../../modules/1password.nix
 
       # Add SDR module
-      ../../modules/rtl-srd.nix
+      #../../modules/rtl-srd.nix
 
       # Add gaming module
       ../../modules/options/gaming.nix
