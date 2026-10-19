@@ -25,7 +25,7 @@
 
     settings = {
       server = {
-        DOMAIN = "git.nepstad.it";  # Internal hostname for SSH
+        #DOMAIN = "git.nepstad.it";  # Internal hostname for SSH (LEGACY, not used by Gitea anymore)
         SSH_DOMAIN = "git.nepstad.it";
         ROOT_URL = "https://git.nepstad.it/";  # Pangolin-facing URL
         SSH_PORT = 2222;  # Internal SSH port for Git
