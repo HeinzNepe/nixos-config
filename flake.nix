@@ -118,6 +118,9 @@
           disko.nixosModules.disko
         ];
 
+        no-gh-vps-01 = mkNixOSConfig "x86_64-linux" ./hosts/no-gh-vps-01/configuration.nix [];
+
+
         # Homelab configuration
         core-vm-gitea-01 = mkNixOSConfig "x86_64-linux" ./hosts/core-vm-gitea-01/configuration.nix [];
 
