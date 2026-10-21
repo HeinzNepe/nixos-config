@@ -27,6 +27,9 @@
       ../../modules/options/tailscale-server.nix
       ../../modules/options/ssh-server.nix
 
+      # Gigahost server agent (Flux monitoring)
+      #./modules/gigahost-agent.nix # TO BE TESTED
+
       # Include the static network configuration for the VPS
       ./networking.nix
 
