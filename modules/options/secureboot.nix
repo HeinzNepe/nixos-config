@@ -18,9 +18,9 @@
 
 
   # Optional but recommended
-  boot.kernelParams = [
-    "lockdown=integrity"
-  ];
+  #boot.kernelParams = [
+  #  "lockdown=integrity"
+  #];
 
   environment.systemPackages = with pkgs; [
     sbctl  # Secure Boot control tool
