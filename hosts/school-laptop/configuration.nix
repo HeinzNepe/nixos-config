@@ -36,8 +36,8 @@
       ../../modules/nix-substitutors.nix
       #../../modules/homelab/nix-remotebuilder.nix
 
-      # Cisco Packet Tracer (remember to add to nixcache)
-      #../../modules/options/packet-tracer.nix
+      # Cisco Packet Tracer (remember to add the .deb to the nix store first)
+      ../../modules/options/packet-tracer.nix
 
       # Java JDK 25 ++
       #../../modules/options/tdt4100.nix
