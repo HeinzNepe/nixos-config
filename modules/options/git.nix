@@ -4,6 +4,9 @@
   environment.systemPackages = with pkgs; [
     # Fancier diffs
     delta
+
+    # Gitea CLI
+    tea
   ];
 
   # Configure git
